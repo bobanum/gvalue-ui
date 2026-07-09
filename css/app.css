@@ -1,3 +1,51 @@
 #app {
 	display: grid;
+
+}
+
+.criteria {
+	display: grid;
+	grid-template-columns: 4em 1fr;
+	grid-column: 1 / -1;
+	--gap: 0.25em 0.25em;
+	--gap: .5em;
+	gap: var(--gap);
+	padding: var(--gap);
+	article {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: 1 / -1;
+		>header {
+			grid-column: 1 / -1;
+			display: grid;
+			grid-template-columns: subgrid;
+			line-height: .9;
+			align-items: center;
+			input {
+				font-size: 1.2em;
+				width: 100%;
+				background-color: #334;
+				color: #fff;
+				align-self: start;
+				appearance: textfield;
+				text-align: right;
+				border: none;
+				border-radius: 0.25em;
+				padding: 0.25em 0.5em;
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	>main {
+		grid-area: 2 / 1;
+	}
+	.criteria {
+		margin-left: 1em;
+		padding: var(--gap);
+	}
 }
