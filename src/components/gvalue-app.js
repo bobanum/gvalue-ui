@@ -5,7 +5,7 @@ const template = document.createElement('template')
 template.innerHTML = `
   <style>
     :host {
-      min-height: 100vh;
+      zzzmin-height: 100vh;
       display: grid;
       place-items: center;
       padding: 1.5rem;
@@ -43,12 +43,7 @@ template.innerHTML = `
   </style>
 
   <main class="card">
-    <h1>Vite + Web Components</h1>
-    <p>
-      Squelette prêt avec des Custom Elements natifs et Shadow DOM.
-      Modifie <code>src/components</code> pour ajouter tes composants.
-    </p>
-    <wc-counter></wc-counter>
+   <wc-counter></wc-counter>
   </main>
 `
 
