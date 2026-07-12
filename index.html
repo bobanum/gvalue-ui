@@ -1,96 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- <script type="module" src="/src/main.js"></script> -->
-    <link rel="stylesheet" href="./css/style.css">
-    <title>gvalue-ui</title>
-  </head>
-  <body>
-    <div class="layout">
-      <header>
-        <h1><img src="/public/favicon.svg" alt="Logo">gValue</h1>
-      </header>
-      <nav class="main">
-        <label for="nav-toggle" class="nav-toggle" aria-label="Ouvrir le menu" tabindex="0" onmousedown="if(this === document.activeElement) {this.blur();event.preventDefault();}">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script type="module" src="/src/main.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+  <title>gvalue-ui</title>
+</head>
+
+<body>
+  <div class="layout">
+    <header>
+      <h1><img src="/public/favicon.svg" alt="Logo">gValue</h1>
+    </header>
+    <nav class="main">
+      <label for="nav-toggle" class="nav-toggle" aria-label="Ouvrir le menu" tabindex="0" onmousedown="if(this === document.activeElement) {this.blur();event.preventDefault();}">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <ul>
+        <li><a href="#">Aliquid</a></li>
+        <li><a href="#">Praesentium</a></li>
+        <li><a href="#">Dolores</a></li>
+        <li><a href="#">Dolorem</a></li>
+        <li><a href="#">Delectus</a></li>
+      </ul>
+    </nav>
+    <main>
+      <div id="app">
+        <header>
+          <h1>Évaluation 1</h1>
+          <h2>Rita Raté (0123456)</h2>
+        </header>
+        <section class="criteria">
+          <article>
+            <header><input type="number" size="1" name="criterion1" id="criterion1">Critere 1, illum provident hic veritatis.</header>
+            <section class="criteria">
+              <article>
+                <header><input type="number" size="1" name="scriterion1" id="scriterion1">Sous-critere 1, delectus nesciunt blanditiis eum sapiente qui molestias</header>
+              </article>
+              <article>
+                <header><input type="number" size="1" name="scriterion2" id="scriterion2">Sous-critere 2, nostrum quod molestiae dolor?</header>
+              </article>
+              <article>
+                <header><input type="number" size="1" name="scriterion3" id="scriterion3">Sous-critere 3, doloribus, voluptatibus, cumque.</header>
+              </article>
+            </section>
+          </article>
+          <article>
+            <header><input type="number" size="1" name="criterion2" id="criterion2">Critere 2, illum provident hic veritatis.</header>
+            <section class="criteria">
+              <article>
+                <header><input type="number" size="1" name="scriterion4" id="scriterion4">Sous-critere 4, delectus nesciunt blanditiis eum sapiente qui molestias</header>
+              </article>
+              <article>
+                <header><input type="number" size="1" name="scriterion5" id="scriterion5">Sous-critere 5, nostrum quod molestiae dolor?</header>
+              </article>
+              <article>
+                <header><input type="number" size="1" name="scriterion6" id="scriterion6">Sous-critere 6, doloribus, voluptatibus, cumque.</header>
+              </article>
+            </section>
+          </article>
+        </section>
+      </div>
+    </main>
+    <nav class="sec">
+      <ul>
+        <li>
+          <a href="">
+            <svg>
+              <use href="/public/icons.svg#home" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg>
+              <use href="/public/icons.svg#search" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg>
+              <use href="/public/icons.svg#user" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <section class="helpers">
+      <div class="comments">
+        <div>Comments <button-ponent icon="comment-add"></button-ponent></div>
         <ul>
-          <li><a href="#">Aliquid</a></li>
-          <li><a href="#">Praesentium</a></li>
-          <li><a href="#">Dolores</a></li>
-          <li><a href="#">Dolorem</a></li>
-          <li><a href="#">Delectus</a></li>
+          <li><menu-ponent icon="hamburger">
+            <div>Quisquam, dignissimos.</div>
+            <div>Quos, sapiente!</div>
+            <div>Commodi, vel.</div>
+            <div>Ex, nobis!</div>
+
+          </menu-ponent><label><input type="checkbox"><span>Fugiat pariatur odio quia hic cumque eveniet voluptatum facere modi incidunt magni.</span></label></li>
+          <li><menu-ponent icon="hamburger"></menu-ponent><label><input type="checkbox"><span>Dolorem, minus! Quos possimus rerum ad vel voluptates sed obcaecati voluptas eligendi.</span></label></li>
+          <li><menu-ponent icon="hamburger"></menu-ponent><label><input type="checkbox"><span>Quia repellat rem earum possimus velit voluptatibus nostrum inventore accusamus fugiat mollitia.</span></label></li>
+          <li><menu-ponent icon="hamburger"></menu-ponent><label><input type="checkbox"><span>Modi unde dignissimos natus fuga, nihil adipisci tenetur culpa sint sunt eveniet!</span></label></li>
+          <li><menu-ponent icon="hamburger"></menu-ponent><label><input type="checkbox"><span>Harum voluptatibus nisi numquam aliquam eos necessitatibus debitis fuga quia eligendi obcaecati!</span></label></li>
         </ul>
-      </nav>
-      <main>
-        <div id="app">
-          <header>
-            <h1>Évaluation 1</h1>
-            <h2>Rita Raté (0123456)</h2>
-          </header>
-          <section class="criteria">
-            <article>
-              <header><input type="number" size="1" name="criterion1" id="criterion1">Critere 1, illum provident hic veritatis.</header>
-              <section class="criteria" style="margin-left: 1em;">
-                <article>
-                  <header><input type="number" size="1" name="scriterion1" id="scriterion1">Sous-critere 1, delectus nesciunt blanditiis eum sapiente qui molestias</header>
-                </article>
-                <article>
-                  <header><input type="number" size="1" name="scriterion2" id="scriterion2">Sous-critere 2, nostrum quod molestiae dolor?</header>
-                </article>
-                <article>
-                  <header><input type="number" size="1" name="scriterion3" id="scriterion3">Sous-critere 3, doloribus, voluptatibus, cumque.</header>
-                </article>
-              </section>
-            </article>
-            <article>
-              <header><input type="number" size="1" name="criterion2" id="criterion2">Critere 2, illum provident hic veritatis.</header>
-              <section class="criteria" style="margin-left: 1em;">
-                <article>
-                  <header><input type="number" size="1" name="scriterion4" id="scriterion4">Sous-critere 4, delectus nesciunt blanditiis eum sapiente qui molestias</header>
-                </article>
-                <article>
-                  <header><input type="number" size="1" name="scriterion5" id="scriterion5">Sous-critere 5, nostrum quod molestiae dolor?</header>
-                </article>
-                <article>
-                  <header><input type="number" size="1" name="scriterion6" id="scriterion6">Sous-critere 6, doloribus, voluptatibus, cumque.</header    >
-                </article>
-              </section>
-            </article>
-          </section>
-        </div>
-      </main>
-      <nav class="sec">
-        <ul>
-          <li>
-            <a href="">
-              <svg>
-                <use href="/public/icons.svg#home"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <svg>
-                <use href="/public/icons.svg#search"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <svg>
-                <use href="/public/icons.svg#user"/>
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </body>
+      </div>
+      <ul class="scale">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+    </section>
+  </div>
+</body>
+
 </html>

@@ -1,20 +1,17 @@
-#app {
-	display: grid;
-
-}
-
 .criteria {
 	display: grid;
 	grid-template-columns: 4em 1fr;
 	grid-column: 1 / -1;
 	--gap: 0.25em 0.25em;
 	--gap: .5em;
-	gap: var(--gap);
+	gap: 0 var(--gap);
 	padding: var(--gap);
 	article {
 		display: grid;
 		grid-template-columns: subgrid;
 		grid-column: 1 / -1;
+		border-top: 1px solid #334;
+		padding: var(--gap);
 		>header {
 			grid-column: 1 / -1;
 			display: grid;
@@ -45,7 +42,7 @@
 		grid-area: 2 / 1;
 	}
 	.criteria {
-		margin-left: 1em;
+		/* margin-left: 1em; */
 		padding: var(--gap);
 	}
 }

@@ -198,7 +198,7 @@
         </symbol>
     </defs>
     <g transform="scale(.2)">
-        <g id="logos" style="display:none">
+        <g id="logos" style="display:">
             <g>
                 <use xlink:href="#gvalue" />
                 <use x="64" xlink:href="#gvalue2" />
@@ -210,7 +210,7 @@
                 <use x="0" xlink:href="#github" />
             </g>
         </g>
-        <g id="global" style="display:none">
+        <g id="global" style="display:">
             <g>
                 <use href="#ellipsis" />
                 <use x="64" href="#hamburger" />

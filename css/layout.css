@@ -2,7 +2,7 @@
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr;
-	
+
 	>header {
 		grid-area: 1 / 1;
 		display: grid;
@@ -22,33 +22,45 @@
 			height: 1.5em;
 		}
 	}
-	
+
 	@media (width > 768px) {
 		grid-template-rows: auto auto 1fr auto;
+
 		>nav.sec {
 			grid-area: 1 / 1;
 			place-self: start end;
+
 			svg {
 				width: auto;
 				aspect-ratio: 1;
 			}
 		}
 	}
-	
-	@media (width <= 768px) {
+
+	@media (width <=768px) {
 		grid-template-rows: auto 1fr auto;
-		/* >main {
-			grid-row: 2;
-		} */
-		/* >nav.sec {
-			grid-row: 3;
-		} */
+
+		>main {
+			grid-area: 2 / 1;
+		}
+
+		>nav.sec {
+			grid-area: 3 / 1;
+		}
+
 		>nav.main {
 			grid-area: 1 / 1;
 		}
+
+		.helpers {
+			grid-area: 2 / 1;
+			place-self: end center;
+		}
 	}
 }
+
 main {
 	padding: 0.5em;
 	overflow: auto;
 }
+
