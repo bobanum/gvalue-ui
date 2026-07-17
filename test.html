@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Header Example</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f5f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 🟢 The Sticky Header Styles */
+    .main-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e1e4e8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 1000;
+      
+      /* Smooth transition when hiding/showing */
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* 🔴 Class added by JS to slide the header away */
+    .header-hidden {
+      transform: translateY(-100%);
+    }
+
+    /* Header Content Styling */
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0070f3;
+    }
+    nav a {
+      text-decoration: none;
+      color: #666;
+      margin-left: 1.5rem;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #0070f3;
+    }
+
+    /* Dummy Content to Enable Scrolling */
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .content-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Component -->
+  <header class="main-header">
+    <div class="logo">ScrollNav</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Page Content -->
+  <main>
+    <div class="content-box">
+      <h1>Scroll Down to Hide, Up to Show</h1>
+      <p>Start scrolling down the page. Notice how the header smoothly slides away out of view to give you more reading space.</p>
+      <p>The moment you scroll upwards—even a little bit—the header instantly reappears so you can access the navigation links again.</p>
+    </div>
+
+    <!-- Repeating boxes just to create page height -->
+    <div class="content-box">
+      <h2>Section 1</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div class="content-box">
+      <h2>Section 2</h2>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="content-box">
+      <h2>Section 3</h2>
+      <p>Mollis pretium lorem primis cubilia habitasse. Rhoncus aenean integer diam non pretium erat. Urna class leo sit cubilia pulvinar fusce habitasse.</p>
+    </div>
+    <div class="content-box">
+      <h2>Section 4</h2>
+      <p>Placerat platea class interdum lobortis proin sodales nam. Dictum integer ad mus litora feugiat sodales id varius sem integer.</p>
+    </div>
+    <div class="content-box">
+      <h2>Section 2</h2>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="content-box">
+      <h2>Section 3</h2>
+      <p>Mollis pretium lorem primis cubilia habitasse. Rhoncus aenean integer diam non pretium erat. Urna class leo sit cubilia pulvinar fusce habitasse.</p>
+    </div>
+    <div class="content-box">
+      <h2>Section 4</h2>
+      <p>Placerat platea class interdum lobortis proin sodales nam. Dictum integer ad mus litora feugiat sodales id varius sem integer.</p>
+    </div>
+  </main>
+
+  <!-- 🔵 JavaScript Logic -->
+  <script>
+    const header = document.querySelector('.main-header');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+
+          // Hide on downward scroll, show immediately on upward scroll.
+          if (currentScrollY > lastScrollY) {
+            header.classList.add('header-hidden');
+          }
+          else {
+            header.classList.remove('header-hidden');
+          }
+
+          lastScrollY = Math.max(currentScrollY, 0);
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    });
+  </script>
+
+</body>
+</html>

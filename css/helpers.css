@@ -1,17 +1,41 @@
 .helpers {
-	border: 2px solid #334;
-	border-bottom: none;
-	border-top-width: 5px;
-	border-radius: 1em 1em 0 0;
+	--radius: .75em;
 	background-color: #333;
-	/* width: 90%; */
-	margin-inline: .5em;
 	box-shadow: inset 2px 2px 3px #0009, 2px 2px 3px #0006;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	border: 2px solid #334;
+	@media (width > 768px) {
+		overflow: hidden;
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr auto;
+		border-right: none;
+		border-left-width: 5px;
+		border-radius: var(--radius) 0 0 var(--radius);
+		.scale {
+			flex-direction: column;
+			width: 2em;
+		}
+	}
+	@media (width <= 768px) {
+		border-bottom: none;
+		border-top-width: 5px;
+		border-radius: var(--radius) var(--radius) 0 0;
+		.scale {
+			li {
+				height: 2em;
+			}
+		}
+	}
+}
+div.comments {
+	overflow-y: auto;
 }
 ul.scale {
 	display: flex;
 	gap: .25em;
-	padding: 0;
+	gap: 2px;
+	padding: 2px;
 	margin: 0;
 	list-style: none;
 	font-size: 1.5em;
@@ -20,9 +44,7 @@ ul.scale {
 		flex-grow: 1;
 		display: grid;
 		place-items: center;
-		width: 1.5em;
-		height: 2em;
-		border-radius: .5em;
+		border-radius: .25em;
 		background-color: #334;
 		color: #fff;
 
@@ -44,7 +66,9 @@ ul.scale {
 			padding-bottom: .5em;
 			margin-inline: .5em;
 			border-bottom: 2px groove #fff6;
+			font-style: oblique;
 			&:has(:checked) {
+				font-style: normal;
 				color: yellow;
 				text-shadow: 1px 1px black;
 				background-color: #ff01;

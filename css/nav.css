@@ -11,6 +11,7 @@ nav ul {
 }
 nav.main {
 	display: grid;
+	display: none;
 	gap: 0.75rem;
 	position: relative;
 	.nav-toggle {
@@ -148,6 +149,7 @@ nav.main {
 nav.sec {
 	background-color: #223;
 	color: #fafafa;
+	place-self: start end;
 	ul {
 		display: flex;
 	}
