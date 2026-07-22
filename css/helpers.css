@@ -5,6 +5,7 @@
 	display: grid;
 	grid-template-rows: 1fr auto;
 	border: 2px solid #334;
+
 	@media (width > 768px) {
 		overflow: hidden;
 		grid-template-rows: 1fr;
@@ -12,15 +13,18 @@
 		border-right: none;
 		border-left-width: 5px;
 		border-radius: var(--radius) 0 0 var(--radius);
+
 		.scale {
 			flex-direction: column;
 			width: 2em;
 		}
 	}
-	@media (width <= 768px) {
+
+	@media (width <=768px) {
 		border-bottom: none;
 		border-top-width: 5px;
 		border-radius: var(--radius) var(--radius) 0 0;
+
 		.scale {
 			li {
 				height: 2em;
@@ -28,9 +32,7 @@
 		}
 	}
 }
-div.comments {
-	overflow-y: auto;
-}
+
 ul.scale {
 	display: flex;
 	gap: .25em;
@@ -39,6 +41,7 @@ ul.scale {
 	margin: 0;
 	list-style: none;
 	font-size: 1.5em;
+	padding-block: .25em;
 
 	li {
 		flex-grow: 1;
@@ -51,29 +54,19 @@ ul.scale {
 		box-shadow: inset -1px -1px 2px #0009, inset 1px 1px 2px #fff8;
 	}
 }
-.comments {
+
+div.comments {
 	color: #fafafa;
-	line-height: 1;
-	ul {
+	line-height: 1.1;
+	overflow-y: hidden;
+	display: grid;
+	.comments-list {
 		font-size: .9em;
-		display: grid;
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		li {
-			display: block;
-			padding: .25em 0;
-			padding-bottom: .5em;
-			margin-inline: .5em;
-			border-bottom: 2px groove #fff6;
-			font-style: oblique;
-			&:has(:checked) {
-				font-style: normal;
-				color: yellow;
-				text-shadow: 1px 1px black;
-				background-color: #ff01;
-			}
-		}
+		overflow-y: scroll;
+
 		button-ponent {
 			width: 1.5em;
 			height: 1.5em;
@@ -81,17 +74,19 @@ ul.scale {
 			float: right;
 		}
 	}
-	>div {
-		font-size: 1.5em;
-		display: flex;
+
+	>header {
+		font-size: 1.2rem;
+		padding: 0.25rem 0.5rem 0;
+		font-weight: bold;
+		/* display: flex; */
 		align-items: center;
+		text-align: center;
 	}
+
 	button-ponent {
 		width: 1.5em;
 		height: 1.5em;
 		padding: .25em;
-	}
-	input {
-		display: none;
 	}
 }

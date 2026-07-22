@@ -1,8 +1,5 @@
-#app {
+/* #app {
 	display: grid;
-	grid-template-columns: auto auto;
-	grid-template-areas: "header header" "evaluation helpers";
-	min-width: 30em;
 	grid-area: app;
 	max-height: 100vh;
 	position: sticky;
@@ -18,8 +15,4 @@
 .criteria, [slot="criteria"] {
 	--gap-inline: .5em;
 	--input-width: 4em;
-	/* display: grid;
-	grid-template-columns: var(--input-width, 4em) 1fr;
-	grid-column: 1 / -1;
-	gap: 0 var(--gap-inline); */
-}
+} */

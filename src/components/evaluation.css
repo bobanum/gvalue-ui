@@ -1,0 +1,36 @@
+:host {
+	display: grid;
+	grid-area: app;
+	max-height: 100vh;
+	position: sticky;
+	top: 0;
+	gap: 0.25em;
+
+	>header {
+		padding: 0.5em;
+		grid-area: header;
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+.criteria,
+[slot="criteria"] {
+	--gap-inline: .5em;
+	--input-width: 4em;
+}
+
+@media (aspect-ratio > 1) {
+	:host {
+		grid-template-columns: 3fr 2fr;
+		grid-template-areas: "header header" "evaluation helpers";
+	}
+}
+
+@media (aspect-ratio <= 1) {
+	:host {
+		grid-template-columns: 1fr;
+		grid-template-areas: "header" "evaluation" "helpers";
+
+	}
+}

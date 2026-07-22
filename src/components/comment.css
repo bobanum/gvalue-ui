@@ -1,0 +1,22 @@
+:host {
+	display: block;
+	padding: .25em 0;
+	padding-bottom: .5em;
+	margin-inline: .5em;
+	border-bottom: 2px groove #fff6;
+	font-style: oblique;
+}
+:host([checked]) {
+	font-style: normal;
+	color: yellow;
+	text-shadow: 1px 1px black;
+	background-color: #ff01;
+}
+
+:host(:last-child) {
+	border-bottom: none;
+}
+
+input {
+	display: none;
+}

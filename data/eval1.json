@@ -1,0 +1,42 @@
+{
+    "title": "Évaluation 1",
+    "student": {
+        "name": "Rita Raté",
+        "id": "0123456"
+    },
+    "score": {
+        "value": 25,
+        "max": 100
+    },
+    "scale": [0, 1, 2, 3, 4, 5],
+    "criteria": [
+        {
+            "label": "Qualité du code source",
+            "children": [
+                { "label": "Lisibilité et indentation du code" },
+                { "label": "Nommage des variables et des fonctions" },
+                {
+                    "label": "Modularité et organisation des fichiers",
+                    "children": [
+                        { "label": "Séparation des responsabilités (HTML/CSS/JS)" }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Fonctionnalités et comportement",
+            "children": [
+                { "label": "Conformité aux exigences du mandat" },
+                { "label": "Gestion des cas limites et des erreurs" },
+                { "label": "Interactivité et expérience utilisateur" }
+            ]
+        }
+    ],
+    "comments": [
+        { "text": "L'indentation est inconsistante et nuit à la lisibilité générale du code." },
+        { "text": "Les noms de variables sont peu descriptifs et ne reflètent pas leur rôle dans le programme." },
+        { "text": "La logique est correcte, mais certaines fonctions sont trop longues et devraient être découpées." },
+        { "text": "Le rendu visuel correspond bien aux maquettes fournies, avec une mise en page soignée." },
+        { "text": "La gestion des erreurs est absente ; l'application plante si le champ est laissé vide." }
+    ]
+}

@@ -5,6 +5,7 @@
 	grid-template-columns: 1fr var(--input-width, 4em) auto;
 	grid-column: 1 / -1;
 	gap: 0 var(--gap-inline);
+	padding-top: var(--gap);
 }
 header,
 slot[name="criteria"] {
@@ -14,30 +15,52 @@ slot[name="criteria"] {
 }
 slot[name="criteria"] {
 	padding-left: var(--gap2);
-	margin-left: var(--gap2);
-	border-left: var(--gap) solid #0002;
-	border-radius: var(--gap2) 0 0 var(--gap2);
+	/* margin-left: var(--gap); */
+	border-color: hsl(from var(--background-color) h s calc(l + 10));
+	border-style: solid;
+	border-width: 0 0 0 var(--gap);
+	border-bottom-left-radius: 1em .5em;
+	position: relative;
+}
+slot {
+	align-self: end;
 }
 :host(:has(>[slot="criteria"])) {
 	>header {
-		input[readonly] {
+		input[readonly], input[disabled] {
 			background-color: #0000;
-			border: 1px solid #0002;
+			/* border: 1px solid hsl(from currentColor h s l / 0.2); */
+			box-shadow: 
+			-1px -1px #0002,
+			inset 1px 1px #fff1,
+			inset -1px -1px #0002,
+			1px 1px #fff1
+			;
 		}
 	}
 	border-radius: var(--gap2);
 }
 header {
-	line-height: .9;
+	line-height: 1.1;
 	align-items: center;
-	padding-block: var(--gap);
+	/* padding-block: var(--gap2) 0; */
 	label {
 		display: contents;
 	}
-
+	.input {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: span 2;
+		align-items: center;
+	}
+	span {
+		color: hsl(from currentColor h s l / 0.5);
+		font-size: smaller;
+	}
 	input {
 		font-size: 1.2em;
 		background-color: #334;
+		box-shadow: inset 1px 1px 0.25em #0009;
 		color: #fff;
 		align-self: start;
 		appearance: textfield;

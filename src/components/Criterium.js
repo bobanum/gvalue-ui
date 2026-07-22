@@ -32,20 +32,23 @@ class Criterium extends Component {
 			const result = document.createElement("label");
 			result.appendChild(this.createSlot());
 			result.appendChild(this.dom.input());
-			const value = document.createElement("span");
-			value.textContent = "/10";
-			result.appendChild(value);
 			return result;
 		},
 		input: () => {
-			const result = document.createElement("input");
-			result.type = "number";
-			result.size = "1";
-			result.name = "scriterion1";
-			result.id = "scriterion1";
+			const result = document.createElement("div");
+			result.classList.add("input");
+			const input = document.createElement("input");
+			input.type = "number";
+			input.size = "1";
+			input.name = "scriterion1";
+			input.id = "scriterion1";
 			if (this.criteriaCount > 0) {
-				result.readOnly = true;
+				input.readOnly = true;
 			}
+			result.appendChild(input);
+			const value = document.createElement("span");
+			value.textContent = "/10";
+			result.appendChild(value);
 			return result;
 		}
 	};
