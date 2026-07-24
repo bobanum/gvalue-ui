@@ -1,0 +1,26 @@
+[
+    {
+        "id": "t2xk6d",
+        "criterion_id": "k4ps8v",
+        "text": "L'indentation est inconsistante et nuit à la lisibilité générale du code.",
+        "value": 2,
+        "proportionnal": false,
+        "absolute": false
+    },
+    {
+        "id": "u3yl7e",
+        "text": "Les noms de variables sont peu descriptifs et ne reflètent pas leur rôle dans le programme."
+    },
+    {
+        "id": "v4zm8f",
+        "text": "La logique est correcte, mais certaines fonctions sont trop longues et devraient être découpées."
+    },
+    {
+        "id": "w5an9g",
+        "text": "Le rendu visuel correspond bien aux maquettes fournies, avec une mise en page soignée."
+    },
+    {
+        "id": "x6bo0h",
+        "text": "La gestion des erreurs est absente ; l'application plante si le champ est laissé vide."
+    }
+]

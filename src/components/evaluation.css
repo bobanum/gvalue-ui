@@ -1,0 +1,95 @@
+:host {
+	--input-width: 3em;
+	display: grid;
+	grid-area: app;
+	max-height: 100vh;
+	position: sticky;
+	top: 0;
+	gap: 0.25em;
+
+	>header {
+		padding: 0.5em;
+		grid-area: header;
+		display: flex;
+		justify-content: space-between;
+	}
+	.scoring {
+		display: flex;
+		align-items: center;
+		gap: 0 1ch;
+	}
+	.student {
+		display: flex;
+		align-items: center;
+		gap: 0 1ch;
+	}
+	.id {
+		quotes: '(' ')';
+		font-size: smaller;
+		&::before {
+			content: open-quote;
+		}
+		&::after {
+			content: close-quote;
+		}
+	}
+}
+
+slot[name="criteria"] {
+	--gap-inline: .5em;
+	grid-area: criteria;
+	display: block;
+	padding: 0 1em;
+	padding-bottom: 1em;
+	overflow-y: auto;
+}
+
+
+@media (aspect-ratio > 1) {
+	:host {
+		grid-template-columns: 3fr 2fr;
+		grid-template-rows: auto 1fr;
+		grid-template-areas: "header header" "criteria helpers";
+	}
+}
+
+@media (aspect-ratio <= 1) {
+	:host {
+		grid-template-columns: 1fr;
+		grid-template-areas: "header" "criteria" "helpers";
+	}
+}
+slot[name="helpers"] {
+	--radius: .75em;
+	background-color: #333;
+	box-shadow: inset 2px 2px 3px #0009, 2px 2px 3px #0006;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	border: 2px solid #334;
+
+	@media (width > 768px) {
+		overflow: hidden;
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr auto;
+		border-right: none;
+		border-left-width: 5px;
+		border-radius: var(--radius) 0 0 var(--radius);
+
+		.scale {
+			flex-direction: column;
+			width: 2em;
+		}
+	}
+
+	@media (width <=768px) {
+		border-bottom: none;
+		border-top-width: 5px;
+		border-radius: var(--radius) var(--radius) 0 0;
+
+		.scale {
+			li {
+				height: 2em;
+			}
+		}
+	}
+}

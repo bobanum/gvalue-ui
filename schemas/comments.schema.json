@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "comments.schema.json",
+    "title": "EvaluationComments",
+    "description": "Schéma d'une liste de commentaires d'évaluation",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "description": "Commentaire associé à un critère d'évaluation",
+        "required": ["id", "text"],
+        "properties": {
+            "id": {
+                "type": "string",
+                "description": "Identifiant unique du commentaire",
+                "pattern": "^[a-z0-9]+$"
+            },
+            "criterion_id": {
+                "type": "string",
+                "description": "Identifiant du critère auquel ce commentaire est associé",
+                "pattern": "^[a-z0-9]+$"
+            },
+            "text": {
+                "type": "string",
+                "description": "Texte du commentaire"
+            },
+            "value": {
+                "type": "number",
+                "description": "Valeur numérique associée au commentaire"
+            },
+            "proportionnal": {
+                "type": "boolean",
+                "description": "Indique si la valeur est proportionnelle"
+            },
+            "absolute": {
+                "type": "boolean",
+                "description": "Indique si la valeur est absolue"
+            }
+        },
+        "additionalProperties": false
+    }
+}
