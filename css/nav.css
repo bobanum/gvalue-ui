@@ -149,11 +149,11 @@ nav.main {
 nav.sec {
 	background-color: #223;
 	color: #fafafa;
-	place-self: start end;
-	ul {
-		display: flex;
-	}
+	display: flex;
 	a {
+		flex-grow: 1;
+		display: grid;
+		place-items: center;
 		&:hover {
 			background-color: #fff1;
 

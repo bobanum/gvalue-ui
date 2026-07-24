@@ -7,7 +7,7 @@ class Comment extends Component {
 		this._ = {
 			value: 0,
 			id: "",
-			criteriumId: "",
+			criterionId: "",
 			proportionnal: false,
 			absolute: false,
 			checked: false
@@ -15,13 +15,13 @@ class Comment extends Component {
 		this.shadowRoot.appendChild(this.dom.syle());
 		this.shadowRoot.appendChild(this.dom.main());
 	}
-	dom = {
-		syle: () => {
+	static dom = {
+		style() {
 			const result = document.createElement("style");
 			result.textContent = css;
 			return result;
 		},
-		main: () => {
+		main() {
 			const result = document.createDocumentFragment();
 			result.appendChild(this.dom.menu());
 			const label = document.createElement("label");
@@ -35,7 +35,7 @@ class Comment extends Component {
 			result.appendChild(label);
 			return result;
 		},
-		menu: () => {
+		menu() {
 			const result = document.createElement("menu-ponent");
 			result.setAttribute("icon", "hamburger");
 			const menuItems = [

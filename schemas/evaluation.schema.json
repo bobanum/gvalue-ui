@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "evaluation.schema.json",
+    "title": "Evaluation",
+    "description": "Schéma d'une évaluation avec critères hiérarchiques",
+    "type": "object",
+    "required": ["title", "id", "criteria"],
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "Titre de l'évaluation"
+        },
+        "id": {
+            "type": "string",
+            "description": "Identifiant court de l'évaluation",
+            "pattern": "^[a-z0-9-_]+$"
+        },
+        "description": {
+            "type": "string",
+            "description": "Description de l'évaluation"
+        },
+        "criteria": {
+            "type": "array",
+            "description": "Liste des critères d'évaluation",
+            "items": {
+                "$ref": "#/$defs/criterion"
+            },
+            "minItems": 1
+        }
+    },
+    "$defs": {
+        "criterion": {
+            "type": "object",
+            "description": "Critère d'évaluation, pouvant contenir des sous-critères ou une valeur",
+            "required": ["id", "label"],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Identifiant unique du critère",
+                    "pattern": "^[a-z0-9]+$"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Libellé du critère"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description détaillée du critère"
+                },
+                "value": {
+                    "type": "number",
+                    "description": "Valeur attribuée au critère (critère feuille)"
+                },
+                "criteria": {
+                    "type": "array",
+                    "description": "Sous-critères (critère parent)",
+                    "items": {
+                        "$ref": "#/$defs/criterion"
+                    },
+                    "minItems": 1
+                }
+            },
+            "oneOf": [
+                {
+                    "required": ["value"],
+                    "not": { "required": ["criteria"] }
+                },
+                {
+                    "required": ["criteria"],
+                    "not": { "required": ["value"] }
+                }
+            ]
+        }
+    }
+}

@@ -1,6 +1,7 @@
 export class Component extends HTMLElement {
 	constructor() {
 		super();
+		this.dom = this.adoptFunctions(this.constructor.dom || {});
 		this.attachShadow({ mode: "open" });
 	}
 	static register(tag) {
@@ -9,6 +10,15 @@ export class Component extends HTMLElement {
 	}
 	static toKebabCase(str) {
 		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+	}
+	adoptFunctions(source) {
+		const result = {};
+		for (let k in source) {
+			if (typeof source[k] === "function") {
+				result[k] = source[k].bind(this);
+			}
+		}
+		return result;
 	}
 	createSlot(name, defaultContent) {
 		const result = document.createElement("slot");
@@ -20,4 +30,9 @@ export class Component extends HTMLElement {
 		}
 		return result;
 	}
+	static dom = {
+		test() {
+			console.log("test static");
+		}
+	};
 }

@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "scoring.schema.json",
+    "title": "StudentEvaluation",
+    "description": "Schéma des résultats d'évaluation pour un étudiant",
+    "type": "object",
+    "required": ["eval_id", "student_id", "criteria"],
+    "additionalProperties": false,
+    "properties": {
+        "eval_id": {
+            "type": "string",
+            "description": "Identifiant de l'évaluation (référence au id de eval1.json)"
+        },
+        "student_id": {
+            "type": "string",
+            "description": "Identifiant de l'étudiant"
+        },
+        "criteria": {
+            "$ref": "#/$defs/criteriaMap"
+        }
+    },
+    "$defs": {
+        "criteriaMap": {
+            "type": "object",
+            "description": "Dictionnaire de critères indexés par leur ID, avec une clé optionnelle 'comments'",
+            "properties": {
+                "comments": {
+                    "type": "array",
+                    "description": "Liste des IDs de commentaires associés à ce niveau",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]+$"
+                    }
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/$defs/criterionEntry"
+            }
+        },
+        "criterionEntry": {
+            "type": "object",
+            "description": "Entrée d'un critère : soit une feuille avec valeur, soit un parent avec sous-critères",
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "description": "Note attribuée au critère"
+                },
+                "comments": {
+                    "type": "array",
+                    "description": "Liste des IDs de commentaires associés à ce critère",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]+$"
+                    }
+                },
+                "criteria": {
+                    "$ref": "#/$defs/criteriaMap"
+                }
+            }
+        }
+    }
+}

@@ -1,53 +1,60 @@
-import { Component } from "../Component.js";
+import { Criterion } from "./Criterion.js";
 import css from "./evaluation.css?inline";
 
-class Evaluation extends Component {
+export class Evaluation extends Criterion {
 	constructor() {
 		super();
-		this.shadowRoot.appendChild(this.dom.style());
-		this.shadowRoot.appendChild(this.dom.main());
+		this.dom = this.adoptFunctions(this.constructor.dom || {});
+		const criteria = this.querySelectorAll('gv-criterion');
+		this.criteriaCount = criteria.length;
+		criteria.forEach((c) => {
+			c.slot = "criteria";
+		});
 	}
-	dom = {
-		style: () => {
+	static dom = {
+		style() {
 			const result = document.createElement("style");
 			result.textContent = css;
 			return result;
 		},
-		main: () => {
+		main() {
 			const result = document.createDocumentFragment();
 			result.appendChild(this.dom.header());
 			result.appendChild(this.createSlot("criteria"));
-			result.appendChild(this.createSlot("helpers"));
+			result.appendChild(this.createSlot("helpers", "Cjoisir"));
 			return result;
 		},
-		header: () => {
+		header() {
 			const result = document.createElement("header");
-			const h1 = document.createElement("h1");
-			h1.appendChild(this.createSlot("title"));
-			result.appendChild(h1);
-			const h2 = document.createElement("h2");
-			h2.appendChild(this.dom.student());
-			result.appendChild(h2);
+			result.appendChild(this.createSlot("title", "Évaluation"));
+			result.appendChild(this.dom.student());
+			result.appendChild(this.dom.scoring());
 			return result;
 		},
-		student: () => {
-			const result = document.createDocumentFragment();
+		student() {
+			const result = document.createElement("div");
+			result.classList.add("student");
 			const lastName = document.createElement("span");
 			lastName.classList.add("last-name");
+			lastName.textContent = "Nom";
 			result.appendChild(lastName);
 			const firstName = document.createElement("span");
 			firstName.classList.add("first-name");
+			firstName.textContent = "Prénom";
 			result.appendChild(firstName);
 			const id = document.createElement("span");
 			id.classList.add("id");
+			id.textContent = "Matricule";
 			result.appendChild(id);
 			return result;
 		},
-		score: () => {
-			const result = document.createDocumentFragment();
-			const score = document.createElement("span");
-			score.classList.add("score");
-			result.appendChild(score);
+		scoring() {
+			const result = document.createElement("div");
+			result.classList.add("scoring");
+			const grade = document.createElement("span");
+			grade.classList.add("grade");
+			grade.textContent = "0";
+			result.appendChild(grade);
 			result.appendChild(document.createTextNode("/"));
 			const maxScore = document.createElement("span");
 			maxScore.classList.add("value");
