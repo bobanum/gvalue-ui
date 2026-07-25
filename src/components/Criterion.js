@@ -4,16 +4,56 @@ import CSS from './criterion.css?inline';
 export class Criterion extends Component {
 	constructor() {
 		super();
+		this._calcValue;
+		this._value;
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
-		const criteria = this.querySelectorAll('gv-criterion');
-		this.criteriaCount = criteria.length;
-		criteria.forEach((c) => {
-			c.slot = "criteria";
-		});
-	}
-	connectedCallback() {
 		this.shadowRoot.appendChild(this.dom.style());
 		this.shadowRoot.appendChild(this.dom.main());
+	}
+	connectedCallback() {
+		console.log(123, this.value);
+		this.shadowRoot.querySelector(".value").textContent = this.value;
+	}
+	get label() {
+		return this.shadowRoot.querySelector("slot:not([name])").textContent;
+	}
+	set label(value) {
+		this.shadowRoot.querySelector("slot:not([name])").textContent = value;
+	}
+	get value() {
+		return (this._value !== undefined ? this._value : this.total) * this.parentNode.ratio;
+	}
+	set value(val) {
+		this._value = val;
+	}
+	get total() {
+		if (this._total === undefined) {
+			const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
+			if (criteria.length === 0) {
+				this._total = this._value || 0;
+			} else {
+				this._total = criteria.reduce((total, criterion) => total + criterion.value, 0);
+			}
+		}
+		return this._total;
+	}
+	get ratio() {
+		if (this._value === undefined) {
+			return 1;
+		}
+		return this._value / this.total;
+	}
+	set calcValue(val) {
+		this._calcValue = val;
+	}
+	set criteria(val) {
+		this.querySelectorAll('gv-criterion').forEach((c) => c.remove());
+		val.forEach((criterionData) => {
+			const criterion = document.createElement('gv-criterion');
+			criterion.slot = "criteria";
+			criterion.fill(criterionData);
+			this.appendChild(criterion);
+		});
 	}
 	static dom = {
 		style() {
@@ -94,7 +134,8 @@ export class Criterion extends Component {
 			}
 			result.appendChild(input);
 			const value = document.createElement("span");
-			value.textContent = "/10";
+			value.classList.add("value");
+			value.textContent = "0";
 			result.appendChild(value);
 			return result;
 		}

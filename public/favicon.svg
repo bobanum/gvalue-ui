@@ -6,5 +6,5 @@
    <symbol id="carre" viewBox="0 0 112 112">
       <path fill="#F60" d="m0 0v112h112v-112zm16 16h80v16h-64v64h-16zm32 32h48v48h-16v-32h-32zm0 32h16v16h-16z" />
    </symbol>
-   <use href="#carre" width="128" height="128" />
+   <use href="#papier" width="128" height="128" />
 </svg>

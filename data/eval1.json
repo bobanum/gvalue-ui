@@ -12,16 +12,17 @@
                     "id": "k4ps8v",
                     "label": "Lisibilité et indentation du code",
                     "description": "Le code est-il bien indenté et facile à lire ?",
-                    "value": 2
+                    "value": 10
                 },
                 {
                     "id": "m5qt9w",
                     "label": "Nommage des variables et des fonctions",
                     "description": "Les noms de variables et de fonctions sont-ils descriptifs et cohérents ?",
-                    "value": 3
+                    "value": 4
                 },
                 {
                     "id": "n6ru0x",
+                    "value": 14,
                     "label": "Modularité et organisation des fichiers",
                     "description": "Les fichiers sont-ils bien organisés et modulaires ?",
                     "criteria": [
@@ -35,7 +36,7 @@
                             "id": "p8tw2z",
                             "label": "Réutilisabilité des composants",
                             "description": "Les composants sont-ils conçus pour être réutilisables et maintenables ?",
-                            "value": 3
+                            "value": 6
                         }
                     ]
                 }
@@ -43,6 +44,7 @@
         },
         {
             "id": "e8ux2b",
+            "value": 5,
             "label": "Fonctionnalités et comportement",
             "description": "Évaluer si les fonctionnalités sont implémentées correctement et si le comportement de l'application est conforme aux attentes.",
             "criteria": [

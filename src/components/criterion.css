@@ -111,7 +111,12 @@ header {
 		}
 	}
 }
-
+.value {
+	width: 4ch;
+	&:before {
+		content: "/";
+	}
+}
 slot:not([name]) {
 	display: grid;
 	place-self: stretch;

@@ -62,6 +62,31 @@ export class Evaluation extends Criterion {
 			return result;
 		}
 	};
+	fetch(url) {
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				this.render(data);
+			})
+			.catch((error) => {
+				console.error("Error fetching evaluation data:", error);
+			});
+	}
+	render(data) {
+		const { title, student, scoring } = data;
+		// this.shadowRoot.querySelector('slot[name="title"]').textContent = data.title;
+		this.appendChild(document.createTextNode(data.title));
+		data.criteria.forEach((criterionData) => {
+			const criterion = document.createElement('gv-criterion');
+			criterion.slot = "criteria";
+			criterion.fill(criterionData);
+			// criterion.setAttribute('data', JSON.stringify(criterionData));
+			this.appendChild(criterion);
+		});
+		
+		// this.shadowRoot.querySelector('slot[name="student"]').textContent = student;
+		// this.shadowRoot.querySelector('slot[name="scoring"]').textContent = scoring;
+	}
 }
 
 Evaluation.register('gv-evaluation');

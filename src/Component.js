@@ -30,6 +30,16 @@ export class Component extends HTMLElement {
 		}
 		return result;
 	}
+	fill(content) {
+		for (let k in content) {
+			this[k] = content[k];
+		}
+	}
+	static from(content) {
+		const result = new this();
+		result.fill(content);
+		return result;
+	}
 	static dom = {
 		test() {
 			console.log("test static");
