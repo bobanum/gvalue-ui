@@ -11,7 +11,9 @@ export class Criterion extends Component {
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
-		console.log(123, this.value);
+		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
+		console.log(criteria.map(c => c.ratio), this.ratio);
+
 		this.shadowRoot.querySelector(".value").textContent = this.value;
 	}
 	get label() {
@@ -26,22 +28,41 @@ export class Criterion extends Component {
 	set value(val) {
 		this._value = val;
 	}
-	get total() {
-		if (this._total === undefined) {
-			const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
-			if (criteria.length === 0) {
-				this._total = this._value || 0;
-			} else {
-				this._total = criteria.reduce((total, criterion) => total + criterion.value, 0);
-			}
-		}
-		return this._total;
+	get totalRaw() {
+		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
+		if (criteria.length === 0) return;
+		return criteria.reduce((total, criterion) => total + criterion.total, 0);
 	}
-	get ratio() {
-		if (this._value === undefined) {
-			return 1;
+	get total() {
+		let result;
+		if (this._value !== undefined) {
+			return this._value;
 		}
-		return this._value / this.total;
+		const totalRaw = this.totalRaw;
+		if (totalRaw === undefined) {
+			result = this._value || 0;
+		} else {
+			result = totalRaw;
+		}
+		return result;
+	}
+
+	get totalPondere() {
+		console.log(1111, this.total, this.parentNode.ratio);
+
+		return this.total * (this.parentNode.ratio || 1);
+	}
+
+	get ratio() {
+		let result = this.parentElement?.ratio || 1;
+		if (this._value === undefined) {
+			return result;
+		}
+		let totalRaw = this.totalRaw;
+		if (totalRaw === undefined) {
+			return result;
+		}
+		return result * this._value / this.totalRaw;
 	}
 	set calcValue(val) {
 		this._calcValue = val;

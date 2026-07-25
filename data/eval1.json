@@ -7,6 +7,7 @@
             "id": "dl7w63",
             "label": "Qualité du code source",
             "description": "Évaluer la lisibilité, l'organisation et la modularité du code source.",
+            "zvalue": 15,
             "criteria": [
                 {
                     "id": "k4ps8v",
@@ -22,7 +23,7 @@
                 },
                 {
                     "id": "n6ru0x",
-                    "value": 14,
+                    "zvalue": 15,
                     "label": "Modularité et organisation des fichiers",
                     "description": "Les fichiers sont-ils bien organisés et modulaires ?",
                     "criteria": [
