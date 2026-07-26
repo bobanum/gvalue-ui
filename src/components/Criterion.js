@@ -4,16 +4,14 @@ import CSS from './criterion.css?inline';
 export class Criterion extends Component {
 	constructor() {
 		super();
-		this._calcValue;
 		this._value;
+		this.criteriaCount = 0;
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
 		this.shadowRoot.appendChild(this.dom.style());
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
 		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
-		console.log(criteria.map(c => c.ratio), this.ratio);
-
 		this.shadowRoot.querySelector(".value").textContent = this.value;
 	}
 	get label() {
@@ -23,52 +21,47 @@ export class Criterion extends Component {
 		this.shadowRoot.querySelector("slot:not([name])").textContent = value;
 	}
 	get value() {
-		return (this._value !== undefined ? this._value : this.total) * this.parentNode.ratio;
+		return this.total * this.parentNode.ratio;
 	}
 	set value(val) {
 		this._value = val;
 	}
 	get totalRaw() {
+		if (this._totalRaw !== undefined) return this._totalRaw;
 		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
 		if (criteria.length === 0) return;
-		return criteria.reduce((total, criterion) => total + criterion.total, 0);
+		return this._totalRaw = criteria.reduce((total, criterion) => total + criterion.total, 0);
 	}
 	get total() {
-		let result;
+		if (this._total !== undefined) return this._total;
 		if (this._value !== undefined) {
-			return this._value;
+			return this._total = this._value;
 		}
 		const totalRaw = this.totalRaw;
 		if (totalRaw === undefined) {
-			result = this._value || 0;
-		} else {
-			result = totalRaw;
+			return this._total = this._value || 0;
 		}
-		return result;
-	}
-
-	get totalPondere() {
-		console.log(1111, this.total, this.parentNode.ratio);
-
-		return this.total * (this.parentNode.ratio || 1);
+		return this._total = totalRaw;
 	}
 
 	get ratio() {
-		let result = this.parentElement?.ratio || 1;
-		if (this._value === undefined) {
-			return result;
+		if (this._ratio !== undefined && !isNaN(this._ratio)) return this._ratio;
+		let ratio = this.parentNode?.ratio || 1;
+		if (this._value === undefined || this.criteriaCount === 0) {
+			return this._ratio = ratio;
 		}
-		let totalRaw = this.totalRaw;
-		if (totalRaw === undefined) {
-			return result;
-		}
-		return result * this._value / this.totalRaw;
-	}
-	set calcValue(val) {
-		this._calcValue = val;
+		return this._ratio = ratio * this._value / this.totalRaw;
 	}
 	set criteria(val) {
 		this.querySelectorAll('gv-criterion').forEach((c) => c.remove());
+		this.criteriaCount = val.length;
+		if (this.criteriaCount > 0) {
+			this.classList.add("has-criteria");
+			this.makeInputReadOnly();
+		} else {
+			this.makeInputReadOnly(false);
+			this.classList.remove("has-criteria");
+		}
 		val.forEach((criterionData) => {
 			const criterion = document.createElement('gv-criterion');
 			criterion.slot = "criteria";
@@ -76,6 +69,64 @@ export class Criterion extends Component {
 			this.appendChild(criterion);
 		});
 	}
+	makeInputReadOnly(revert = false) {
+		const input = this.shadowRoot.querySelector("header input");
+		// if (revert) {
+		// 	input.disabled = true;
+		// 	input.style.pointerEvents = "none";
+		// 	return;
+		// }
+		
+		input.disabled = true;
+		input.style.pointerEvents = "none";
+		input.placeholder = "10";
+		console.log(input);
+		const enableInput = () => {
+			input.disabled = false;
+			input.value = input.placeholder;
+			input.focus();
+			input.select();
+			input.addEventListener("blur", () => {
+				input.disabled = true;
+			}, { once: true });
+		};
+
+		let longPressTimer;
+		const LONG_PRESS_MS = 500;
+		let result = input.parentElement;
+		result.addEventListener("click", (e) => {
+			if (e.ctrlKey) {
+				enableInput();
+			}
+		});
+
+		result.addEventListener("mousedown", () => {
+			longPressTimer = window.setTimeout(() => {
+				enableInput();
+			}, LONG_PRESS_MS);
+		});
+
+		const clearLongPress = () => {
+			if (longPressTimer) {
+				window.clearTimeout(longPressTimer);
+				longPressTimer = undefined;
+			}
+		};
+
+		result.addEventListener("mouseup", clearLongPress);
+		result.addEventListener("mouseleave", clearLongPress);
+		result.addEventListener("contextmenu", (e) => {
+			e.preventDefault();
+		});
+		result.addEventListener("touchstart", () => {
+			longPressTimer = window.setTimeout(() => {
+				enableInput();
+			}, LONG_PRESS_MS);
+		});
+		result.addEventListener("touchend", clearLongPress);
+		result.addEventListener("touchcancel", clearLongPress);
+	}
+
 	static dom = {
 		style() {
 			const result = document.createElement("style");
@@ -104,55 +155,6 @@ export class Criterion extends Component {
 			input.size = "1";
 			input.name = "scriterion1";
 			input.id = "scriterion1";
-			if (this.criteriaCount > 0) {
-				input.disabled = true;
-				input.style.pointerEvents = "none";
-				input.placeholder = "10";
-				const enableInput = () => {
-					input.disabled = false;
-					input.value = input.placeholder;
-					input.focus();
-					input.select();
-					input.addEventListener("blur", () => {
-						input.disabled = true;
-					}, { once: true });
-				};
-
-				let longPressTimer;
-				const LONG_PRESS_MS = 500;
-
-				result.addEventListener("click", (e) => {
-					if (e.ctrlKey) {
-						enableInput();
-					}
-				});
-
-				result.addEventListener("mousedown", () => {
-					longPressTimer = window.setTimeout(() => {
-						enableInput();
-					}, LONG_PRESS_MS);
-				});
-
-				const clearLongPress = () => {
-					if (longPressTimer) {
-						window.clearTimeout(longPressTimer);
-						longPressTimer = undefined;
-					}
-				};
-
-				result.addEventListener("mouseup", clearLongPress);
-				result.addEventListener("mouseleave", clearLongPress);
-				result.addEventListener("contextmenu", (e) => {
-					e.preventDefault();
-				});
-				result.addEventListener("touchstart", () => {
-					longPressTimer = window.setTimeout(() => {
-						enableInput();
-					}, LONG_PRESS_MS);
-				});
-				result.addEventListener("touchend", clearLongPress);
-				result.addEventListener("touchcancel", clearLongPress);
-			}
 			result.appendChild(input);
 			const value = document.createElement("span");
 			value.classList.add("value");
@@ -161,6 +163,7 @@ export class Criterion extends Component {
 			return result;
 		}
 	};
+
 }
 
 Criterion.register('gv-criterion');

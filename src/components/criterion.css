@@ -31,6 +31,7 @@ slot {
 
 :host(:has(>[slot="criteria"])) {
 	>header {
+
 		input[readonly],
 		input[disabled] {
 			background-color: #0000;
@@ -45,6 +46,20 @@ slot {
 
 	border-radius: var(--gap2);
 }
+
+/* :host(.has-criteria) {
+	>header {
+		input {
+			background-color: #0000;
+			box-shadow:
+				-1px -1px #0002,
+				inset 1px 1px #fff1,
+				inset -1px -1px #0002,
+				1px 1px #fff1;
+		}
+	}
+} */
+
 
 header {
 	line-height: 1.1;
@@ -65,8 +80,9 @@ header {
 		--background-color: #fff2;
 		background-color: var(--background-color);
 		position: relative;
+
 		&::after {
-			--width:.6em;
+			--width: .6em;
 			content: "";
 			position: absolute;
 			left: 100%;
@@ -111,12 +127,15 @@ header {
 		}
 	}
 }
+
 .value {
 	width: 4ch;
+
 	&:before {
 		content: "/";
 	}
 }
+
 slot:not([name]) {
 	display: grid;
 	place-self: stretch;
