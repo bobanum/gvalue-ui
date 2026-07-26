@@ -71,16 +71,9 @@ export class Criterion extends Component {
 	}
 	makeInputReadOnly(revert = false) {
 		const input = this.shadowRoot.querySelector("header input");
-		// if (revert) {
-		// 	input.disabled = true;
-		// 	input.style.pointerEvents = "none";
-		// 	return;
-		// }
-		
 		input.disabled = true;
 		input.style.pointerEvents = "none";
 		input.placeholder = "10";
-		console.log(input);
 		const enableInput = () => {
 			input.disabled = false;
 			input.value = input.placeholder;
