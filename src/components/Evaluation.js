@@ -11,6 +11,13 @@ export class Evaluation extends Criterion {
 			c.slot = "criteria";
 		});
 	}
+	connectedCallback() {
+		super.connectedCallback();
+		const scale = document.createElement("gv-scale");
+		scale.slot = "helpers";
+		this.appendChild(scale);
+		// this.appendChild(scale.cloneNode(true));
+	}
 	static dom = {
 		style() {
 			const result = document.createElement("style");
@@ -83,7 +90,7 @@ export class Evaluation extends Criterion {
 			// criterion.setAttribute('data', JSON.stringify(criterionData));
 			this.appendChild(criterion);
 		});
-		
+
 		// this.shadowRoot.querySelector('slot[name="student"]').textContent = student;
 		// this.shadowRoot.querySelector('slot[name="scoring"]').textContent = scoring;
 	}

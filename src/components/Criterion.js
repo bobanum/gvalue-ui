@@ -52,6 +52,12 @@ export class Criterion extends Component {
 		}
 		return this._ratio = ratio * this._value / this.totalRaw;
 	}
+	get description() {
+		return this.shadowRoot.querySelector(".description").textContent;
+	}
+	set description(value) {
+		this.shadowRoot.querySelector(".description").textContent = value;
+	}
 	set criteria(val) {
 		this.querySelectorAll('gv-criterion').forEach((c) => c.remove());
 		this.criteriaCount = val.length;
@@ -130,6 +136,9 @@ export class Criterion extends Component {
 			const result = document.createDocumentFragment();
 			const header = document.createElement("header");
 			header.appendChild(this.dom.label());
+			const description = document.createElement("div");
+			description.classList.add("description");
+			header.appendChild(description);
 			result.appendChild(header);
 			result.appendChild(this.createSlot("criteria"));
 			return result;

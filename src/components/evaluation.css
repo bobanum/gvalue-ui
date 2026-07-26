@@ -5,7 +5,8 @@
 	max-height: 100vh;
 	position: sticky;
 	top: 0;
-	gap: 0.25em;
+	/* gap: 0.25em; */
+	height: 100%;
 
 	>header {
 		padding: 0.5em;
@@ -13,22 +14,27 @@
 		display: flex;
 		justify-content: space-between;
 	}
+
 	.scoring {
 		display: flex;
 		align-items: center;
 		gap: 0 1ch;
 	}
+
 	.student {
 		display: flex;
 		align-items: center;
 		gap: 0 1ch;
 	}
+
 	.id {
 		quotes: '(' ')';
 		font-size: smaller;
+
 		&::before {
 			content: open-quote;
 		}
+
 		&::after {
 			content: close-quote;
 		}
@@ -45,34 +51,28 @@ slot[name="criteria"] {
 }
 
 
+slot[name="helpers"] {
+	--radius: .75em;
+	background-color: #333;
+	display: grid;
+	border: 2px solid hsl(from var(--background-color) h s calc(l + 25));
+	position: relative;
+}
+
 @media (aspect-ratio > 1) {
 	:host {
 		grid-template-columns: 3fr 2fr;
 		grid-template-rows: auto 1fr;
 		grid-template-areas: "header header" "criteria helpers";
 	}
-}
 
-@media (aspect-ratio <= 1) {
-	:host {
-		grid-template-columns: 1fr;
-		grid-template-areas: "header" "criteria" "helpers";
-	}
-}
-slot[name="helpers"] {
-	--radius: .75em;
-	background-color: #333;
-	box-shadow: inset 2px 2px 3px #0009, 2px 2px 3px #0006;
-	display: grid;
-	grid-template-rows: 1fr auto;
-	border: 2px solid #334;
-
-	@media (width > 768px) {
+	slot[name="helpers"] {
 		overflow: hidden;
+		grid-auto-flow: column;
 		grid-template-rows: 1fr;
-		grid-template-columns: 1fr auto;
+		grid-template-columns: unset;
+		place-content: stretch end;
 		border-right: none;
-		border-left-width: 5px;
 		border-radius: var(--radius) 0 0 var(--radius);
 
 		.scale {
@@ -80,11 +80,20 @@ slot[name="helpers"] {
 			width: 2em;
 		}
 	}
+}
 
-	@media (width <=768px) {
+@media (aspect-ratio <= 1) {
+	:host {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 3fr 2fr;
+		grid-template-areas: "header" "criteria" "helpers";
+	}
+
+	slot[name="helpers"] {
+		margin-inline: 0.5rem;
 		border-bottom: none;
-		border-top-width: 5px;
 		border-radius: var(--radius) var(--radius) 0 0;
+		place-content: end stretch;
 
 		.scale {
 			li {
