@@ -16,6 +16,7 @@ export class Evaluation extends Criterion {
 		const scale = document.createElement("gv-scale");
 		scale.slot = "helpers";
 		this.appendChild(scale);
+		this.appendChild(this.dom.comments());
 		// this.appendChild(scale.cloneNode(true));
 	}
 	static dom = {
@@ -66,6 +67,44 @@ export class Evaluation extends Criterion {
 			const maxScore = document.createElement("span");
 			maxScore.classList.add("value");
 			result.appendChild(maxScore);
+			return result;
+		},
+		comments() {
+			const result = document.createElement("div");
+			result.classList.add("comments");
+			result.slot = "helpers";
+			const h1 = document.createElement("header");
+			h1.textContent = "Commentaires";
+			result.appendChild(h1);
+			result.appendChild(this.createSlot("comments"));
+			const comments = [
+				"Bonne progression, et le sourire revient déjà quand on regarde le travail.",
+				"Le raisonnement est solide, même si la mise en page a encore besoin d'un peu d'enthousiasme.",
+				"Quelques idées brillantes, mais l'ordinateur semble avoir pris un café avant la fin.",
+				"Le fond est intéressant, il ne manque plus qu'un petit coup de polish pour le rendre vraiment élégant.",
+				"On sent une vraie compréhension du sujet, avec un petit goût pour le chaos bien organisé.",
+				"C'est clair, pertinent et franchement plus convaincant que la moyenne des brouillons de dernière minute.",
+				"Un très bon effort, avec juste assez de personnalité pour rester mémorable.",
+				"La structure est là, il reste à peaufiner les détails pour un rendu encore plus net.",
+				"Pas mal du tout : on dirait que la créativité a fait une apparition surprise.",
+				"Le travail est cohérent, et même les petites imperfections ont du charme.",
+				"On voit de la méthode, de l'initiative et un soupçon de magie bien placée.",
+				"L'idée est bonne, la présentation pourrait encore gagner un peu de punch.",
+				"Très correct, avec une vraie volonté de progresser et de faire mieux.",
+				"Le résultat est prometteur, presque aussi convaincant qu'un café bien servi.",
+				"Quelques accroches très réussies, et un ensemble qui tient bien la route.",
+			];
+
+			comments.forEach((commentText, i) => {
+				let comment = document.createElement("gv-comment");
+				comment.textContent = commentText;
+				if (Math.random() < 0.5) {
+					comment.value = Math.floor(Math.random() * 10) + 1;
+					comment.absolute = Math.random() < 0.5;
+					comment.proportionnal = Math.random() < 0.5;
+				}
+				result.appendChild(comment);
+			});
 			return result;
 		}
 	};

@@ -1,5 +1,5 @@
 :host {
-	--size: 1.5em;
+	--size: 2em;
 	display: flex;
 	margin: 0.25em;
 	list-style: none;
@@ -7,6 +7,7 @@
 	position: relative;
 	/* height: 2em; */
 	user-select: none;
+	order: 10;
 
 	div {
 		flex-grow: 1;

@@ -5,6 +5,9 @@
 	margin-inline: .5em;
 	border-bottom: 2px groove #fff6;
 	font-style: oblique;
+	>label>input {
+		display: none;
+	}
 }
 :host([checked]) {
 	font-style: normal;
@@ -16,7 +19,70 @@
 :host(:last-child) {
 	border-bottom: none;
 }
+* {
+	box-sizing: border-box;
+}
+form {
+	display: grid;
+	gap: .5em;
+	textarea {
+		resize: none;
+		width: 100%;
+		font-family: inherit;
+		background-color: #fff3;
+		border: 1px solid var(--border-color);
+		padding: .5em;
+		color:inherit;
+		outline: none;
+	}
+}
+span.value:not(:empty) {
+	font-size: .9em;
+	quotes: "[" "]";
+	&::before {
+		content: open-quote;
+	}
+	&::after {
+		content: close-quote;
+	}
+}
+.value-container {
+	gap: .5em;
+	display: flex;
+	fieldset {
+		margin: 0;
+		padding: 0;
+		border: none;
+		display: contents;
+	}
+}
+::part(box) {
+	box-sizing: border-box;
+}
 
-input {
-	display: none;
+@media (aspect-ratio > 1) {
+	.value-container {
+		flex-direction: row;
+	}
+	::part(box) {
+		width: auto;
+		transform-origin: right;
+		margin-right: .5em;
+		justify-self: end;
+	}
+}
+@media (aspect-ratio <= 1) {
+	.value-container {
+		flex-direction: row;
+		fieldset {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	::part(box) {
+		width: calc(100% - 1em);
+		transform-origin: bottom;
+		margin-bottom: 2em;
+		align-self: end;
+	}
 }

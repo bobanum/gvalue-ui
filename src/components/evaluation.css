@@ -70,7 +70,7 @@ slot[name="helpers"] {
 		overflow: hidden;
 		grid-auto-flow: column;
 		grid-template-rows: 1fr;
-		grid-template-columns: unset;
+		grid-template-columns: 1fr auto;
 		place-content: stretch end;
 		border-right: none;
 		border-radius: var(--radius) 0 0 var(--radius);
@@ -93,6 +93,7 @@ slot[name="helpers"] {
 		margin-inline: 0.5rem;
 		border-bottom: none;
 		border-radius: var(--radius) var(--radius) 0 0;
+		grid-template-rows: 1fr auto;
 		place-content: end stretch;
 
 		.scale {

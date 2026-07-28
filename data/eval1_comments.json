@@ -9,18 +9,22 @@
     },
     {
         "id": "u3yl7e",
+        "criterion_id": "k4ps8v",
         "text": "Les noms de variables sont peu descriptifs et ne reflètent pas leur rôle dans le programme."
     },
     {
         "id": "v4zm8f",
+        "criterion_id": "k4ps8v",
         "text": "La logique est correcte, mais certaines fonctions sont trop longues et devraient être découpées."
     },
     {
         "id": "w5an9g",
+        "criterion_id": "k4ps8v",
         "text": "Le rendu visuel correspond bien aux maquettes fournies, avec une mise en page soignée."
     },
     {
         "id": "x6bo0h",
-        "text": "La gestion des erreurs est absente ; l'application plante si le champ est laissé vide."
+        "criterion_id": "k4ps8v",
+        "text": "La gestion des erreurs est absente; l'application plante si le champ est laissé vide."
     }
 ]
