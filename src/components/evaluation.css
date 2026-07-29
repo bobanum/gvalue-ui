@@ -27,6 +27,49 @@
 		gap: 0 1ch;
 	}
 
+	.comments {
+		box-sizing: border-box;
+		overflow: hidden;
+		display: grid;
+		grid-template-rows: auto 1fr;
+
+		header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.5rem;
+			font-size: larger;
+			background-color: hsl(from var(--background-color) h calc(s + 15) calc(l + 15));
+			h1 {
+				margin: 0;
+				font-size: 1em;
+			}
+
+			button {
+				--color: hsl(0, 70%, 50%);
+				box-sizing: border-box;
+				font-size: 1em;
+				aspect-ratio: 1;
+				width: 2em;
+				margin-block: -1em;
+				border-radius: 2em;
+				border: none;
+				background-color: var(--color);
+				box-shadow: 0 2px 3px #0006;
+				color: white;
+
+				&:hover {
+					background-color: hsl(from var(--color) h 100% l);
+				}
+			}
+		}
+
+		slot {
+			overflow-y: auto;
+			display: grid;
+		}
+	}
+
 	.id {
 		quotes: '(' ')';
 		font-size: smaller;
@@ -41,6 +84,7 @@
 	}
 }
 
+
 slot[name="criteria"] {
 	--gap-inline: .5em;
 	grid-area: criteria;
@@ -51,7 +95,7 @@ slot[name="criteria"] {
 }
 
 
-slot[name="helpers"] {
+.helpers {
 	--radius: .75em;
 	background-color: #333;
 	display: grid;
@@ -66,7 +110,7 @@ slot[name="helpers"] {
 		grid-template-areas: "header header" "criteria helpers";
 	}
 
-	slot[name="helpers"] {
+	.helpers {
 		overflow: hidden;
 		grid-auto-flow: column;
 		grid-template-rows: 1fr;
@@ -82,14 +126,14 @@ slot[name="helpers"] {
 	}
 }
 
-@media (aspect-ratio <= 1) {
+@media (aspect-ratio <=1) {
 	:host {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 3fr 2fr;
 		grid-template-areas: "header" "criteria" "helpers";
 	}
 
-	slot[name="helpers"] {
+	.helpers {
 		margin-inline: 0.5rem;
 		border-bottom: none;
 		border-radius: var(--radius) var(--radius) 0 0;

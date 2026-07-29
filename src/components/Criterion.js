@@ -21,7 +21,7 @@ export class Criterion extends Component {
 		this.shadowRoot.querySelector("slot:not([name])").textContent = value;
 	}
 	get value() {
-		return this.total * this.parentNode.ratio;
+		return this.total * (this.parentNode?.ratio || 1);
 	}
 	set value(val) {
 		this._value = val;
@@ -33,7 +33,7 @@ export class Criterion extends Component {
 		return this._totalRaw = criteria.reduce((total, criterion) => total + criterion.total, 0);
 	}
 	get total() {
-		if (this._total !== undefined) return this._total;
+		// if (this._total !== undefined) return this._total;
 		if (this._value !== undefined) {
 			return this._total = this._value;
 		}
@@ -93,37 +93,9 @@ export class Criterion extends Component {
 		let longPressTimer;
 		const LONG_PRESS_MS = 500;
 		let result = input.parentElement;
-		result.addEventListener("click", (e) => {
-			if (e.ctrlKey) {
-				enableInput();
-			}
+		this.addEventListener.call(result, "ctrl-click|longpress", (e) => {
+			enableInput();
 		});
-
-		result.addEventListener("mousedown", () => {
-			longPressTimer = window.setTimeout(() => {
-				enableInput();
-			}, LONG_PRESS_MS);
-		});
-
-		const clearLongPress = () => {
-			if (longPressTimer) {
-				window.clearTimeout(longPressTimer);
-				longPressTimer = undefined;
-			}
-		};
-
-		result.addEventListener("mouseup", clearLongPress);
-		result.addEventListener("mouseleave", clearLongPress);
-		result.addEventListener("contextmenu", (e) => {
-			e.preventDefault();
-		});
-		result.addEventListener("touchstart", () => {
-			longPressTimer = window.setTimeout(() => {
-				enableInput();
-			}, LONG_PRESS_MS);
-		});
-		result.addEventListener("touchend", clearLongPress);
-		result.addEventListener("touchcancel", clearLongPress);
 	}
 
 	static dom = {

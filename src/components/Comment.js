@@ -17,19 +17,44 @@ class Comment extends Component {
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
-		this.addEventListener("click", this.evt.open.bind(this));
+		this.addEventListener("longpress", this.evt.open.bind(this));
 	}
 	get value() {
 		return this._.value;
 	}
 	set value(value) {
 		this._.value = value;
-		this.shadowRoot.querySelector(".value").textContent = value;
+		const textValue = this.formatValue(value);
+		this.shadowRoot.querySelector(".value").textContent = textValue;
+	}
+	formatValue(value, precision = 2) {
+		let frac = precision % 1;
+		precision -= frac;
+		let result = value;
+		let sign = Math.sign(value);
+		result = Math.abs(value);
+		let length = Math.floor(Math.log10(result));
+		const mult = 10 ** (precision - length - 1);
+
+		result = Math.round(result * mult) / mult;
+		if (frac > 0) {
+			let residu = value - result;
+			residu = residu * mult / frac;
+			residu = Math.round(residu);
+			residu = residu * frac / mult;
+			result = +(result + residu).toFixed(9);
+		}
+		result = result.toString();
+		if (sign <= 0) {
+			result = `\u2796\uFE0E${result}`;
+		} else {
+			result = `\u2795\uFE0E${result}`;
+		}
+		return result;
 	}
 	evt = {
 		open(e) {
 			if (e.originalTarget.tagName !== "SLOT") return;
-			console.log(e);
 			e.stopPropagation();
 			e.stopImmediatePropagation();
 			e.preventDefault();
@@ -103,23 +128,29 @@ class Comment extends Component {
 			// negative.appendChild(document.createTextNode("Négatif"));
 			// negativeCheckbox.checked = this.negative;
 			// fieldset.appendChild(negative);
-			
-			const proportionnal = document.createElement("label");
-			const proportionnalCheckbox = document.createElement("input");
-			proportionnalCheckbox.type = "checkbox";
-			proportionnal.appendChild(proportionnalCheckbox);
-			proportionnal.appendChild(document.createTextNode("[0-1]"));
-			proportionnalCheckbox.checked = this.proportionnal;
-			fieldset.appendChild(proportionnal);
 
-			const absolute = document.createElement("label");
-			const absoluteCheckbox = document.createElement("input");
-			absoluteCheckbox.type = "checkbox";
-			absolute.appendChild(absoluteCheckbox);
-			absolute.appendChild(document.createTextNode("Absolu"));
-			absoluteCheckbox.checked = this.absolute;
-			fieldset.disabled = (valueInput.value === "");
-			fieldset.appendChild(absolute);
+			const radio = (name, label, checked) => {
+				let result = document.createElement("label");
+				const box = document.createElement("input");
+				box.type = "radio";
+				box.name = name;
+				result.appendChild(box);
+				result.appendChild(document.createTextNode(label));
+				box.checked = checked;
+				return result;
+			};
+
+			fieldset.appendChild(radio("proportionnal", `[-1➔1]`, this.proportionnal));
+			fieldset.appendChild(radio("proportionnal", `[-${this.criterion.value}➔${this.criterion.value}]`, !this.proportionnal));
+
+			// const absolute = document.createElement("label");
+			// const absoluteCheckbox = document.createElement("input");
+			// absoluteCheckbox.type = "checkbox";
+			// absolute.appendChild(absoluteCheckbox);
+			// absolute.appendChild(document.createTextNode("Absolu"));
+			// absoluteCheckbox.checked = this.absolute;
+			// fieldset.disabled = (valueInput.value === "");
+			// fieldset.appendChild(absolute);
 
 			div.appendChild(fieldset);
 
