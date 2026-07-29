@@ -21,7 +21,7 @@ export class Criterion extends Component {
 		this.shadowRoot.querySelector("slot:not([name])").textContent = value;
 	}
 	get value() {
-		return this.total * this.parentNode.ratio;
+		return this.total * (this.parentNode?.ratio || 1);
 	}
 	set value(val) {
 		this._value = val;
@@ -33,7 +33,7 @@ export class Criterion extends Component {
 		return this._totalRaw = criteria.reduce((total, criterion) => total + criterion.total, 0);
 	}
 	get total() {
-		if (this._total !== undefined) return this._total;
+		// if (this._total !== undefined) return this._total;
 		if (this._value !== undefined) {
 			return this._total = this._value;
 		}
@@ -51,6 +51,12 @@ export class Criterion extends Component {
 			return this._ratio = ratio;
 		}
 		return this._ratio = ratio * this._value / this.totalRaw;
+	}
+	get description() {
+		return this.shadowRoot.querySelector(".description").textContent;
+	}
+	set description(value) {
+		this.shadowRoot.querySelector(".description").textContent = value;
 	}
 	set criteria(val) {
 		this.querySelectorAll('gv-criterion').forEach((c) => c.remove());
@@ -87,37 +93,9 @@ export class Criterion extends Component {
 		let longPressTimer;
 		const LONG_PRESS_MS = 500;
 		let result = input.parentElement;
-		result.addEventListener("click", (e) => {
-			if (e.ctrlKey) {
-				enableInput();
-			}
+		this.addEventListener.call(result, "ctrl-click|longpress", (e) => {
+			enableInput();
 		});
-
-		result.addEventListener("mousedown", () => {
-			longPressTimer = window.setTimeout(() => {
-				enableInput();
-			}, LONG_PRESS_MS);
-		});
-
-		const clearLongPress = () => {
-			if (longPressTimer) {
-				window.clearTimeout(longPressTimer);
-				longPressTimer = undefined;
-			}
-		};
-
-		result.addEventListener("mouseup", clearLongPress);
-		result.addEventListener("mouseleave", clearLongPress);
-		result.addEventListener("contextmenu", (e) => {
-			e.preventDefault();
-		});
-		result.addEventListener("touchstart", () => {
-			longPressTimer = window.setTimeout(() => {
-				enableInput();
-			}, LONG_PRESS_MS);
-		});
-		result.addEventListener("touchend", clearLongPress);
-		result.addEventListener("touchcancel", clearLongPress);
 	}
 
 	static dom = {
@@ -130,6 +108,9 @@ export class Criterion extends Component {
 			const result = document.createDocumentFragment();
 			const header = document.createElement("header");
 			header.appendChild(this.dom.label());
+			const description = document.createElement("div");
+			description.classList.add("description");
+			header.appendChild(description);
 			result.appendChild(header);
 			result.appendChild(this.createSlot("criteria"));
 			return result;

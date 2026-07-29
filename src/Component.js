@@ -1,4 +1,5 @@
 export class Component extends HTMLElement {
+	static LONG_PRESS_DELAY = 500;
 	constructor() {
 		super();
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
@@ -33,6 +34,70 @@ export class Component extends HTMLElement {
 	fill(content) {
 		for (let k in content) {
 			this[k] = content[k];
+		}
+	}
+	addEventListener(type, listener, options) {
+		let types = type.split("|");
+		if (types.length > 1) {
+			for (let t of types) {
+				this.addEventListener(t, listener, options);
+			}
+			return;
+		}
+		let eventProperties = {
+			ctrl: "ctrlKey",
+			shift: "shiftKey",
+			alt: "altKey",
+			meta: "metaKey",
+			stop: "stopImmediatePropagation",
+			prevent: "preventDefault",
+		};
+		let behaviours = type.split(":");
+		type = behaviours.shift();
+		let modifiers = type.split("-");
+		type = modifiers.pop();
+		let customs = ["longpress"];
+		
+		if (modifiers.length > 0 || behaviours.length > 0) {
+			let originalListener = listener;
+			listener = function (e) {
+				for (let mod of modifiers) {
+					if (mod[0] === "!" && e[eventProperties[mod.slice(1)]] || !e[eventProperties[mod]]) {
+						return;
+					}
+				}
+				for (let behaviour of behaviours) {
+					behaviour = eventProperties[behaviour] || behaviour;
+					e[behaviour]();
+				}
+				originalListener.call(this, e);
+			};
+		}
+		if (!customs.includes(type)) {
+			return super.addEventListener(type, listener, options);
+		}
+		if (modifiers.length > 0 && !customs.includes(type)) {
+			return super.addEventListener(type, function (e) {
+			}, options);
+		}
+		if (type === "longpress") {
+			super.addEventListener("pointerdown", e => {
+				// e.stopImmediatePropagation();
+				// e.preventDefault();
+				let timer = setTimeout(() => {
+					document.addEventListener("contextmenu", (e) => {
+						e.preventDefault();
+					}, { once: true });
+					listener.call(this, e);
+					timer = undefined;
+				}, Component.LONG_PRESS_DELAY);
+				document.addEventListener("pointerup", (e) => {
+					e.preventDefault();
+					e.stopImmediatePropagation();
+					clearTimeout(timer);
+					timer = undefined;
+				}, { once: true });
+			}, options);
 		}
 	}
 	static from(content) {
