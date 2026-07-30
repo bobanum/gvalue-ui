@@ -1,5 +1,5 @@
 :host {
-	--input-width: 3em;
+	--input-width: 3rem;
 	display: grid;
 	grid-area: app;
 	max-height: 100vh;
@@ -7,6 +7,7 @@
 	top: 0;
 	/* gap: 0.25em; */
 	height: 100%;
+	font-size: max(2vw, 1rem);
 
 	>header {
 		padding: 0.5em;
@@ -32,6 +33,8 @@
 		overflow: hidden;
 		display: grid;
 		grid-template-rows: auto 1fr;
+		--bg-color: hsl(from var(--background-color) h calc(s + 15) calc(l + var(--darker)));
+		border-right: 2px solid var(--bg-color);
 
 		header {
 			display: flex;
@@ -39,7 +42,7 @@
 			align-items: center;
 			padding: 0.5rem;
 			font-size: larger;
-			background-color: hsl(from var(--background-color) h calc(s + 15) calc(l + 15));
+			background-color: var(--bg-color);
 			h1 {
 				margin: 0;
 				font-size: 1em;
@@ -56,7 +59,7 @@
 				border: none;
 				background-color: var(--color);
 				box-shadow: 0 2px 3px #0006;
-				color: white;
+				color: var(--text-color);
 
 				&:hover {
 					background-color: hsl(from var(--color) h 100% l);
@@ -67,6 +70,8 @@
 		slot {
 			overflow-y: auto;
 			display: grid;
+			font-size: smaller;
+			line-height: 1;
 		}
 	}
 
@@ -97,7 +102,7 @@ slot[name="criteria"] {
 
 .helpers {
 	--radius: .75em;
-	background-color: #333;
+	background-color: var(--background-color);
 	display: grid;
 	border: 2px solid hsl(from var(--background-color) h s calc(l + 25));
 	position: relative;

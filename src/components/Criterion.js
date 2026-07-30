@@ -67,7 +67,8 @@ export class Criterion extends Component {
 		} else {
 			this.makeInputReadOnly(false);
 			this.classList.remove("has-criteria");
-		}
+			console.log(this.shadowRoot.querySelectorAll("input"));
+				}
 		val.forEach((criterionData) => {
 			const criterion = document.createElement('gv-criterion');
 			criterion.slot = "criteria";
@@ -77,16 +78,17 @@ export class Criterion extends Component {
 	}
 	makeInputReadOnly(revert = false) {
 		const input = this.shadowRoot.querySelector("header input");
-		input.disabled = true;
+		input.readOnly = true;
 		input.style.pointerEvents = "none";
 		input.placeholder = "10";
+		input.tabIndex = -1;
 		const enableInput = () => {
-			input.disabled = false;
+			input.readOnly = false;
 			input.value = input.placeholder;
 			input.focus();
 			input.select();
 			input.addEventListener("blur", () => {
-				input.disabled = true;
+				input.readOnly = true;
 			}, { once: true });
 		};
 
@@ -108,11 +110,13 @@ export class Criterion extends Component {
 			const result = document.createDocumentFragment();
 			const header = document.createElement("header");
 			header.appendChild(this.dom.label());
-			const description = document.createElement("div");
-			description.classList.add("description");
-			header.appendChild(description);
+
+			
 			result.appendChild(header);
 			result.appendChild(this.createSlot("criteria"));
+			const description = document.createElement("div");
+			description.classList.add("description");
+			result.appendChild(description);
 			return result;
 		},
 		label() {
@@ -129,6 +133,7 @@ export class Criterion extends Component {
 			input.size = "1";
 			input.name = "scriterion1";
 			input.id = "scriterion1";
+			input.tabIndex = 0;
 			result.appendChild(input);
 			const value = document.createElement("span");
 			value.classList.add("value");

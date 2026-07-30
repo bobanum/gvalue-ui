@@ -4,6 +4,7 @@ import css from "./evaluation.css?inline";
 export class Evaluation extends Criterion {
 	constructor() {
 		super();
+		this.level = 0;
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
 		const criteria = this.querySelectorAll('gv-criterion');
 		this.criteriaCount = criteria.length;
@@ -76,8 +77,6 @@ export class Evaluation extends Criterion {
 			return result;
 		},
 		comments() {
-			console.log(123);
-			
 			const result = document.createElement("section");
 			result.classList.add("comments");
 			const header = document.createElement("header");

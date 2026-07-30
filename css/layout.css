@@ -7,7 +7,7 @@ body {
 		display: grid;
 		align-items: center;
 		padding: 0.5em;
-		color: #f60;
+		color: var(--text-color);
 
 		h1 {
 			display: flex;
@@ -27,10 +27,6 @@ body {
 
 	>nav.sec {
 		grid-area: nav-sec
-	}
-
-	>nav.main {
-		grid-area: nav-main;
 	}
 
 	.helpers {
@@ -60,7 +56,7 @@ body {
 		grid-template-rows: auto 1fr auto auto;
 		grid-template-columns: 1fr auto;
 		grid-template-areas:
-		"header nav-main"
+		"header header"
 		"app app"
 		"helpers helpers"
 		"nav-sec nav-sec"
