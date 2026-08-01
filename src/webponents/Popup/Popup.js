@@ -1,7 +1,7 @@
-import { Component } from "./Component.js";
-import css from "../css/popup.css?inline";
+import { Component } from "../../Component.js";
+import css from "./popup.css?inline";
 
-class PopupPonent extends Component {
+class Popup extends Component {
 	constructor() {
 		super();
 		this.shadowRoot.appendChild(this.dom.style());
@@ -75,4 +75,4 @@ class PopupPonent extends Component {
 	};
 }
 
-PopupPonent.register();
+Popup.register("popup-ponent");

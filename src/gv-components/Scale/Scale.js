@@ -1,4 +1,4 @@
-import { Component } from "../Component.js";
+import { Component } from "../../Component.js";
 import css from "./scale.css?inline";
 
 class Scale extends Component { 

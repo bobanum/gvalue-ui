@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
+import { Component } from "../../Component.js";
 
-class MenuPonent extends Component {
+class Menu extends Component {
 	static defaultUrl = "/public/icons.svg#hamburger";
 	constructor() {
 		super();
@@ -18,7 +18,7 @@ class MenuPonent extends Component {
 	set icon(value) {
 
 		if (!value.match(/^[a-zA-Z0-9]+:\/\/|^\/|^\./)) {
-			value = `${MenuPonent.defaultUrl}#${value}`;
+			value = `${Menu.defaultUrl}#${value}`;
 		}
 		this._icon.value = value;
 	}
@@ -82,7 +82,7 @@ class MenuPonent extends Component {
 			const result = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 			result.tabIndex = 0;
 			const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-			use.setAttribute("href", MenuPonent.defaultUrl);
+			use.setAttribute("href", Menu.defaultUrl);
 			result.appendChild(use);
 			this._icon = use.attributes.getNamedItem("href");
 			return result;
@@ -94,4 +94,4 @@ class MenuPonent extends Component {
 	}
 }
 
-MenuPonent.register();
+Menu.register("menu-ponent");

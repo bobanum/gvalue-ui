@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
+import { Component } from "../../Component.js";
 
-class ButtonPonent extends Component {
+class Button extends Component {
 	static defaultUrl = "/public/icons.svg";
 	constructor() {
 		super();
@@ -16,7 +16,7 @@ class ButtonPonent extends Component {
 	set icon(value) {
 
 		if (!value.match(/^[a-zA-Z0-9]+:\/\/|^\/|^\./)) {
-			value = `${ButtonPonent.defaultUrl}#${value}`;
+			value = `${Button.defaultUrl}#${value}`;
 		}
 		console.log(value);
 		this._icon.value = value;
@@ -82,4 +82,4 @@ class ButtonPonent extends Component {
 	}
 }
 
-ButtonPonent.register();
+Button.register("button-ponent");

@@ -66,12 +66,13 @@
 				}
 			}
 		}
-
+		
 		slot {
 			overflow-y: auto;
 			display: grid;
 			font-size: smaller;
 			line-height: 1;
+			align-self: flex-start;
 		}
 	}
 

@@ -1,9 +1,10 @@
-import { Component } from '../Component.js';
+import { Component } from '../../Component.js';
 import CSS from './criterion.css?inline';
 
 export class Criterion extends Component {
 	constructor() {
 		super();
+		this._comments = [];
 		this._value;
 		this.criteriaCount = 0;
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
@@ -58,17 +59,20 @@ export class Criterion extends Component {
 	set description(value) {
 		this.shadowRoot.querySelector(".description").textContent = value;
 	}
+	get criteria() {
+		return [...this.querySelectorAll(':scope>gv-criterion')];
+	}
 	set criteria(val) {
-		this.querySelectorAll('gv-criterion').forEach((c) => c.remove());
+		this.criteria.forEach((c) => c.remove());
 		this.criteriaCount = val.length;
 		if (this.criteriaCount > 0) {
 			this.classList.add("has-criteria");
-			this.makeInputReadOnly();
+			this.makeInputReadOnly(this.shadowRoot.querySelector("header input"), true);
 		} else {
-			this.makeInputReadOnly(false);
+			this.makeInputReadOnly(this.shadowRoot.querySelector("header input"), false);
 			this.classList.remove("has-criteria");
 			console.log(this.shadowRoot.querySelectorAll("input"));
-				}
+		}
 		val.forEach((criterionData) => {
 			const criterion = document.createElement('gv-criterion');
 			criterion.slot = "criteria";
@@ -76,8 +80,25 @@ export class Criterion extends Component {
 			this.appendChild(criterion);
 		});
 	}
-	makeInputReadOnly(revert = false) {
-		const input = this.shadowRoot.querySelector("header input");
+	get comments() {
+		return this._comments || [];
+	}
+	set comments(val) {
+		this._comments = val.filter((c) => c.criterion_id === this.id).map((c) => {
+			const comment = document.createElement("gv-comment");
+			comment.fill({ text: c.text });
+			return comment;
+		});
+		
+		if (this._comments.length > 0) {
+			this.classList.add("has-comments");
+			this.append(...this._comments);
+		}
+		this.criteria.forEach((c) => {
+			c.comments = val;
+		});
+	}
+	makeInputReadOnly(input, revert = false) {
 		input.readOnly = true;
 		input.style.pointerEvents = "none";
 		input.placeholder = "10";
@@ -99,7 +120,14 @@ export class Criterion extends Component {
 			enableInput();
 		});
 	}
-
+	activate () {
+		this.classList.add("current");
+		const evaluation = this.closest("gv-evaluation");
+		evaluation.showComments(this.comments);
+	}
+	deactivate () {
+		this.classList.remove("current");
+	}
 	static dom = {
 		style() {
 			const result = document.createElement("style");
@@ -111,12 +139,13 @@ export class Criterion extends Component {
 			const header = document.createElement("header");
 			header.appendChild(this.dom.label());
 
-			
+
 			result.appendChild(header);
 			result.appendChild(this.createSlot("criteria"));
 			const description = document.createElement("div");
 			description.classList.add("description");
 			result.appendChild(description);
+			// result.appendChild(this.createSlot("comments"));
 			return result;
 		},
 		label() {
@@ -128,17 +157,26 @@ export class Criterion extends Component {
 		input() {
 			const result = document.createElement("div");
 			result.classList.add("input");
-			const input = document.createElement("input");
-			input.type = "number";
+			const input = document.createElement("input", { is: "gv-number" });
+			input.type = "text";
 			input.size = "1";
 			input.name = "scriterion1";
 			input.id = "scriterion1";
+			input.step = "0.25";
+			input.min = "0";
+			input.max = "10";
 			input.tabIndex = 0;
 			result.appendChild(input);
 			const value = document.createElement("span");
 			value.classList.add("value");
 			value.textContent = "0";
 			result.appendChild(value);
+			input.addEventListener("focus", (e) => {
+				this.activate();
+			});
+			input.addEventListener("blur", (e) => {
+				this.deactivate();
+			});
 			return result;
 		}
 	};

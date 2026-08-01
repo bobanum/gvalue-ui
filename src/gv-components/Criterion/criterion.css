@@ -16,19 +16,25 @@ slot[name="criteria"] {
 }
 
 slot[name="criteria"]:has-slotted {
+	--border-color: hsl(from var(--background-color) h s 50% / 0.1);
 	padding-left: var(--gap2);
 	/* margin-left: var(--gap); */
-	border-color: hsl(from currentColor h s l / 0.3);
+	border-color: var(--border-color);
 	border-style: solid;
 	border-width: 0 0 0 var(--gap);
 	border-bottom-left-radius: 1em .5em;
 	position: relative;
 	padding-bottom: .5em;
 }
+slot[name="comments"] {
+	display: block;
+	grid-column: 1 / -1;
+}
 
 slot {
 	align-self: end;
 }
+
 .description {
 	font-size: 0.9em;
 	font-family: 'Bad Script';
@@ -38,8 +44,10 @@ slot {
 	display: none;
 	padding-block: .5em;
 }
+
 :host(:has(>[slot="criteria"])) {
 	>header {
+
 		input[readonly],
 		input[disabled] {
 			background-color: #0000;
@@ -52,6 +60,7 @@ slot {
 		}
 	}
 }
+
 ::slotted(gv-criterion) {
 	font-size: .95em;
 }
@@ -94,6 +103,7 @@ header {
 			border-block-width: 1em;
 			margin-top: 0.25em;
 		}
+
 		>.description {
 			display: block;
 		}
@@ -130,6 +140,7 @@ header {
 			-webkit-appearance: none;
 			margin: 0;
 		}
+
 		&:focus {
 			outline: 2px solid hsl(from blue 211 50% l);
 			outline-offset: 1px;
