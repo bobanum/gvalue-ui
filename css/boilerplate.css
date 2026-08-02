@@ -9,7 +9,7 @@ body {
 	min-height: 100vh;
 	/* background: radial-gradient(circle at top, hsl(211, 7%, 35%) 0%, 45%, hsl(211, 7%, 10%) 100%); */
 	background-color: var(--background-color);
-	color: #fff;
+	color: var(--text-color);
 	overflow: hidden;
 }
 

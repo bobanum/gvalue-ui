@@ -19,12 +19,12 @@
     },
     {
         "id": "w5an9g",
-        "criterion_id": "k4ps8v",
+        "criterion_id": "m5qt9w",
         "text": "Le rendu visuel correspond bien aux maquettes fournies, avec une mise en page soignée."
     },
     {
         "id": "x6bo0h",
-        "criterion_id": "k4ps8v",
+        "criterion_id": "m5qt9w",
         "text": "La gestion des erreurs est absente; l'application plante si le champ est laissé vide."
     }
 ]

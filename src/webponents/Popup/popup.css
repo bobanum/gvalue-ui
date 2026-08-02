@@ -4,7 +4,7 @@
 	inset: 0;
 	display: grid;
 	place-items: center;
-	background-color: #0003;
+	background-color: hsl(from var(--background-color) h s l / 0.2);
 	backdrop-filter: blur(0.25em);
 	z-index: 1000;
 	transition-property: backdrop-filter, background-color;

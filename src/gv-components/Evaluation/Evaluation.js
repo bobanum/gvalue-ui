@@ -1,9 +1,10 @@
-import { Criterion } from "./Criterion.js";
+import { Criterion } from "../Criterion/Criterion.js";
 import css from "./evaluation.css?inline";
 
 export class Evaluation extends Criterion {
 	constructor() {
 		super();
+		this.level = 0;
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
 		const criteria = this.querySelectorAll('gv-criterion');
 		this.criteriaCount = criteria.length;
@@ -16,7 +17,21 @@ export class Evaluation extends Criterion {
 		const scale = document.createElement("gv-scale");
 		scale.slot = "helpers";
 		this.appendChild(scale);
-		this.addComments();
+		// this.addComments();
+	}
+	makeInputReadOnly(input, revert = false) {
+		return; // Do nothing, the evaluation input should never be editable
+	}
+	emptyComments() {
+		const comments = [...this.querySelectorAll('gv-comment')];
+		comments.forEach((c) => {
+			c.remove();
+		});
+	}
+	showComments(comments) {
+		this.emptyComments();
+		this.append(...comments);
+		return this;
 	}
 	static dom = {
 		style() {
@@ -29,6 +44,9 @@ export class Evaluation extends Criterion {
 			result.appendChild(this.dom.header());
 			result.appendChild(this.createSlot("criteria"));
 			result.appendChild(this.dom.helpers());
+			const description = document.createElement("p");
+			description.classList.add("description");
+			result.appendChild(description);
 			return result;
 		},
 		header() {
@@ -76,12 +94,10 @@ export class Evaluation extends Criterion {
 			return result;
 		},
 		comments() {
-			console.log(123);
-			
 			const result = document.createElement("section");
 			result.classList.add("comments");
 			const header = document.createElement("header");
-			const title =  document.createElement("h1");
+			const title = document.createElement("h1");
 			title.classList.add("title");
 			title.textContent = "Commentaires";
 			header.appendChild(title);
@@ -120,37 +136,24 @@ export class Evaluation extends Criterion {
 			comment.criterion = this;
 			comment.textContent = commentText;
 			if (Math.random() < 0.5) {
-				comment.value = Math.random() * 10 -5;
+				comment.value = Math.random() * 10 - 5;
 				// comment.absolute = Math.random() < 0.5;
 				// comment.proportionnal = Math.random() < 0.5;
 			}
 			this.appendChild(comment);
 		});
 	}
-	fetch(url) {
-		fetch(url)
-			.then((response) => response.json())
-			.then((data) => {
-				this.render(data);
+	fetch(...url) {
+		Promise.all(url.map((u) => fetch(u).then((response) => response.json())))
+			.then(([data, comments]) => {
+				// console.log(data, comments);
+				// this.addComments(comments);
+				this.fill(data);
+				this.comments = comments;
 			})
 			.catch((error) => {
 				console.error("Error fetching evaluation data:", error);
 			});
-	}
-	render(data) {
-		const { title, student, scoring } = data;
-		// this.shadowRoot.querySelector('slot[name="title"]').textContent = data.title;
-		this.appendChild(document.createTextNode(data.title));
-		data.criteria.forEach((criterionData) => {
-			const criterion = document.createElement('gv-criterion');
-			criterion.slot = "criteria";
-			criterion.fill(criterionData);
-			// criterion.setAttribute('data', JSON.stringify(criterionData));
-			this.appendChild(criterion);
-		});
-
-		// this.shadowRoot.querySelector('slot[name="student"]').textContent = student;
-		// this.shadowRoot.querySelector('slot[name="scoring"]').textContent = scoring;
 	}
 }
 

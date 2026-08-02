@@ -1,4 +1,4 @@
-import { Component } from '../Component.js';
+import { Component } from '../../Component.js';
 import css from './comment.css?inline';
 
 class Comment extends Component {
@@ -17,6 +17,7 @@ class Comment extends Component {
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
+		this.slot = "comments";
 		this.addEventListener("longpress", this.evt.open.bind(this));
 	}
 	get value() {
@@ -26,6 +27,9 @@ class Comment extends Component {
 		this._.value = value;
 		const textValue = this.formatValue(value);
 		this.shadowRoot.querySelector(".value").textContent = textValue;
+	}
+	set text(value) {
+		this.textContent = value;
 	}
 	formatValue(value, precision = 2) {
 		let frac = precision % 1;

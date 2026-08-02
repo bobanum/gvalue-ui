@@ -15,30 +15,39 @@ slot[name="criteria"] {
 	grid-column: 1 / -1;
 }
 
-slot[name="criteria"] {
+slot[name="criteria"]:has-slotted {
+	--border-color: hsl(from var(--background-color) h s 50% / 0.1);
 	padding-left: var(--gap2);
 	/* margin-left: var(--gap); */
-	border-color: hsl(from var(--background-color) h s calc(l + 10));
+	border-color: var(--border-color);
 	border-style: solid;
 	border-width: 0 0 0 var(--gap);
 	border-bottom-left-radius: 1em .5em;
 	position: relative;
+	padding-bottom: .5em;
+}
+slot[name="comments"] {
+	display: block;
+	grid-column: 1 / -1;
 }
 
 slot {
 	align-self: end;
 }
+
 .description {
 	font-size: 0.9em;
 	font-family: 'Bad Script';
 	grid-column: 1 / -1;
 	line-height: 1;
-	color: #fff8;
+	color: hsl(from currentColor h s l / 0.5);
 	display: none;
 	padding-block: .5em;
 }
+
 :host(:has(>[slot="criteria"])) {
 	>header {
+
 		input[readonly],
 		input[disabled] {
 			background-color: #0000;
@@ -51,12 +60,13 @@ slot {
 		}
 	}
 }
+
 ::slotted(gv-criterion) {
 	font-size: .95em;
 }
 
 :host(:focus-within) {
-	>header .description {
+	.description {
 		display: block;
 	}
 }
@@ -73,12 +83,12 @@ header {
 	}
 
 	&:hover {
-		background-color: #0008;
+		background-color: hsl(from var(--background-color) h calc(s - 10) calc(l - var(--more)));
 	}
 
 	&:focus-within {
-		--background-color: #fff2;
-		background-color: var(--background-color);
+		/* --background-color:red; */
+		background-color: hsl(from var(--background-color) h calc(s + 10) calc(l + var(--less)));
 		position: relative;
 
 		&::after {
@@ -93,6 +103,7 @@ header {
 			border-block-width: 1em;
 			margin-top: 0.25em;
 		}
+
 		>.description {
 			display: block;
 		}
@@ -116,7 +127,7 @@ header {
 		font-size: 1.2em;
 		background-color: hsl(from var(--background-color) h s calc(l + 10));
 		box-shadow: inset 1px 1px 0.25em #0009;
-		color: #fff;
+		color: var(--text-color);
 		align-self: baseline;
 		appearance: textfield;
 		text-align: right;
@@ -129,6 +140,7 @@ header {
 			-webkit-appearance: none;
 			margin: 0;
 		}
+
 		&:focus {
 			outline: 2px solid hsl(from blue 211 50% l);
 			outline-offset: 1px;
