@@ -40,6 +40,9 @@ body {
 			"header app"
 			"nav-sec app"
 		;
+		>header, >nav.sec {
+			background-color: hsl(from var(--background-color) h s calc(l + var(--less)));
+		}
 		>header>h1>span {
 			display: none;
 		}

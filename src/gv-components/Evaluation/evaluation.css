@@ -1,5 +1,6 @@
 :host {
 	--input-width: 3rem;
+
 	display: grid;
 	grid-area: app;
 	max-height: 100vh;
@@ -16,80 +17,92 @@
 		justify-content: space-between;
 	}
 
-	.scoring {
+}
+
+.scoring {
+	display: flex;
+	align-items: center;
+	gap: 0 1ch;
+}
+
+.student {
+	display: flex;
+	align-items: center;
+	gap: 0 1ch;
+}
+.helpers {
+	--radius: .75em;
+	--bg-color: hsl(from var(--background-color) h calc(s / 2) calc(l + var(--less)));
+	--border-color: hsl(from var(--bg-color) h calc(s + 50) l);
+
+	display: grid;
+	overflow: hidden;
+	position: relative;
+	background-color: var(--bg-color);
+}
+
+.comments {
+	box-sizing: border-box;
+	overflow: hidden;
+	display: grid;
+	grid-template-rows: auto 1fr;
+
+	header {
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		gap: 0 1ch;
+		padding: 0.25em 0.5em;
+		background-color: var(--border-color);
+
+		h1 {
+			margin: 0;
+			font-size: 1em;
+		}
+
+		button {
+			--color: hsl(0, 70%, 50%);
+			box-sizing: border-box;
+			font-size: 0.75em;
+			aspect-ratio: 1;
+			width: 2em;
+			margin-block: -1em;
+			border-radius: 2em;
+			border: none;
+			background-color: var(--color);
+			box-shadow: 0 2px 3px #0006;
+			color: white;
+
+			&:hover {
+				background-color: hsl(from var(--color) h 100% l);
+			}
+		}
 	}
 
-	.student {
-		display: flex;
-		align-items: center;
-		gap: 0 1ch;
-	}
-
-	.comments {
-		box-sizing: border-box;
-		overflow: hidden;
+	slot {
+		overflow-y: auto;
 		display: grid;
-		grid-template-rows: auto 1fr;
-		--bg-color: hsl(from var(--background-color) h calc(s + 15) calc(l + var(--darker)));
-		border-right: 2px solid var(--bg-color);
-
-		header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0.5rem;
-			font-size: larger;
-			background-color: var(--bg-color);
-			h1 {
-				margin: 0;
-				font-size: 1em;
-			}
-
-			button {
-				--color: hsl(0, 70%, 50%);
-				box-sizing: border-box;
-				font-size: 1em;
-				aspect-ratio: 1;
-				width: 2em;
-				margin-block: -1em;
-				border-radius: 2em;
-				border: none;
-				background-color: var(--color);
-				box-shadow: 0 2px 3px #0006;
-				color: var(--text-color);
-
-				&:hover {
-					background-color: hsl(from var(--color) h 100% l);
-				}
-			}
-		}
-		
-		slot {
-			overflow-y: auto;
-			display: grid;
-			font-size: smaller;
-			line-height: 1;
-			align-self: flex-start;
-		}
-	}
-
-	.id {
-		quotes: '(' ')';
 		font-size: smaller;
-
-		&::before {
-			content: open-quote;
-		}
-
-		&::after {
-			content: close-quote;
-		}
+		line-height: 1;
+		align-content: flex-start;
 	}
 }
 
+.id {
+	quotes: '(' ')';
+	font-size: smaller;
+
+	&::before {
+		content: open-quote;
+	}
+
+	&::after {
+		content: close-quote;
+	}
+}
+
+.description {
+	display: none;
+}
 
 slot[name="criteria"] {
 	--gap-inline: .5em;
@@ -100,14 +113,6 @@ slot[name="criteria"] {
 	overflow-y: auto;
 }
 
-
-.helpers {
-	--radius: .75em;
-	background-color: var(--background-color);
-	display: grid;
-	border: 2px solid hsl(from var(--background-color) h s calc(l + 25));
-	position: relative;
-}
 
 @media (aspect-ratio > 1) {
 	:host {
@@ -122,8 +127,8 @@ slot[name="criteria"] {
 		grid-template-rows: 1fr;
 		grid-template-columns: 1fr auto;
 		place-content: stretch end;
-		border-right: none;
 		border-radius: var(--radius) 0 0 var(--radius);
+		margin-bottom: .25em;
 
 		.scale {
 			flex-direction: column;

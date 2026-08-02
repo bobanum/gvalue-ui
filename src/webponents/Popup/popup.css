@@ -1,10 +1,13 @@
 :host {
-	--button-size: 5em;
+	--button-size: 6em;
+	--anchor: center center;
+	--offset: 10em;
 	position: fixed;
 	inset: 0;
 	display: grid;
 	place-items: center;
 	background-color: hsl(from var(--background-color) h s l / 0.2);
+	color: var(--text-color);
 	backdrop-filter: blur(0.25em);
 	z-index: 1000;
 	transition-property: backdrop-filter, background-color;
@@ -14,12 +17,12 @@
 		pointer-events: all;
 	} */
 }
+:host(.visible) .box {
+	scale: 1 !important;
+}
 :host(:not(.visible)) {
 	background-color: #0000;
 	backdrop-filter: blur(0em);
-	.box {
-		scale: 0;
-	}
 }
 .box {
 	display: grid;
@@ -34,6 +37,7 @@
 	filter: drop-shadow(0 0 1em #0008);
 	transition-property: scale;
 	transition-duration: 0.2s;
+	transform-origin: var(--anchor);
 	pointer-events: all;
 	scale: 1;
 

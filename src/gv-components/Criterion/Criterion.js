@@ -86,7 +86,8 @@ export class Criterion extends Component {
 	set comments(val) {
 		this._comments = val.filter((c) => c.criterion_id === this.id).map((c) => {
 			const comment = document.createElement("gv-comment");
-			comment.fill({ text: c.text });
+			comment.fill(c);
+			comment.criterion = this;
 			return comment;
 		});
 		
@@ -116,7 +117,8 @@ export class Criterion extends Component {
 		let longPressTimer;
 		const LONG_PRESS_MS = 500;
 		let result = input.parentElement;
-		this.addEventListener.call(result, "ctrl-click|longpress", (e) => {
+		// this.addEventListener.call(result, "ctrl-click|longpress", (e) => {
+		this.addEventListener.call(result, "contextmenu", (e) => {
 			enableInput();
 		});
 	}

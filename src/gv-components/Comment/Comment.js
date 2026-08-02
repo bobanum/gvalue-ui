@@ -15,10 +15,11 @@ class Comment extends Component {
 		this.dom = this.adoptFunctions(this.constructor.dom || {});
 		this.shadowRoot.appendChild(this.dom.style());
 		this.shadowRoot.appendChild(this.dom.main());
+		this.addEventListener("contextmenu", this.evt.open.bind(this));
 	}
 	connectedCallback() {
 		this.slot = "comments";
-		this.addEventListener("longpress", this.evt.open.bind(this));
+		// this.addEventListener("longpress", this.evt.open.bind(this));
 	}
 	get value() {
 		return this._.value;
@@ -74,6 +75,11 @@ class Comment extends Component {
 			dup.textContent = "Dupliquer";
 			popup.appendChild(dup);
 			popup.appendChild(this.dom.form());
+			const top = this.getBoundingClientRect().top;
+			const left = this.getBoundingClientRect().left;
+
+			popup.style.setProperty("--offset-y", `${window.innerHeight - top}px`);
+			popup.style.setProperty("--offset-x", `${window.innerWidth - left}px`);
 			this.shadowRoot.appendChild(popup);
 		}
 	};

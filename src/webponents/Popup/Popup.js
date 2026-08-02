@@ -11,6 +11,16 @@ class Popup extends Component {
 		setTimeout(() => {
 			this.classList.add("visible");
 		}, 50);
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") {
+				return this.remove();
+			}
+			if (e.key === "Enter" && e.ctrlKey) {
+				// send "submit" event to the popup
+				this.dispatchEvent(new CustomEvent("submit"));
+				this.remove();
+			}
+		});
 	}
 	remove() {
 		this.classList.remove("visible");

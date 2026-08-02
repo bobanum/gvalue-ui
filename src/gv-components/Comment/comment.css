@@ -66,9 +66,12 @@ span.value:not(:empty) {
 	}
 	::part(box) {
 		width: auto;
-		transform-origin: right;
-		margin-right: .5em;
-		justify-self: end;
+		margin-left: auto;
+		scale: 0 1;
+		transform-origin: right 0%;
+		margin-right: var(--offset-x);
+		/* margin-right: 3rem; */
+		/* justify-self: end; */
 	}
 }
 @media (aspect-ratio <= 1) {
@@ -81,8 +84,11 @@ span.value:not(:empty) {
 	}
 	::part(box) {
 		width: calc(100% - 1em);
-		transform-origin: bottom;
-		margin-bottom: 2em;
-		align-self: end;
+		margin-top: auto;
+		margin-bottom: var(--offset-y);
+		transform-origin: center bottom;
+		scale: 1 0;
+		/* margin-bottom: 6rem; */
+		/* align-self: end; */
 	}
 }
