@@ -12,6 +12,7 @@ export class Criterion extends Component {
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
+		this.tabIndex = -2;
 		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
 		this.shadowRoot.querySelector(".value").textContent = this.value;
 	}
@@ -90,8 +91,10 @@ export class Criterion extends Component {
 			comment.criterion = this;
 			return comment;
 		});
-		
+
 		if (this._comments.length > 0) {
+			console.log(this._comments);
+
 			this.classList.add("has-comments");
 			this.append(...this._comments);
 		}
@@ -122,13 +125,14 @@ export class Criterion extends Component {
 			enableInput();
 		});
 	}
-	activate () {
+	activate() {
 		this.classList.add("current");
 		const evaluation = this.closest("gv-evaluation");
-		evaluation.showComments(this.comments);
+		evaluation.fillComments(this.comments);
 	}
-	deactivate () {
+	deactivate() {
 		this.classList.remove("current");
+		this._comments.forEach((c) => c.remove());
 	}
 	static dom = {
 		style() {
@@ -160,6 +164,7 @@ export class Criterion extends Component {
 			const result = document.createElement("div");
 			result.classList.add("input");
 			const input = document.createElement("input", { is: "gv-number" });
+			input.inputMode = "none";
 			input.type = "text";
 			input.size = "1";
 			input.name = "scriterion1";
@@ -173,11 +178,19 @@ export class Criterion extends Component {
 			value.classList.add("value");
 			value.textContent = "0";
 			result.appendChild(value);
-			input.addEventListener("focus", (e) => {
-				this.activate();
+
+			input.addEventListener("pointerdown", (e) => {
+				if (this.shadowRoot.activeElement === input && !input.readOnly) {
+					input.inputMode = "decimal";
+				}
 			});
-			input.addEventListener("blur", (e) => {
-				this.deactivate();
+			this.addEventListener("focusin", (e) => {				
+				const currentCriterion = document.body.querySelector("gv-criterion.current");
+				if (currentCriterion && currentCriterion !== this) {
+					currentCriterion.deactivate();
+				}
+				this.activate();
+				e.stopPropagation();
 			});
 			return result;
 		}

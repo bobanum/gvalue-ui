@@ -11,8 +11,7 @@
 }
 :host([checked]) {
 	font-style: normal;
-	color: yellow;
-	text-shadow: 1px 1px black;
+	color: var(--highlight-color);
 	background-color: #ff01;
 }
 

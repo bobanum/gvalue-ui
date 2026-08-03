@@ -13,19 +13,19 @@ slot[name="criteria"] {
 	display: grid;
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
+	padding-left: var(--gap2);
 }
 
 slot[name="criteria"]:has-slotted {
-	--border-color: hsl(from var(--background-color) h s 50% / 0.1);
-	padding-left: var(--gap2);
-	/* margin-left: var(--gap); */
+	--border-color: hsl(from var(--background-color) h s calc(l + var(--less)));
 	border-color: var(--border-color);
 	border-style: solid;
 	border-width: 0 0 0 var(--gap);
 	border-bottom-left-radius: 1em .5em;
-	position: relative;
+	/* position: relative; */
 	padding-bottom: .5em;
 }
+
 slot[name="comments"] {
 	display: block;
 	grid-column: 1 / -1;
@@ -40,8 +40,8 @@ slot {
 	font-family: 'Bad Script';
 	grid-column: 1 / -1;
 	line-height: 1;
-	color: hsl(from currentColor h s l / 0.5);
-	display: none;
+	color: hsl(from currentColor h s l / 0.75);
+	/* display: none; */
 	padding-block: .5em;
 }
 
@@ -65,9 +65,38 @@ slot {
 	font-size: .95em;
 }
 
-:host(:focus-within) {
+:host(:has(.current)),
+:host(.current) {
+	/* outline: solid green; */
 	.description {
 		display: block;
+	}
+}
+:host(:not(.current)) {
+	.description {
+		display: none;
+	}
+}
+
+:host(.current) {
+	>header {
+		/* --background-color:red; */
+		background-color: hsl(from var(--background-color) h calc(s + 10) calc(l + var(--less)));
+		position: relative;
+
+		&::after {
+			--width: .6em;
+			content: "";
+			position: absolute;
+			left: 100%;
+			border: 0px solid transparent;
+			border-left-width: var(--width);
+			border-left-color: var(--background-color);
+			align-self: baseline;
+			border-block-width: 1em;
+			margin-top: 0.25em;
+		}
+
 	}
 }
 
@@ -86,28 +115,6 @@ header {
 		background-color: hsl(from var(--background-color) h calc(s - 10) calc(l - var(--more)));
 	}
 
-	&:focus-within {
-		/* --background-color:red; */
-		background-color: hsl(from var(--background-color) h calc(s + 10) calc(l + var(--less)));
-		position: relative;
-
-		&::after {
-			--width: .6em;
-			content: "";
-			position: absolute;
-			left: 100%;
-			border: 0px solid transparent;
-			border-left-width: var(--width);
-			border-left-color: var(--background-color);
-			align-self: baseline;
-			border-block-width: 1em;
-			margin-top: 0.25em;
-		}
-
-		>.description {
-			display: block;
-		}
-	}
 
 	.input {
 		font-size: 1rem;

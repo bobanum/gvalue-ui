@@ -6,15 +6,17 @@
 	max-height: 100vh;
 	position: sticky;
 	top: 0;
-	/* gap: 0.25em; */
 	height: 100%;
 	font-size: max(2vw, 1rem);
 
 	>header {
 		padding: 0.5em;
 		grid-area: header;
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		font-weight: bold;
+		slot {
+			display: block;
+		}
 	}
 
 }
@@ -108,7 +110,7 @@ slot[name="criteria"] {
 	--gap-inline: .5em;
 	grid-area: criteria;
 	display: block;
-	padding: 0 1em;
+	padding: 0 0.5em;
 	padding-bottom: 1em;
 	overflow-y: auto;
 }
@@ -119,6 +121,11 @@ slot[name="criteria"] {
 		grid-template-columns: 3fr 2fr;
 		grid-template-rows: auto 1fr;
 		grid-template-areas: "header header" "criteria helpers";
+		>header {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			justify-content: space-between;
+		}
 	}
 
 	.helpers {
@@ -142,8 +149,14 @@ slot[name="criteria"] {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 3fr 2fr;
 		grid-template-areas: "header" "criteria" "helpers";
+		>header {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			slot {
+				grid-column: 1 / -1;
+			}
+		}
 	}
-
 	.helpers {
 		margin-inline: 0.5rem;
 		border-bottom: none;

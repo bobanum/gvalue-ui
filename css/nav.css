@@ -11,7 +11,7 @@ nav ul {
 }
 nav.sec {
 	background-color: var(--background-color);
-	color: var(--text-color);
+	color: var(--base-color);
 	display: flex;
 	a {
 		flex-grow: 1;

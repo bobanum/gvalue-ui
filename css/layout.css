@@ -5,8 +5,9 @@ body {
 	>header {
 		grid-area: header;
 		display: grid;
+		grid-template-columns: 1fr auto;
 		align-items: center;
-		padding: 0.5em;
+		padding: 0.25em;
 		color: var(--text-color);
 
 		h1 {
@@ -17,7 +18,23 @@ body {
 		}
 
 		img {
-			height: 1.2em;
+			height: 1.5em;
+			filter: drop-shadow(.025em .05em 1px #0004);
+		}
+
+		.fullscreen-toggle {
+			display: none;
+			justify-self: end;
+			align-self: center;
+			border: 0;
+			background: transparent;
+			color: inherit;
+			font: inherit;
+			font-size: 1.4em;
+			line-height: 1;
+			padding: 0.35em;
+			min-width: 2em;
+			min-height: 2em;
 		}
 	}
 
@@ -40,29 +57,39 @@ body {
 			"header app"
 			"nav-sec app"
 		;
-		>header, >nav.sec {
+
+		>header,
+		>nav.sec {
 			background-color: hsl(from var(--background-color) h s calc(l + var(--less)));
 		}
+
 		>header>h1>span {
 			display: none;
 		}
+
 		>nav.sec {
 			flex-direction: column;
+
 			svg {
 				width: auto;
 				aspect-ratio: 1;
 			}
 		}
 	}
-	
-	@media (aspect-ratio <= 1) {
+
+	@media (aspect-ratio <=1) {
 		grid-template-rows: auto 1fr auto auto;
 		grid-template-columns: 1fr auto;
 		grid-template-areas:
-		"header header"
-		"app app"
-		"helpers helpers"
-		"nav-sec nav-sec"
+			"header header"
+			"app app"
+			"helpers helpers"
+			"nav-sec nav-sec"
 		;
+
+		>header .fullscreen-toggle {
+			display: inline-grid;
+			place-items: center;
+		}
 	}
 }

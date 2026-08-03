@@ -1,12 +1,11 @@
 html {
-	height: 100vh;
-	font-size: 16px;
+	height: 100svh;
 	overflow: hidden;
 }
 
 body {
 	margin: 0;
-	min-height: 100vh;
+	height: 100svh;
 	/* background: radial-gradient(circle at top, hsl(211, 7%, 35%) 0%, 45%, hsl(211, 7%, 10%) 100%); */
 	background-color: var(--background-color);
 	color: var(--text-color);

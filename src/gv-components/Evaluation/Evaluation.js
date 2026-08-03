@@ -28,8 +28,8 @@ export class Evaluation extends Criterion {
 			c.remove();
 		});
 	}
-	showComments(comments) {
-		this.emptyComments();
+	fillComments(comments) {
+		// this.emptyComments();
 		this.append(...comments);
 		return this;
 	}
