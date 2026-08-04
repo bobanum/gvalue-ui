@@ -7,11 +7,10 @@ export default class Dom extends Component.Dom {
 
 
 		result.appendChild(header);
-		result.appendChild(this.createSlot("criteria"));
 		const description = document.createElement("div");
 		description.classList.add("description");
 		result.appendChild(description);
-		// result.appendChild(this.createSlot("comments"));
+		result.appendChild(this.createSlot("criteria"));
 		return result;
 	}
 	label() {

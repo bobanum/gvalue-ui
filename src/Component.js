@@ -26,7 +26,6 @@ export default class Component extends HTMLElement {
 	}
 	adoptFunctions(source) {
 		const props = this.getAllProperties(source);
-		console.log(props, { ...props });
 
 		for (let k in props) {
 			if (typeof props[k] === "function") {

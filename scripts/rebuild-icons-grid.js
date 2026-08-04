@@ -10,7 +10,7 @@ const ICONS_PATH = path.resolve(__dirname, '../public/icons.svg');
 
 const ICON_SIZE = 64;
 const COLUMNS = 10;
-const DISPLAY_GROUP_OPEN = '<g transform="scale(.1)" color="#800">';
+const DISPLAY_GROUP_OPEN = '<g id="display">';
 
 function removeXmlProlog(svg) {
     return svg.replace(/^\uFEFF?\s*<\?xml[^?]*\?>\s*/, '');

@@ -12,7 +12,12 @@ const fullscreenToggle = document.querySelector('.fullscreen-toggle');
 if (fullscreenToggle) {
 	const updateFullscreenToggle = () => {
 		const isFullscreen = Boolean(document.fullscreenElement);
-		fullscreenToggle.textContent = isFullscreen ? '⤢' : '⛶';
+		const use = fullscreenToggle.querySelector('use');
+		const url = new URL(use.getAttribute('href'), window.location.href);
+		console.log(url);
+		url.hash = isFullscreen ? '#fullscreen-off' : '#fullscreen-on';
+		use.setAttribute('href', url.href);
+		// fullscreenToggle.textContent = isFullscreen ? '⤢' : '⛶';
 		fullscreenToggle.setAttribute('aria-label', isFullscreen ? 'Quitter le plein écran' : 'Basculer en plein écran');
 	};
 
