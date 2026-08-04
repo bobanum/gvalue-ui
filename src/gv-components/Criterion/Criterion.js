@@ -1,14 +1,14 @@
-import { Component } from '../../Component.js';
-import CSS from './criterion.css?inline';
+import Component from '../../Component.js';
+import Dom from './dom.js';
+import css from "./style.css?inline";
 
-export class Criterion extends Component {
+export default class Criterion extends Component {
 	constructor() {
 		super();
 		this._comments = [];
 		this._value;
 		this.criteriaCount = 0;
-		this.dom = this.adoptFunctions(this.constructor.dom || {});
-		this.shadowRoot.appendChild(this.dom.style());
+		this.shadowRoot.appendChild(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
@@ -134,68 +134,6 @@ export class Criterion extends Component {
 		this.classList.remove("current");
 		this._comments.forEach((c) => c.remove());
 	}
-	static dom = {
-		style() {
-			const result = document.createElement("style");
-			result.textContent = CSS;
-			return result;
-		},
-		main() {
-			const result = document.createDocumentFragment();
-			const header = document.createElement("header");
-			header.appendChild(this.dom.label());
-
-
-			result.appendChild(header);
-			result.appendChild(this.createSlot("criteria"));
-			const description = document.createElement("div");
-			description.classList.add("description");
-			result.appendChild(description);
-			// result.appendChild(this.createSlot("comments"));
-			return result;
-		},
-		label() {
-			const result = document.createElement("label");
-			result.appendChild(this.createSlot());
-			result.appendChild(this.dom.input());
-			return result;
-		},
-		input() {
-			const result = document.createElement("div");
-			result.classList.add("input");
-			const input = document.createElement("input", { is: "gv-number" });
-			input.inputMode = "none";
-			input.type = "text";
-			input.size = "1";
-			input.name = "scriterion1";
-			input.id = "scriterion1";
-			input.step = "0.25";
-			input.min = "0";
-			input.max = "10";
-			input.tabIndex = 0;
-			result.appendChild(input);
-			const value = document.createElement("span");
-			value.classList.add("value");
-			value.textContent = "0";
-			result.appendChild(value);
-
-			input.addEventListener("pointerdown", (e) => {
-				if (this.shadowRoot.activeElement === input && !input.readOnly) {
-					input.inputMode = "decimal";
-				}
-			});
-			this.addEventListener("focusin", (e) => {				
-				const currentCriterion = document.body.querySelector("gv-criterion.current");
-				if (currentCriterion && currentCriterion !== this) {
-					currentCriterion.deactivate();
-				}
-				this.activate();
-				e.stopPropagation();
-			});
-			return result;
-		}
-	};
-
 }
 
-Criterion.register('gv-criterion');
+Criterion.register('gv-criterion', { Dom });

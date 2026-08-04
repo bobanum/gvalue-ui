@@ -1,25 +1,39 @@
-export class Component extends HTMLElement {
+export default class Component extends HTMLElement {
 	static LONG_PRESS_DELAY = 500;
 	constructor() {
 		super();
-		this.dom = this.adoptFunctions(this.constructor.dom || {});
+		// this.dom = this.adoptFunctions(this.constructor.Dom || {});
+		this.dom = this.adoptFunctions(new this.constructor.Dom());
 		this.attachShadow({ mode: "open" });
 	}
-	static register(tag) {
+	static register(tag, options = {}) {
 		tag = tag || this.toKebabCase(this.name);
 		customElements.define(tag, this);
+		for (let k in options) {
+			this[k] = options[k];
+		}
 	}
 	static toKebabCase(str) {
 		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 	}
+	getAllProperties(obj) {
+		if (obj === null || obj.constructor.name === "Object") return {};
+
+		const props = this.getAllProperties(Object.getPrototypeOf(obj));
+		Object.getOwnPropertyNames(obj).forEach(p => props[p] = obj[p]);
+
+		return props;
+	}
 	adoptFunctions(source) {
-		const result = {};
-		for (let k in source) {
-			if (typeof source[k] === "function") {
-				result[k] = source[k].bind(this);
+		const props = this.getAllProperties(source);
+		console.log(props, { ...props });
+
+		for (let k in props) {
+			if (typeof props[k] === "function") {
+				props[k] = props[k].bind(this);
 			}
 		}
-		return result;
+		return props;
 	}
 	createSlot(name, defaultContent) {
 		const result = document.createElement("slot");
@@ -57,7 +71,7 @@ export class Component extends HTMLElement {
 		let modifiers = type.split("-");
 		type = modifiers.pop();
 		let customs = ["longpress"];
-		
+
 		if (modifiers.length > 0 || behaviours.length > 0) {
 			let originalListener = listener;
 			listener = function (e) {
@@ -105,9 +119,11 @@ export class Component extends HTMLElement {
 		result.fill(content);
 		return result;
 	}
-	static dom = {
-		test() {
-			console.log("test static");
+	static Dom = class {
+		style(cssText) {
+			const result = document.createElement("style");
+			result.textContent = cssText;
+			return result;
 		}
 	};
 }

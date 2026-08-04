@@ -1,3 +1,5 @@
+/* Criterion Component Styles */
+
 :host {
 	--gap: .25em;
 	--gap2: calc(var(--gap) * 2);

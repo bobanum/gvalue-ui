@@ -1,6 +1,7 @@
+/* Evaluation Component Styles */
+
 :host {
 	--input-width: 3rem;
-
 	display: grid;
 	grid-area: app;
 	max-height: 100vh;
@@ -18,7 +19,6 @@
 			display: block;
 		}
 	}
-
 }
 
 .scoring {
@@ -114,7 +114,6 @@ slot[name="criteria"] {
 	padding-bottom: 1em;
 	overflow-y: auto;
 }
-
 
 @media (aspect-ratio > 1) {
 	:host {

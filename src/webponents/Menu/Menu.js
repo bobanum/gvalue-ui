@@ -1,4 +1,4 @@
-import { Component } from "../../Component.js";
+import Component from "../../Component.js";
 
 class Menu extends Component {
 	static defaultUrl = "/public/icons.svg#hamburger";

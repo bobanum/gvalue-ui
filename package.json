@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "icons:grid": "node scripts/rebuild-icons-grid.js"
   },
   "devDependencies": {
     "vite": "^8.1.1"
