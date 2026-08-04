@@ -1,3 +1,5 @@
+/* Scale Component Styles */
+
 :host {
 	--size: 2em;
 	display: flex;
@@ -5,12 +7,12 @@
 	list-style: none;
 	font-size: 1.5em;
 	position: relative;
-	/* height: 2em; */
 	user-select: none;
 	order: 10;
 
 	div {
 		flex-grow: 1;
+		flex-basis: 0;
 		display: grid;
 		place-items: center;
 		border-radius: 3px;

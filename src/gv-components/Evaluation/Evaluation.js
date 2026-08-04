@@ -16,6 +16,9 @@ export default class Evaluation extends Criterion {
 	connectedCallback() {
 		super.connectedCallback();
 		const scale = document.createElement("gv-scale");
+		scale.min = 0;
+		scale.max = 2;
+		scale.length = 6;
 		scale.slot = "helpers";
 		this.appendChild(scale);
 		// this.addComments();

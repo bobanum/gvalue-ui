@@ -3,13 +3,20 @@ import Component from "../../Component.js";
 export default class Dom extends Component.Dom {
 	main() {
 		const result = document.createElement("fieldset");
-		for (let i = 0; i <= 5; i++) {
-			const step = document.createElement("div");
-			step.tabIndex = -1;
-			step.innerHTML = i;
-			result.appendChild(step);
-		}
+		this.parts.fieldset = result;
+		// for (let i = 0; i <= 5; i++) {
+		// 	const step = document.createElement("div");
+		// 	step.tabIndex = -1;
+		// 	step.innerHTML = i;
+		// 	result.appendChild(step);
+		// }
 		result.appendChild(this.dom.sec());
+		return result;
+	}
+	step(val) {
+		const result = document.createElement("div");
+		result.tabIndex = -1;
+		result.innerHTML = val;
 		return result;
 	}
 	sec() {

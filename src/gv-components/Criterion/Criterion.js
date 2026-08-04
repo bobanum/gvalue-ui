@@ -129,6 +129,8 @@ export default class Criterion extends Component {
 		this.classList.add("current");
 		const evaluation = this.closest("gv-evaluation");
 		evaluation.fillComments(this.comments);
+		console.log(evaluation.querySelector("gv-scale"));
+		
 	}
 	deactivate() {
 		this.classList.remove("current");
