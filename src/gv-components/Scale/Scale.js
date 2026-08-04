@@ -51,7 +51,7 @@ class Scale extends Component {
 	formatFrac(value) {
 		const codes = [
 			["15", "25", "35", "45"],
-			["16", "13", "36", "23", "56"],
+			["16", "13", "12", "23", "56"],
 			["18", "14", "38", "12", "58", "34", "78"]
 		];
 		const integer = Math.floor(value);
