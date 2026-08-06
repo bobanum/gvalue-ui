@@ -1,0 +1,114 @@
+[
+    {
+        "id": "z6ba1i",
+        "criterion_id": "b2c3d4",
+        "text": "La voix manque de projection dans les scènes de groupe et certains mots sont avalés.",
+        "value": 2,
+        "relative": false
+    },
+    {
+        "id": "e1gf6n",
+        "criterion_id": "b2c3d4",
+        "text": "Bon volume mais débit parfois trop rapide dans les tirades longues."
+    },
+    {
+        "id": "f2hg7o",
+        "criterion_id": "c3d4e5",
+        "text": "Les gestes sont naturels et appuient bien le propos."
+    },
+    {
+        "id": "a7cb2j",
+        "criterion_id": "e5f6g7",
+        "text": "Le personnage perd en cohérence vers la fin de la scène, le ton redevenant naturel."
+    },
+    {
+        "id": "g3ih8p",
+        "criterion_id": "e5f6g7",
+        "text": "Quelques ruptures de ton lors des changements de scène."
+    },
+    {
+        "id": "h4ji9q",
+        "criterion_id": "f6g7h8",
+        "text": "L'émotion transmise est sincère, particulièrement dans le monologue final."
+    },
+    {
+        "id": "i5kj0r",
+        "criterion_id": "f6g7h8",
+        "text": "Manque parfois d'intensité dans les moments les plus dramatiques."
+    },
+    {
+        "id": "j6lk1s",
+        "criterion_id": "g7h8i9",
+        "text": "Le jeu évite les clichés, bonne subtilité dans les silences."
+    },
+    {
+        "id": "b8dc3k",
+        "criterion_id": "i9j0k1",
+        "text": "Le trac est visible au début mais l'élève reprend rapidement le contrôle."
+    },
+    {
+        "id": "k7ml2t",
+        "criterion_id": "i9j0k1",
+        "text": "La respiration est mieux maîtrisée qu'à la répétition précédente."
+    },
+    {
+        "id": "l8nm3u",
+        "criterion_id": "j0k1l2",
+        "text": "Bonne utilisation de la profondeur de scène, mais reste trop statique en début de scène."
+    },
+    {
+        "id": "c9ed4l",
+        "criterion_id": "l2m3n4",
+        "text": "Une hésitation notable sur le texte au milieu de la scène, sans toutefois perdre le fil."
+    },
+    {
+        "id": "m9on4v",
+        "criterion_id": "l2m3n4",
+        "text": "Aucune erreur de texte lors de la représentation finale."
+    },
+    {
+        "id": "n0po5w",
+        "criterion_id": "m3n4o5",
+        "text": "Les déplacements prévus sont respectés avec précision."
+    },
+    {
+        "id": "o1qp6x",
+        "criterion_id": "n4o5p6",
+        "text": "Bonne écoute des répliques des partenaires, réactions naturelles."
+    },
+    {
+        "id": "p2rq7y",
+        "criterion_id": "n4o5p6",
+        "text": "Manque parfois de contact visuel avec les autres comédiens."
+    },
+    {
+        "id": "q3sr8z",
+        "criterion_id": "o5p6q7",
+        "text": "A bien rattrapé un oubli de réplique d'un partenaire sans casser le rythme."
+    },
+    {
+        "id": "r4ts9a",
+        "criterion_id": "q7r8s9",
+        "text": "Fait preuve de respect et d'écoute envers les partenaires de jeu."
+    },
+    {
+        "id": "d0fe5m",
+        "criterion_id": "w3x4y5",
+        "text": "Choix d'interprétation audacieux et personnel qui apporte une réelle valeur ajoutée à la scène."
+    },
+    {
+        "id": "s5ut0b",
+        "criterion_id": "w3x4y5",
+        "text": "Prend des risques créatifs qui enrichissent la scène."
+    },
+    {
+        "id": "t6vu1c",
+        "criterion_id": "x4y5z6",
+        "text": "Utilisation judicieuse des accessoires pour renforcer le personnage."
+    },
+    {
+        "id": "u7wv2d",
+        "criterion_id": "y5z6a7",
+        "text": "L'ensemble de la prestation forme un tout cohérent et abouti."
+    }
+]

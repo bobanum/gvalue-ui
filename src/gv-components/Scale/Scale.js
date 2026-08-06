@@ -7,8 +7,7 @@ class Scale extends Component {
 		super();
 		this._.min = 0;
 		this._.max = 5;
-		this._.length = 6;
-		console.log(123);
+		this._.length = 9;
 
 		this.shadowRoot.appendChild(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.main());
@@ -39,14 +38,77 @@ class Scale extends Component {
 	update() {
 		const part = this.parts.fieldset;
 		part.innerHTML = "";
-		const step = (this.max - this.min) / (this.length - 1);
-		for (let i = this.min; i <= this.max; i += step) {
-			const button = document.createElement("div");
-			button.tabIndex = -1;
-			button.innerHTML = this.formatFrac(i);
-			part.appendChild(button);
+		part.appendChild(this.buttons(this.max, this.min));
+		// const step = (this.max - this.min) / (this.length - 1);
+		// for (let i = this.min; i <= this.max; i += step) {
+		// 	const button = this.dom.step(i);
+		// 	part.appendChild(button);
+		// }
+	}
+	buttons(max, min, length) {
+		const range = max - min;
+		if (length === undefined) {
+			length = this.findLength(range);
 		}
-		// const steps = this.shadowRoot.querySelectorAll("fieldset > div");
+		if (typeof length === "object") {
+			const { modulo, remainder } = length;
+			const result = this.buttons(max-remainder, min, modulo);
+			const range2 = range - remainder;
+			// const step = range2 / modulo;
+			// for (let i = min; i <= range2 + min; i += step) {
+			// 	result.appendChild(this.dom.step(i));
+			// }
+			result.appendChild(this.dom.step(max));
+			return result;
+		} else {
+			const result = document.createDocumentFragment();
+			const step = range / length;
+			for (let i = min; i <= max; i += step) {
+				result.appendChild(this.dom.step(i));
+			}
+			return result;
+		}
+	}
+	findLength(range) {
+		if (range < 3) {
+			const length60 = {
+				"15": 1, "20": 1, "30": 2, "40": 2, "45": 3, "75": 5,
+				"80": 4, "90": 6, "100": 5, "105": 5, "135": 9, "140": 7, "150": 5,
+				"160": 8, "165": 10, "12": 1, "24": 2, "36": 3, "48": 4, "72": 6, "84": 7,
+				"96": 4, "108": 5, "132": 9, "144": 5, "156": 12, "168": 6
+			}[Math.round(range * 60)];
+			if (length60) {
+				return length60;
+			}
+		}
+		const lengthInt = { "1": 4, "2": 4, "3": 6, "4": 4, "5": 5, "6": 6, "7": 7 }[range];
+		if (lengthInt) {
+			return lengthInt;
+		}
+		const { modulo, remainder } = this.findModulo(range);
+		if (remainder === 0) {
+			return modulo;
+		}
+		console.error(123);
+		return { modulo, remainder };
+	}
+	findModulo(range) {
+		console.log(123);
+		if (range % 1 !== 0) {
+			let frac = range % 1;
+			let { modulo, remainder } = this.findModulo(range - frac);
+			remainder += frac;
+			return { modulo, remainder };
+		}
+		const modulos = [5, 4, 3];
+		for (const modulo of modulos) {
+			if (range % modulo === 0) {
+				return { modulo, remainder: 0 };
+			}
+		}
+		let { modulo, remainder } = this.findModulo(range - 1);
+		remainder++;
+		return { modulo, remainder };
 	}
 	formatFrac(value) {
 		const codes = [

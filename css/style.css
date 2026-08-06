@@ -5,7 +5,7 @@
 @import 'nav.css';
 @import 'app.css';
 
-gv-criterion.current {
+/* gv-criterion.current {
 	anchor-name: --current-criterion;
 	&::after {
 		content: "";
@@ -25,4 +25,4 @@ gv-criterion.current {
 		box-sizing: border-box;
 		z-index: 1;
 	}
-}
+} */
