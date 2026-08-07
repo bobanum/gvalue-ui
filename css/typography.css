@@ -1,8 +1,9 @@
 /* // add a text, title font and a monospace font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Carter+One:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap');
 
 html {
   font-family: 'Roboto', sans-serif;
@@ -21,4 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 
 code, input, textarea, select {
   font-family: 'Source Code Pro', monospace;
+}
+gv-scale {
+  font-stretch: condensed;
 }

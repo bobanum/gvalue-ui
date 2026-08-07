@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <symbol id="ns-symbol" viewBox="0 0 24 24">
+            <path d="m12 0.5-4 4h3l-3.1e-5 14h-3l4 4 4-4h-3l3.1e-5 -14h3z" style="fill:#fff" />
+            <path d="m11.79 0-3.793 3.793v1.207h2.5v13h-2.5v1.207l3.793 3.793h0.4141l3.793-3.793v-1.207h-2.5v-13h2.5v-1.207l-3.793-3.793zm0.207 1.207 2.793 2.793h-2.293v15h2.293l-2.793 2.793-2.793-2.793h2.293v-15h-2.293z" />
+        </symbol>
+        <symbol id="collapse-symbol" viewBox="0 0 24 24">
+            <g id="part">
+                <path d="m10.5 0.5v6h-3l4 4 4-4h-3v-6z" style="fill:#fff" />
+                <path d="m9.978 0 0.02149 6h-2.999v0.708l3.292 3.292h-6.292v1h15v-1h-6.294l3.294-3.292v-0.7084h-2.999v-6zm1.021 1h1v6h2.293l-2.793 2.793-2.793-2.793h2.293z" />
+            </g>
+            <use transform="matrix(1,0,0,-1,0,23)" xlink:href="#part" />
+        </symbol>
+        <symbol id="expand-symbol" viewBox="0 0 24 24">
+            <use transform="matrix(1,0,0,-1,0,11)" xlink:href="#part" />
+            <use transform="translate(0,12)" xlink:href="#part" />
+        </symbol>
+    </defs>
+    <use xlink:href="#expand-symbol" />
+    <view id="expand" viewBox="0 0 24 24"/>
+    <use x="24" xlink:href="#collapse-symbol" />
+    <view id="collapse" viewBox="24 0 24 24"/>
+    <use x="48" xlink:href="#ns-symbol" />
+    <view id="ns" viewBox="48 0 24 24"/>
+</svg>

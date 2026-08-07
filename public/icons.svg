@@ -128,12 +128,12 @@
         <symbol id="arrow-nw" viewBox="0 0 64 64">
             <use transform="rotate(315 32 32)" href="#arrow-n" />
         </symbol>
-        <symbol id="top" viewBox="0 0 64 64">
+        <symbol id="arrow-top" viewBox="0 0 64 64">
             <use transform="translate(0)" href="#arrow-n" />
             <use transform="translate(0 -24)" href="#minus" />
         </symbol>
-        <symbol id="bottom" viewBox="0 0 64 64">
-            <use transform="rotate(180 32 32)" href="#top" />
+        <symbol id="arrow-bottom" viewBox="0 0 64 64">
+            <use transform="rotate(180 32 32)" href="#arrow-top" />
         </symbol>
     </defs>
     <defs id="file-defs">
@@ -351,8 +351,8 @@
                 <g transform="translate(0,64)">
                     <use href="#arrow-w" />
                     <use x="64" href="#arrow-nw" />
-                    <use x="128" href="#top" />
-                    <use x="192" href="#bottom" />
+                    <use x="128" href="#arrow-top" />
+                    <use x="192" href="#arrow-bottom" />
                 </g>
             </g>
             <g id="file" transform="translate(0,320)">

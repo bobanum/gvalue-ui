@@ -8,6 +8,8 @@
 	grid-column: 1 / -1;
 	gap: 0 var(--gap-inline);
 	padding-top: var(--gap);
+	cursor: ns-resize;
+	cursor: url(/public/cursors.svg#expand) 11.5 11.5, ns-resize;
 }
 
 header,
@@ -49,7 +51,8 @@ slot.criteria {
 }
 :host(.collapsed) {
 	slot.criteria {
-		border-left-color: transparent;
+		border-top: 2px solid var(--accent-color);
+		padding-top: .25em;
 	}
 	::slotted(gv-criterion) {
 		display: none;
@@ -79,7 +82,6 @@ slot {
 
 :host(:has(>[slot="criteria"])) {
 	>header {
-
 		input[readonly],
 		input[disabled] {
 			background-color: #0000;
@@ -123,6 +125,7 @@ header {
 	margin: calc(var(--gap) * -1);
 	border-radius: 0.5em;
 	border: 2px solid transparent;
+	cursor: pointer;
 
 	label {
 		display: contents;

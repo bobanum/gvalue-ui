@@ -80,7 +80,7 @@ export default class Dom extends Criterion.Dom {
 		result.appendChild(this.dom.navButton("Floor", "all", { "margin-top": "auto", "margin-left": "auto", "padding": ".125em" }));
 		result.appendChild(this.dom.navButton("Ceil", "nothing", { "margin-bottom": "auto", "margin-right": "auto", "padding": ".125em" }));
 		result.appendChild(this.dom.navButton("Suivant", "arrow-s"));
-		result.appendChild(this.dom.navButton("Fin", "arrow-sw"));
+		result.appendChild(this.dom.navButton("Fin", "arrow-bottom"));
 		return result;
 	}
 	navButton(label, icon, properties = {}) {
