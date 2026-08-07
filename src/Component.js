@@ -37,6 +37,7 @@ export default class Component extends HTMLElement {
 	}
 	createSlot(name, defaultContent) {
 		const result = document.createElement("slot");
+		result.classList.add(name || "default");
 		if (name) {
 			result.setAttribute("name", name);
 		}

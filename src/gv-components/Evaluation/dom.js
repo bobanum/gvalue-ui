@@ -19,7 +19,7 @@ export default class Dom extends Criterion.Dom {
 		return result;
 	}
 	helpers() {
-		const result = document.createElement("div");
+		const result = document.createElement("section");
 		result.classList.add("helpers");
 		result.appendChild(this.dom.comments());
 		result.appendChild(this.createSlot("helpers"));
@@ -30,15 +30,15 @@ export default class Dom extends Criterion.Dom {
 		result.classList.add("student");
 		const lastName = document.createElement("span");
 		lastName.classList.add("last-name");
-		lastName.textContent = "Nom";
+		lastName.textContent = "Raté";
 		result.appendChild(lastName);
 		const firstName = document.createElement("span");
 		firstName.classList.add("first-name");
-		firstName.textContent = "Prénom";
+		firstName.textContent = "Rita";
 		result.appendChild(firstName);
 		const id = document.createElement("span");
 		id.classList.add("id");
-		id.textContent = "Matricule";
+		id.textContent = "0123456";
 		result.appendChild(id);
 		return result;
 	}
@@ -70,6 +70,26 @@ export default class Dom extends Criterion.Dom {
 		result.appendChild(header);
 		result.appendChild(this.createSlot("comments"));
 
+		return result;
+	}
+	navigation() {
+		const result = document.createElement("nav");
+		result.classList.add("navigation");
+		result.appendChild(this.dom.navButton("Début", "arrow-nw"));
+		result.appendChild(this.dom.navButton("Précédent", "arrow-n"));
+		result.appendChild(this.dom.navButton("Floor", "all", { "margin-top": "auto", "margin-left": "auto", "padding": ".125em" }));
+		result.appendChild(this.dom.navButton("Ceil", "nothing", { "margin-bottom": "auto", "margin-right": "auto", "padding": ".125em" }));
+		result.appendChild(this.dom.navButton("Suivant", "arrow-s"));
+		result.appendChild(this.dom.navButton("Fin", "arrow-sw"));
+		return result;
+	}
+	navButton(label, icon, properties = {}) {
+		const result = document.createElement("button-ponent");
+		result.label = "";
+		result.icon = icon;
+		for (const [key, value] of Object.entries(properties)) {
+			result.style[key] = value;
+		}
 		return result;
 	}
 }

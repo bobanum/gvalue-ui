@@ -39,11 +39,6 @@ class Scale extends Component {
 		const part = this.parts.fieldset;
 		part.innerHTML = "";
 		part.appendChild(this.buttons(this.max, this.min));
-		// const step = (this.max - this.min) / (this.length - 1);
-		// for (let i = this.min; i <= this.max; i += step) {
-		// 	const button = this.dom.step(i);
-		// 	part.appendChild(button);
-		// }
 	}
 	buttons(max, min, length) {
 		const range = max - min;
@@ -52,12 +47,8 @@ class Scale extends Component {
 		}
 		if (typeof length === "object") {
 			const { modulo, remainder } = length;
-			const result = this.buttons(max-remainder, min, modulo);
+			const result = this.buttons(max - remainder, min, modulo);
 			const range2 = range - remainder;
-			// const step = range2 / modulo;
-			// for (let i = min; i <= range2 + min; i += step) {
-			// 	result.appendChild(this.dom.step(i));
-			// }
 			result.appendChild(this.dom.step(max));
 			return result;
 		} else {
@@ -89,17 +80,16 @@ class Scale extends Component {
 		if (remainder === 0) {
 			return modulo;
 		}
-		console.error(123);
 		return { modulo, remainder };
 	}
 	findModulo(range) {
-		console.log(123);
 		if (range % 1 !== 0) {
 			let frac = range % 1;
 			let { modulo, remainder } = this.findModulo(range - frac);
 			remainder += frac;
 			return { modulo, remainder };
 		}
+		// const modulos = [7, 6, 5, 4, 3];
 		const modulos = [5, 4, 3];
 		for (const modulo of modulos) {
 			if (range % modulo === 0) {

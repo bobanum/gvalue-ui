@@ -10,13 +10,23 @@ export default class Dom extends Component.Dom {
 		const description = document.createElement("div");
 		description.classList.add("description");
 		result.appendChild(description);
-		result.appendChild(this.createSlot("criteria"));
+		result.appendChild(this.dom.criteria());
 		return result;
 	}
 	label() {
 		const result = document.createElement("label");
 		result.appendChild(this.createSlot());
 		result.appendChild(this.dom.input());
+		return result;
+	}
+	criteria() {
+		const result = this.createSlot("criteria");
+		result.addEventListener("click", (e) => {
+			if (e.target !== e.currentTarget) {
+				return;
+			}
+			this.classList.toggle("collapsed");
+		});
 		return result;
 	}
 	input() {

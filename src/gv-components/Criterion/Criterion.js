@@ -12,15 +12,15 @@ export default class Criterion extends Component {
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
-		this.tabIndex = -2;
+		// this.tabIndex = 0;
 		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
 		this.shadowRoot.querySelector(".value").textContent = this.value;
 	}
 	get label() {
-		return this.shadowRoot.querySelector("slot:not([name])").textContent;
+		return this.shadowRoot.querySelector("slot.default").textContent;
 	}
 	set label(value) {
-		this.shadowRoot.querySelector("slot:not([name])").textContent = value;
+		this.shadowRoot.querySelector("slot.default").textContent = value;
 	}
 	get value() {
 		return this.total * (this.parentNode?.ratio || 1);
@@ -61,6 +61,7 @@ export default class Criterion extends Component {
 		this.shadowRoot.querySelector(".description").textContent = value;
 	}
 	get criteria() {
+		// TODO use assignedElements
 		return [...this.querySelectorAll(':scope>gv-criterion')];
 	}
 	set criteria(val) {
@@ -93,8 +94,6 @@ export default class Criterion extends Component {
 		});
 
 		if (this._comments.length > 0) {
-			console.log(this._comments);
-
 			this.classList.add("has-comments");
 			this.append(...this._comments);
 		}
@@ -104,7 +103,7 @@ export default class Criterion extends Component {
 	}
 	makeInputReadOnly(input, revert = false) {
 		input.readOnly = true;
-		input.style.pointerEvents = "none";
+		// input.style.pointerEvents = "none";
 		input.placeholder = "10";
 		input.tabIndex = -1;
 		const enableInput = () => {
@@ -129,12 +128,12 @@ export default class Criterion extends Component {
 		this.classList.add("current");
 		const evaluation = this.closest("gv-evaluation");
 		evaluation.fillComments(this.comments);
-		const oldScale = evaluation.querySelector("gv-scale");
 		const newScale = document.createElement("gv-scale");
 		newScale.slot = "helpers";
 		newScale.min = 0;
 		newScale.max = this.value;
-		oldScale.replaceWith(newScale);
+		evaluation.querySelectorAll("gv-scale").forEach((s) => s.remove());
+		evaluation.appendChild(newScale);
 	}
 	deactivate() {
 		this.classList.remove("current");

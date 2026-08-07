@@ -1,14 +1,10 @@
 import Component from "../../Component.js";
 
 class Button extends Component {
-	static defaultUrl = "/public/icons.svg";
+	static defaultUrl = "/icons.svg";
 	constructor() {
 		super();
 		this.shadowRoot.appendChild(this.dom.main());
-	}
-	connectedCallback() {
-		console.log(123);
-
 	}
 	get icon() {
 		return this._icon?.value;
@@ -18,15 +14,12 @@ class Button extends Component {
 		if (!value.match(/^[a-zA-Z0-9]+:\/\/|^\/|^\./)) {
 			value = `${Button.defaultUrl}#${value}`;
 		}
-		console.log(value);
 		this._icon.value = value;
 	}
 	get label() {
 		return this._label.value;
 	}
 	set label(value) {
-		console.log(value);
-		
 		this._label.value = value;
 	}
 	dom = {
@@ -44,8 +37,8 @@ class Button extends Component {
 					display: inline-flex;
 					align-items: center;
 					justify-content: center;
-					width: 1em;
-					height: 1em;
+					aspect-ratio: 1;
+					box-sizing: border-box;
 				}
 				svg {
 					width: 100%;

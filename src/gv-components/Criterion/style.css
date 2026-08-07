@@ -11,26 +11,54 @@
 }
 
 header,
-slot[name="criteria"] {
+slot.criteria {
 	display: grid;
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
 	padding-left: var(--gap2);
 }
-
-slot[name="criteria"]:has-slotted {
-	--border-color: hsl(from var(--background-color) h s calc(l + var(--less)));
-	border-color: var(--border-color);
+:host(.has-criteria) slot.criteria {
+	border-color: var(--accent-color);
 	border-style: solid;
 	border-width: 0 0 calc(var(--gap) / 2) var(--gap);
-	border-top-left-radius: 1em .5em;
-	border-bottom-left-radius: 1em .5em;
-	border-bottom-right-radius: .5em 1em;
-	/* position: relative; */
+	border-radius: 1em;
 	padding-bottom: .25em;
+	position: relative;
+	&::before {
+		content: "⏵";
+		position: absolute;
+		border-radius: 1em;
+		color: var(--accent-color);
+		border: 1px solid currentColor;
+		background-color: var(--background-color);
+		line-height: 0;
+		font-size: .8rem;
+		width: 1.2em;
+		height: 1.2em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		top: -.25em;
+		left: 0em;
+		box-sizing: border-box;
+		/* padding-left: 1px; */
+		/* padding-bottom: 2px; */
+		rotate: 0deg;
+		transition: rotate 0.2s ease-in-out;
+	}
 }
-
-slot[name="comments"] {
+:host(.collapsed) {
+	slot.criteria {
+		border-left-color: transparent;
+	}
+	::slotted(gv-criterion) {
+		display: none;
+	}
+	&::before {
+		rotate: 90deg;
+	}
+}
+slot.comments {
 	display: block;
 	grid-column: 1 / -1;
 }
@@ -71,7 +99,6 @@ slot {
 
 :host(:has(.current)),
 :host(.current) {
-	/* outline: solid green; */
 	.description {
 		display: block;
 	}
@@ -84,23 +111,8 @@ slot {
 
 :host(.current) {
 	>header {
-		/* --background-color:red; */
-		background-color: hsl(from var(--background-color) h calc(s + 10) calc(l + var(--less)));
+		background-color: var(--accent-color);
 		position: relative;
-
-		&::after {
-			--width: .6em;
-			content: "";
-			position: absolute;
-			left: 100%;
-			border: 0px solid transparent;
-			border-left-width: var(--width);
-			border-left-color: var(--background-color);
-			align-self: baseline;
-			border-block-width: 1em;
-			margin-top: 0.25em;
-		}
-
 	}
 }
 
@@ -109,14 +121,16 @@ header {
 	align-items: center;
 	padding: var(--gap);
 	margin: calc(var(--gap) * -1);
-	border-radius: 0.5em 0 0 0.5em;
+	border-radius: 0.5em;
+	border: 2px solid transparent;
 
 	label {
 		display: contents;
 	}
 
 	&:hover {
-		background-color: hsl(from var(--background-color) h calc(s - 10) calc(l - var(--more)));
+		background-color: hsl(from var(--accent-color) h s l / 0.3);
+		border-color: var(--accent-color);
 	}
 
 
@@ -167,7 +181,7 @@ header {
 	}
 }
 
-slot:not([name]) {
+slot.default {
 	display: grid;
 	place-self: stretch;
 	align-items: center;
