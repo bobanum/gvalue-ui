@@ -45,7 +45,7 @@
 		font-size: 1.25em;
 		margin: 0;
 	}
-	slot[name="title"] {
+	slot.title {
 		display: flex;
 		font-weight: bold;
 		justify-content: space-between;

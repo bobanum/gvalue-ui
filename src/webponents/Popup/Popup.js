@@ -30,7 +30,7 @@ class Popup extends Component {
 		}, { once: true });
 	}
 	set title(value) {
-		this.shadowRoot.querySelector("slot[name=title]").textContent = value;
+		this.shadowRoot.querySelector("slot.title").textContent = value;
 	}
 }
 

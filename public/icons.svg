@@ -36,8 +36,28 @@
         <symbol id="pinned" viewBox="0 0 64 64">
             <path d="m32 4c-6.626 6e-7 -12 1.791-12 4s5.374 4 12 4h2e-3c6.626 0 12-1.791 12-4s-5.372-4-12-4zm11.4 7.75c-0.6801 0.3949-1.44 0.7125-2.279 0.9922-2.463 0.8213-5.628 1.275-9.123 1.275h-0.001953c-3.495-1e-6 -6.659-0.4542-9.123-1.275-0.8388-0.2796-1.599-0.5961-2.279-0.9902 1.115 3.392 3.702 6.117 7.006 7.418l-1.717 13.74c-8.055 2.583-13.89 10.14-13.89 19.05-0.0013 2.054 7.779 3.775 18 3.98v3.664c-1e-3 0.2211 0.895 0.4004 2 0.4004s2-0.1793 2-0.4004v-3.664c10.22-0.2054 18-1.926 18-3.98-2e-6 -8.913-5.83-16.46-13.88-19.05l-1.717-13.74c3.304-1.301 5.891-4.027 7.006-7.42z" fill="currentColor" />
         </symbol>
-        <symbol id="asterix" viewBox="0 0 64 64">
+        <symbol id="asterisk" viewBox="0 0 64 64">
             <path d="m32 5.182a6 6 0 0 0-6 6v14.88l-14.15-4.596a6 6 0 0 0-7.561 3.852 6 6 0 0 0 3.854 7.561l14.15 4.596-8.744 12.04a6 6 0 0 0 1.328 8.381 6 6 0 0 0 8.381-1.326l8.742-12.04 8.742 12.04a6 6 0 0 0 8.381 1.326 6 6 0 0 0 1.328-8.381l-8.744-12.04 14.15-4.596a6 6 0 0 0 3.854-7.561 6 6 0 0 0-7.561-3.852l-14.15 4.596v-14.88a6 6 0 0 0-6-6z" fill="currentColor" />
+        </symbol>
+        <symbol id="asterisk-hexa" viewBox="0 0 64 64">
+            <use width="64" height="64" href="#minus" />
+            <use transform="rotate(60,32,32)" width="64" height="64" href="#minus" />
+            <use transform="rotate(120,32,32)" width="64" height="64" href="#minus" />
+        </symbol>
+        <symbol id="asterisk-octo" viewBox="0 0 64 64">
+            <use width="64" height="64" href="#minus" />
+            <use transform="rotate(45,32,32)" width="64" height="64" href="#minus" />
+            <use transform="rotate(90,32,32)" width="64" height="64" href="#minus" />
+            <use transform="rotate(135,32,32)" width="64" height="64" href="#minus" />
+        </symbol>
+        <symbol id="asterisk-hepta" viewBox="0 0 64 64">
+            <path id="hepta-part" d="m32 4c-3.324 0-6 2.676-6 6v24h12v-24c0-3.324-2.676-6-6-6z" fill="currentColor" />
+            <use transform="rotate(-51.43 32 32)" href="#hepta-part" />
+            <use transform="rotate(257.1 32 32)" href="#hepta-part" />
+            <use transform="rotate(205.7 32 32)" href="#hepta-part" />
+            <use transform="rotate(154.3 32 32)" href="#hepta-part" />
+            <use transform="rotate(102.9 32 32)" href="#hepta-part" />
+            <use transform="rotate(51.43 32 32)" href="#hepta-part" />
         </symbol>
         <symbol id="dot" viewBox="0 0 64 64">
             <path d="m38 32c0-3.324-2.676-6-6-6s-6 2.676-6 6 2.676 6 6 6 6-2.676 6-6z" fill="currentColor" />
@@ -47,6 +67,27 @@
         </symbol>
         <symbol id="up" viewBox="0 0 64 64">
             <path d="m24 48v-20h-12c-1.476 0-2.215-1.784-1.172-2.828l18.34-18.34c1.562-1.562 4.094-1.562 5.656 0l18.34 18.34c1.043 1.044 0.304 2.828-1.172 2.828h-12v20z" fill="currentColor" />
+        </symbol>
+        <symbol id="interro" viewBox="0 0 64 64">
+            <path d="m32 4c-9.941 0-18 8.059-18 18a6 6 0 0 0 6 6 6 6 0 0 0 6-6c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6a6 6 0 0 0-6 6v6a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-1.023c6.991-2.471 12-9.139 12-16.98 0-9.941-8.059-18-18-18zm0 44a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6z" fill="currentColor" />
+        </symbol>
+        <symbol id="exclam" viewBox="0 0 64 64">
+            <path d="m32 4c-4.418 0-8 3.582-8 8 0 0.1967 0.0076 0.3928 0.02148 0.5859l1.994 27.85c0.2227 3.109 2.818 5.562 5.984 5.562s5.762-2.453 5.984-5.562l1.994-27.85c0.01386-0.1932 0.02148-0.3892 0.02148-0.5859 0-4.418-3.582-8-8-8zm0 44c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z" fill="currentColor" />
+        </symbol>
+        <symbol id="quote" viewBox="0 0 64 64">
+            <path id="quote-part" d="m22 8c-4.418 0-8 3.582-8 8 0 2.374 1.036 4.504 2.674 5.973 0.8154 0.7311 1.326 1.796 1.326 2.979 0 1.678-1.033 3.114-2.497 3.708-0.7834 0.3178-1.503 0.9814-1.503 1.832 0 0.8333 0.6914 1.516 1.538 1.436 8.115-0.7739 14.46-7.609 14.46-15.93 0-4.418-3.582-8-8-8z" fill="currentColor" />
+            <use transform="translate(20)" href="#quote-part" />
+        </symbol>
+        <symbol id="dollar" viewBox="0 0 64 64">
+            <path d="m32 2c-3.314 0-6 2.686-6 6v2h-4c-7.732 0-14 6.268-14 14s6.268 14 14 14h4v4h-10c-3.314 0-6 2.686-6 6s2.686 6 6 6h10v2c0 3.314 2.686 6 6 6s6-2.686 6-6v-2h4c7.732 0 14-6.268 14-14s-6.268-14-14-14h-4v-4h10c3.314 0 6-2.686 6-6s-2.686-6-6-6h-10v-2c0-3.314-2.686-6-6-6zm-10 20h4v4h-4c-1.105 0-2-0.8954-2-2s0.8954-2 2-2zm16 16h4c1.105 0 2 0.8954 2 2s-0.8954 2-2 2h-4z" fill="currentColor" />
+        </symbol>
+        <symbol id="cent" viewBox="0 0 64 64">
+            <path d="m32 18c-3.314 0-6 2.686-6 6v2h-1c-7.732 0-14 6.268-14 14s6.268 14 14 14h1v2c0 3.314 2.686 6 6 6s6-2.686 6-6v-2h4c3.314 0 6-2.686 6-6s-2.686-6-6-6h-4v-4h4c3.314 0 6-2.686 6-6s-2.686-6-6-6h-4v-2c0-3.314-2.686-6-6-6zm-7 20h1v4h-1c-1.105 0-2-0.8954-2-2s0.8954-2 2-2z" fill="currentColor" />
+        </symbol>
+        <symbol id="percent" viewBox="0 0 64 64">
+            <path d="m44.7 4c-2.22 0-4.158 1.207-5.195 3l-25.4 44c-0.5108 0.8826-0.8047 1.907-0.8047 3 0 3.313 2.687 6 6 6 2.22 0 4.158-1.207 5.195-3l25.4-44c0.5108-0.8826 0.8047-1.907 0.8047-3 0-3.313-2.687-6-6-6z" fill="currentColor" />
+            <path d="m18 4a14 14 0 0 0-14 14 14 14 0 0 0 14 14 14 14 0 0 0 14-14 14 14 0 0 0-14-14zm0 11a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z" fill="currentColor" />
+            <path d="m46 32a14 14 0 0 0-14 14 14 14 0 0 0 14 14 14 14 0 0 0 14-14 14 14 0 0 0-14-14zm0 11a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z" fill="currentColor" />
         </symbol>
     </defs>
     <defs id="arrows-defs">
@@ -87,12 +128,12 @@
         <symbol id="arrow-nw" viewBox="0 0 64 64">
             <use transform="rotate(315 32 32)" href="#arrow-n" />
         </symbol>
-        <symbol id="top" viewBox="0 0 64 64">
+        <symbol id="arrow-top" viewBox="0 0 64 64">
             <use transform="translate(0)" href="#arrow-n" />
             <use transform="translate(0 -24)" href="#minus" />
         </symbol>
-        <symbol id="bottom" viewBox="0 0 64 64">
-            <use transform="rotate(180 32 32)" href="#top" />
+        <symbol id="arrow-bottom" viewBox="0 0 64 64">
+            <use transform="rotate(180 32 32)" href="#arrow-top" />
         </symbol>
     </defs>
     <defs id="file-defs">
@@ -121,6 +162,13 @@
         </symbol>
         <symbol id="document" viewBox="0 0 64 64">
             <path d="m16 4c-3.29 0-6 2.71-6 6v44c0 3.29 2.71 6 6 6h32c3.29 0 6-2.71 6-6v-30c0-3.091-1.229-6.057-3.414-8.243l-8.343-8.343c-2.186-2.186-5.152-3.414-8.243-3.414zm0 4s18.14 0.00854 18.21 0.0105c1.024 0.1012 1.789 0.9328 1.789 1.99v6c0 3.29 2.71 6 6 6h6c1.057 0 1.888 0.7646 1.99 1.789 2e-3 0.07069 0.0105 30.21 0.0105 30.21 0 1.128-0.8717 2-2 2h-32c-1.128 0-2-0.8717-2-2v-44c0-1.128 0.8717-2 2-2zm24 2.828 7.172 7.172h-5.172c-1.128 0-2-0.8717-2-2zm-20 15.17v2h24v-2zm0 6v2h24v-2zm0 6v2h24v-2zm0 6v2h24v-2zm0 6v2h24v-2z" fill="currentColor" />
+        </symbol>
+        <symbol id="code-html" viewBox="0 0 64 64">
+            <path d="m25.29 10.67c2.248-0.01549 4.456 1.384 5.164 3.84 0.5484 1.896 2.52e-4 3.943-1.424 5.311l-12.19 12.18 12.19 12.19c2.952 2.834 1.724 7.799-2.209 8.939-1.898 0.5482-3.943 7.04e-4 -5.311-1.422l-15.95-15.95c-1.016-1.016-1.578-2.4-1.557-3.836h0.0039c0.02116-1.381 0.5799-2.699 1.557-3.676l15.95-15.95c1.064-1.106 2.426-1.625 3.775-1.635zm13.43 0c-2.248-0.01549-4.456 1.384-5.164 3.84-0.5484 1.896-2.52e-4 3.943 1.424 5.311l12.19 12.18-12.19 12.19c-2.952 2.834-1.724 7.799 2.209 8.939 1.898 0.5482 3.943 7.04e-4 5.311-1.422l15.95-15.95c1.016-1.016 1.578-2.4 1.557-3.836h-0.0039c-0.02116-1.381-0.5799-2.699-1.557-3.676l-15.95-15.95c-1.064-1.106-2.426-1.625-3.775-1.635z" fill="currentColor" />
+        </symbol>
+        <symbol id="code-js" viewBox="0 0 64 64">
+            <path id="curly" d="m19 4c-4.986 0-9 4.014-9 9v13c0 1.662-1.338 3-3 3s-3 1.338-3 3 1.338 3 3 3 3 1.338 3 3v13c0 4.986 4.014 9 9 9h3c1.662 0 3-1.338 3-3s-1.338-3-3-3-3-1.338-3-3v-13c0-2.309-0.861-4.41-2.281-6 1.42-1.59 2.281-3.691 2.281-6v-13c0-1.662 1.338-3 3-3s3-1.338 3-3-1.338-3-3-3z" fill="currentColor" />
+            <use transform="rotate(180,32,32)" href="#curly" />
         </symbol>
     </defs>
     <defs id="editor-defs">
@@ -255,7 +303,6 @@
         </symbol>
     </defs>
     <g transform="scale(.1)" color="#880000">
-
         <g id="display">
             <g id="commun">
                 <g>
@@ -271,13 +318,24 @@
                     <use x="576" href="#pinned" />
                 </g>
                 <g transform="translate(0,64)">
-                    <use href="#asterix" />
-                    <use x="64" href="#dot" />
-                    <use x="128" href="#tray" />
-                    <use x="192" href="#up" />
+                    <use href="#asterisk" />
+                    <use x="64" href="#asterisk-hexa" />
+                    <use x="128" href="#asterisk-octo" />
+                    <use x="192" href="#asterisk-hepta" />
+                    <use x="256" href="#dot" />
+                    <use x="320" href="#tray" />
+                    <use x="384" href="#up" />
+                    <use x="448" href="#interro" />
+                    <use x="512" href="#exclam" />
+                    <use x="576" href="#quote" />
+                </g>
+                <g transform="translate(0,128)">
+                    <use href="#dollar" />
+                    <use x="64" href="#cent" />
+                    <use x="128" href="#percent" />
                 </g>
             </g>
-            <g id="arrows" transform="translate(0,128)">
+            <g id="arrows" transform="translate(0,192)">
                 <g>
                     <use href="#first" />
                     <use x="64" href="#previous" />
@@ -293,11 +351,11 @@
                 <g transform="translate(0,64)">
                     <use href="#arrow-w" />
                     <use x="64" href="#arrow-nw" />
-                    <use x="128" href="#top" />
-                    <use x="192" href="#bottom" />
+                    <use x="128" href="#arrow-top" />
+                    <use x="192" href="#arrow-bottom" />
                 </g>
             </g>
-            <g id="file" transform="translate(0,256)">
+            <g id="file" transform="translate(0,320)">
                 <g>
                     <use href="#save" />
                     <use x="64" href="#open" />
@@ -307,9 +365,11 @@
                     <use x="320" href="#download" />
                     <use x="384" href="#text" />
                     <use x="448" href="#document" />
+                    <use x="512" href="#code-html" />
+                    <use x="576" href="#code-js" />
                 </g>
             </g>
-            <g id="editor" transform="translate(0,320)">
+            <g id="editor" transform="translate(0,384)">
                 <g>
                     <use href="#erase" />
                     <use x="64" href="#edit" />
@@ -323,7 +383,7 @@
                     <use x="576" href="#link" />
                 </g>
             </g>
-            <g id="eval" transform="translate(0,384)">
+            <g id="eval" transform="translate(0,448)">
                 <g>
                     <use href="#student" />
                     <use x="64" href="#teacher" />
@@ -349,7 +409,7 @@
                     <use x="576" href="#backslash" />
                 </g>
             </g>
-            <g id="emoji" transform="translate(0,512)">
+            <g id="emoji" transform="translate(0,576)">
                 <g>
                     <use href="#scream" />
                     <use x="64" href="#wink" />

@@ -2,7 +2,8 @@ export default class Component extends HTMLElement {
 	static LONG_PRESS_DELAY = 500;
 	constructor() {
 		super();
-		// this.dom = this.adoptFunctions(this.constructor.Dom || {});
+		this._ = {};
+		this.parts = {};
 		this.dom = this.adoptFunctions(new this.constructor.Dom());
 		this.attachShadow({ mode: "open" });
 	}
@@ -36,6 +37,7 @@ export default class Component extends HTMLElement {
 	}
 	createSlot(name, defaultContent) {
 		const result = document.createElement("slot");
+		result.classList.add(name || "default");
 		if (name) {
 			result.setAttribute("name", name);
 		}

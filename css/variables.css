@@ -4,26 +4,31 @@
     --danger-color: hsl(0, 70%, 45%);
     --warning-color: hsl(40, 100%, 50%);
     --info-color: hsl(180, 70%, 45%);
-    --background-color: hsl(var(--h), var(--s), var(--l));
     --highlight-color: hsl(24, 100%, 50%);
     --darker: -10;
     --lighter: 7;
+	--accent-color: hsl(from var(--background-color) h s calc(l + 2 * var(--less)));
+	--emphasis-color: hsl(from var(--background-color) h s calc(l + 2 * var(--more)));
     
     @media (prefers-color-scheme: light) {
         --s: 50%;
         --l: 95%;
-        --more: 7;
-        --less: -10;
+        --d: 20%;
+        --more: 10;
+        --less: -6;
         --text-color: #333;
         --base-color: hsl(var(--h), var(--s), 25%);
+        --background-color: hsl(var(--h), var(--s), var(--l));
     }
     
     @media (prefers-color-scheme: dark) {
         --s: 50%;
         --l: 10%;
-        --more: -7;
-        --less: 10;
+        --d: 80%;
+        --more: -3;
+        --less: 4;
         --text-color: #fff;
         --base-color: hsl(var(--h), var(--s), 60%);
+        --background-color: hsl(var(--h), var(--s), var(--l));
     }
 }

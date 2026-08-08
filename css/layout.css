@@ -9,6 +9,7 @@ body {
 		align-items: center;
 		padding: 0.25em;
 		color: var(--text-color);
+		background-color: hsl(from var(--background-color) h s calc(l + 2 * var(--less)));
 
 		h1 {
 			display: flex;
@@ -43,7 +44,8 @@ body {
 	}
 
 	>nav.sec {
-		grid-area: nav-sec
+		grid-area: nav-sec;
+		background-color: hsl(from var(--background-color) h s calc(l + 2 * var(--less)));
 	}
 
 	.helpers {
@@ -58,10 +60,10 @@ body {
 			"nav-sec app"
 		;
 
-		>header,
+		/* >header,
 		>nav.sec {
 			background-color: hsl(from var(--background-color) h s calc(l + var(--less)));
-		}
+		} */
 
 		>header>h1>span {
 			display: none;
