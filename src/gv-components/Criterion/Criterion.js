@@ -7,26 +7,44 @@ export default class Criterion extends Component {
 		super();
 		this._comments = [];
 		this._value;
-		this.criteriaCount = 0;
+		this._score;
+		this._criteria = [];
 		this.shadowRoot.appendChild(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
-		// this.tabIndex = 0;
-		const criteria = [...this.querySelectorAll(':scope>gv-criterion')];
-		this.shadowRoot.querySelector(".value").textContent = this.value;
+		this.parts.value.textContent = this.value;
 	}
 	get label() {
-		return this.shadowRoot.querySelector("slot.default").textContent;
+		return this.parts.label.textContent;
 	}
 	set label(value) {
-		this.shadowRoot.querySelector("slot.default").textContent = value;
+		this.parts.label.textContent = value;
 	}
 	get value() {
 		return this.total * (this.parentNode?.ratio || 1);
 	}
 	set value(val) {
 		this._value = val;
+		this.parts.score.max = val;
+	}
+	get score() {
+		if (this._score === undefined) {
+			this._score = this._criteria.reduce((total, criterion) => total + criterion.score, 0);
+		}
+		return this._score;
+	}
+	set score(val) {
+		if (this._score === val) return;
+		if (val === null || val === undefined) {
+			this._score = undefined;
+		} else {
+			this._score = val;
+		}
+		this.parts.score.value = this.score;
+		this.dispatchEvent(new CustomEvent("change", {
+			detail: { value: this.value }
+		}));
 	}
 	get totalRaw() {
 		if (this._totalRaw !== undefined) return this._totalRaw;
@@ -49,7 +67,7 @@ export default class Criterion extends Component {
 	get ratio() {
 		if (this._ratio !== undefined && !isNaN(this._ratio)) return this._ratio;
 		let ratio = this.parentNode?.ratio || 1;
-		if (this._value === undefined || this.criteriaCount === 0) {
+		if (this._value === undefined || this._criteria.length === 0) {
 			return this._ratio = ratio;
 		}
 		return this._ratio = ratio * this._value / this.totalRaw;
@@ -61,26 +79,28 @@ export default class Criterion extends Component {
 		this.shadowRoot.querySelector(".description").textContent = value;
 	}
 	get criteria() {
-		// TODO use assignedElements
-		return [...this.querySelectorAll(':scope>gv-criterion')];
+		return this._criteria;
 	}
-	set criteria(val) {
-		this.criteria.forEach((c) => c.remove());
-		this.criteriaCount = val.length;
-		if (this.criteriaCount > 0) {
-			this.classList.add("has-criteria");
-			this.makeInputReadOnly(this.shadowRoot.querySelector("header input"), true);
-		} else {
-			this.makeInputReadOnly(this.shadowRoot.querySelector("header input"), false);
-			this.classList.remove("has-criteria");
-			console.log(this.shadowRoot.querySelectorAll("input"));
-		}
-		val.forEach((criterionData) => {
+	set criteria(criteriaData) {
+		this._criteria.forEach((c) => c.remove());
+		this._criteria.splice(0);
+		this._criteria.push(...criteriaData.map((criterionData) => {
 			const criterion = document.createElement('gv-criterion');
 			criterion.slot = "criteria";
 			criterion.fill(criterionData);
 			this.appendChild(criterion);
-		});
+			criterion.addEventListener("change", (e) => {
+				this.score = null; // Reset score to recalculate based on criteria
+			});
+			return criterion;
+		}));
+		if (this._criteria.length > 0) {
+			this.classList.add("has-criteria");
+			this.makeInputReadOnly(this.parts.score, true);
+		} else {
+			this.makeInputReadOnly(this.parts.score, false);
+			this.classList.remove("has-criteria");
+		}
 	}
 	get comments() {
 		return this._comments || [];
@@ -127,13 +147,13 @@ export default class Criterion extends Component {
 	activate() {
 		this.classList.add("current");
 		const evaluation = this.closest("gv-evaluation");
-		evaluation.fillComments(this.comments);
-		const newScale = document.createElement("gv-scale");
-		newScale.slot = "helpers";
-		newScale.min = 0;
-		newScale.max = this.value;
-		evaluation.querySelectorAll("gv-scale").forEach((s) => s.remove());
-		evaluation.appendChild(newScale);
+		evaluation.removeHelpers();
+		evaluation.fillComments(this._comments);
+		const scale = evaluation.appendChild(this.dom.scale());
+		this.parts.scale = scale;
+		scale.addEventListener("change", (e) => {
+			this.score = e.detail.value;
+		});
 	}
 	deactivate() {
 		this.classList.remove("current");

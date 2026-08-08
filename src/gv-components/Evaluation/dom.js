@@ -22,7 +22,7 @@ export default class Dom extends Criterion.Dom {
 		const result = document.createElement("section");
 		result.classList.add("helpers");
 		result.appendChild(this.dom.comments());
-		result.appendChild(this.createSlot("helpers"));
+		this.parts.helpers = result.appendChild(this.createSlot("helpers"));
 		return result;
 	}
 	student() {
@@ -45,14 +45,22 @@ export default class Dom extends Criterion.Dom {
 	scoring() {
 		const result = document.createElement("div");
 		result.classList.add("scoring");
-		const grade = document.createElement("span");
-		grade.classList.add("grade");
-		grade.textContent = "0";
-		result.appendChild(grade);
+		const score = document.createElement("span");
+		score.classList.add("score");
+		score.textContent = "0";
+		Object.defineProperty(score, "value", {
+			get: function() {
+				return this.textContent;
+			},
+			set: function(val) {
+				this.textContent = val;
+			}
+		});
+		this.parts.score = result.appendChild(score);
 		result.appendChild(document.createTextNode("/"));
 		const maxScore = document.createElement("span");
 		maxScore.classList.add("value");
-		result.appendChild(maxScore);
+		this.parts.value = result.appendChild(maxScore);
 		return result;
 	}
 	comments() {
@@ -68,7 +76,7 @@ export default class Dom extends Criterion.Dom {
 		add.textContent = "\u2795\uFE0E";
 		header.appendChild(add);
 		result.appendChild(header);
-		result.appendChild(this.createSlot("comments"));
+		this.parts.comments = result.appendChild(this.createSlot("comments"));
 
 		return result;
 	}

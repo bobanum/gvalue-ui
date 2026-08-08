@@ -10,11 +10,10 @@ export default class Dom extends Component.Dom {
 	}
 	step(val) {
 		const result = document.createElement("div");
-		result.tabIndex = -1;
+		result.tabIndex = 1;
 		result.innerHTML = this.formatFrac(val);
 		result.dataset.value = val;
-		result.addEventListener("focusin", () => {
-			result.appendChild(this.dom.sec());			
+		result.addEventListener("click", () => {
 			this.dispatchEvent(new CustomEvent("change", {
 				detail: { value: val }
 			}));

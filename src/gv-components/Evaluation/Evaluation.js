@@ -22,11 +22,8 @@ export default class Evaluation extends Criterion {
 	makeInputReadOnly(input, revert = false) {
 		return; // Do nothing, the evaluation input should never be editable
 	}
-	emptyComments() {
-		const comments = [...this.querySelectorAll('gv-comment')];
-		comments.forEach((c) => {
-			c.remove();
-		});
+	removeHelpers() {
+		this.parts.helpers.assignedElements().forEach((s) => s.remove());
 	}
 	fillComments(comments) {
 		this.append(...comments);
