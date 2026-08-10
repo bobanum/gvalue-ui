@@ -32,9 +32,9 @@ export default class Dom extends Component.Dom {
 	scoring() {
 		const result = document.createElement("div");
 		result.classList.add("scoring");
-		const score = document.createElement("input", { is: "gv-number" });
+		const score = document.createElement("input");
 		score.inputMode = "none";
-		score.type = "text";
+		score.type = "number";
 		score.size = "1";
 		score.min = "0";
 		score.tabIndex = 0;
@@ -43,6 +43,11 @@ export default class Dom extends Component.Dom {
 		value.classList.add("value");
 		this.parts.value = result.appendChild(value);
 		result.appendChild(value);
+		score.addEventListener("change", (e) => {
+			console.log(e);
+			
+			this.score = parseFloat(score.value);
+		});
 
 		score.addEventListener("pointerdown", (e) => {
 			if (this.shadowRoot.activeElement === score && !score.readOnly) {
