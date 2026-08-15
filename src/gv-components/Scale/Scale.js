@@ -17,22 +17,22 @@ class Scale extends Component {
 	get min() {
 		return this._.min;
 	}
-	set min(value) {
-		this._.min = value;
+	set min(val) {
+		this._.min = val;
 		this.update();
 	}
 	get max() {
 		return this._.max;
 	}
-	set max(value) {
-		this._.max = value;
+	set max(val) {
+		this._.max = val;
 		this.update();
 	}
 	get length() {
 		return this._.length;
 	}
-	set length(value) {
-		this._.length = value;
+	set length(val) {
+		this._.length = val;
 		this.update();
 	}
 	update() {

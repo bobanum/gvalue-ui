@@ -15,7 +15,7 @@ export default class Dom extends Criterion.Dom {
 		const result = document.createElement("header");
 		result.appendChild(this.createSlot("title", "Évaluation"));
 		result.appendChild(this.dom.student());
-		result.appendChild(this.dom.scoring());
+		this.parts.scoring = result.appendChild(this.dom.scoring());
 		return result;
 	}
 	helpers() {
@@ -43,6 +43,10 @@ export default class Dom extends Criterion.Dom {
 		return result;
 	}
 	scoring() {
+		const result = document.createElement("gv-scoring");
+		return result;
+	}
+	zzzscoring() {
 		const result = document.createElement("div");
 		result.classList.add("scoring");
 		const score = document.createElement("span");

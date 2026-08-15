@@ -13,13 +13,13 @@
                     "id": "b2c3d4",
                     "label": "Expression vocale et diction",
                     "description": "La voix est-elle bien projetée, la diction claire et le débit maîtrisé ?",
-                    "value": 12
+                    "max": 12
                 },
                 {
                     "id": "c3d4e5",
                     "label": "Expression corporelle et gestuelle",
                     "description": "Le langage corporel et les déplacements soutiennent-ils le personnage ?",
-                    "value": 5.5
+                    "max": 5.5
                 },
                 {
                     "id": "d4e5f6",
@@ -31,19 +31,19 @@
                             "id": "e5f6g7",
                             "label": "Cohérence et crédibilité du personnage",
                             "description": "Le personnage reste-t-il cohérent tout au long de la prestation ?",
-                            "value": 11
+                            "max": 11
                         },
                         {
                             "id": "f6g7h8",
                             "label": "Émotion et engagement dans le jeu",
                             "description": "L'élève transmet-il des émotions sincères et un réel engagement ?",
-                            "value": 13
+                            "max": 13
                         },
                         {
                             "id": "g7h8i9",
                             "label": "Nuances et subtilité du jeu",
                             "description": "L'interprétation évite-t-elle les clichés et apporte-t-elle des nuances ?",
-                            "value": 17
+                            "max": 17
                         }
                     ]
                 },
@@ -57,13 +57,13 @@
                             "id": "i9j0k1",
                             "label": "Contrôle du stress et de la nervosité",
                             "description": "L'élève reste-t-il maître de lui malgré le trac ?",
-                            "value": 9
+                            "max": 9
                         },
                         {
                             "id": "j0k1l2",
                             "label": "Occupation de l'espace scénique",
                             "description": "L'élève utilise-t-il efficacement l'espace de jeu disponible ?",
-                            "value": 6
+                            "max": 6
                         }
                     ]
                 }
@@ -79,25 +79,25 @@
                     "id": "l2m3n4",
                     "label": "Mémorisation du texte",
                     "description": "Le texte est-il connu et restitué sans hésitation ni erreur majeure ?",
-                    "value": 7
+                    "max": 7
                 },
                 {
                     "id": "m3n4o5",
                     "label": "Respect des indications de mise en scène",
                     "description": "Les déplacements, positions et interactions prévues sont-ils respectés ?",
-                    "value": 12
+                    "max": 12
                 },
                 {
                     "id": "n4o5p6",
                     "label": "Interaction avec les partenaires de jeu",
                     "description": "L'élève écoute-t-il et réagit-il de façon naturelle aux autres comédiens ?",
-                    "value": 5
+                    "max": 5
                 },
                 {
                     "id": "o5p6q7",
                     "label": "Réaction aux imprévus et improvisation",
                     "description": "L'élève sait-il réagir avec justesse en cas d'oubli ou d'imprévu ?",
-                    "value": 3
+                    "max": 3
                 }
             ]
         },
@@ -111,13 +111,13 @@
                     "id": "q7r8s9",
                     "label": "Écoute et respect des partenaires de jeu",
                     "description": "L'élève écoute-t-il et respecte-t-il les autres comédiens sur scène ?",
-                    "value": 5
+                    "max": 5
                 },
                 {
                     "id": "r8s9t0",
                     "label": "Contribution à la cohésion du groupe",
                     "description": "L'élève participe-t-il positivement à la dynamique collective ?",
-                    "value": 5
+                    "max": 5
                 },
                 {
                     "id": "s9t0u1",
@@ -129,13 +129,13 @@
                             "id": "t0u1v2",
                             "label": "Assiduité aux répétitions",
                             "description": "L'élève est-il présent et ponctuel aux répétitions ?",
-                            "value": 2
+                            "max": 2
                         },
                         {
                             "id": "u1v2w3",
                             "label": "Prise en compte des commentaires du metteur en scène",
                             "description": "L'élève intègre-t-il les corrections et suggestions reçues ?",
-                            "value": 3
+                            "max": 3
                         }
                     ]
                 }
@@ -145,25 +145,25 @@
             "id": "v2w3x4",
             "label": "Créativité et dimension artistique",
             "description": "Évaluer l'apport créatif et artistique de l'élève à la prestation.",
-            "value": 30,
+            "max": 30,
             "criteria": [
                 {
                     "id": "w3x4y5",
                     "label": "Originalité des choix d'interprétation",
                     "description": "L'élève propose-t-il des choix personnels et originaux dans son jeu ?",
-                    "value": 7
+                    "max": 7
                 },
                 {
                     "id": "x4y5z6",
                     "label": "Utilisation des costumes, accessoires et décor",
                     "description": "Les éléments scéniques sont-ils exploités de façon pertinente ?",
-                    "value": 4
+                    "max": 4
                 },
                 {
                     "id": "y5z6a7",
                     "label": "Cohérence artistique de l'ensemble de la prestation",
                     "description": "La prestation forme-t-elle un tout cohérent sur le plan artistique ?",
-                    "value": 4
+                    "max": 4
                 }
             ]
         }

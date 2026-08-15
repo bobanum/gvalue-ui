@@ -11,6 +11,7 @@ export default class Evaluation extends Criterion {
 		criteria.forEach((c) => {
 			c.slot = "criteria";
 		});
+		
 		this.shadowRoot.querySelector("style").replaceWith(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.navigation());
 	}

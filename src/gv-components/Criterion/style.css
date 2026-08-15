@@ -3,13 +3,12 @@
 :host {
 	--border-color: var(--accent-color);
 	display: grid;
-	grid-template-columns: 1fr var(--input-width, 4em) auto;
+	grid-template-columns: 1fr var(--input-width, 4em);
 	grid-column: 1 / -1;
 	/* gap: 0 .25rem; */
 	/* padding-top: .5rem; */
 	cursor: default;
 }
-
 header,
 slot.criteria {
 	display: grid;
@@ -23,7 +22,7 @@ header {
 	align-items: center;
 	padding: .125rem .25rem;
 	margin-inline: -.125rem;
-	border-radius: 0.5rem;
+	border-radius: 0.25rem;
 	border: 2px solid transparent;
 	cursor: pointer;
 
@@ -139,11 +138,12 @@ slot {
 
 .description {
 	font-size: 0.9em;
-	font-family: 'Bad Script';
+	font-family: var(--font-cursive);
 	grid-column: 1 / -1;
 	line-height: 1;
 	/* color: hsl(from currentColor h s l / 0.75); */
 	padding-block: .5em;
+	padding-inline: .5em;
 }
 
 ::slotted(gv-criterion) {
@@ -178,20 +178,21 @@ slot.default {
 :host(.has-criteria) {
 	padding-top: .25em;
 	/* cursor: default; */
-
 	>header {
 		border-style: dotted;
 		background-clip: padding-box;
 		font-style: oblique;
 
-		.scoring {
+		gv-scoring {
+			--background-color: transparent;
+			--text-color: inherit;
 			--sh: hsl(from var(--background-color) h s calc(l + var(--less)));
 			--hl: hsl(from var(--background-color) h s calc(l + var(--more)));
 			box-shadow: none;
-			background-color: transparent;
+			/* background-color: transparent;
 			background-image: linear-gradient(to bottom,
 					hsl(from var(--background-color) h s l),
-					hsl(from var(--background-color) h s calc(l + var(--less))));
+					hsl(from var(--background-color) h s calc(l + var(--less)))); */
 		}
 	}
 }
@@ -217,6 +218,7 @@ slot.default {
 	>header {
 		background-color: var(--accent-color);
 		border-color: var(--border-color);
+		box-shadow: 0px 9px 6px -6px #0003;
 		/* position: relative; */
 	}
 }
