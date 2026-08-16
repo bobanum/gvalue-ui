@@ -105,28 +105,28 @@
             <path d="m4 55.33v-2.652a4.674 4.674 135 0 1 4.674-4.674h46.65a4.674 4.674 45 0 1 4.674 4.674v2.652a4.674 4.674 135 0 1-4.674 4.674h-46.65a4.674 4.674 45 0 1-4.674-4.674z" fill="currentColor" />
         </symbol>
         <symbol id="arrow-n" viewBox="0 0 64 64">
-            <path d="m31.89 10.67c-1.843 0.02688-3.603 0.7715-4.906 2.075l-21.26 21.27c-3.933 3.782-2.298 10.41 2.942 11.92 2.528 0.7312 5.254 7.39e-4 7.078-1.898l9.136-9.142v18.33c-0.05632 3.968 3.144 7.213 7.11 7.213 3.968 0 7.168-3.245 7.11-7.213v-18.33l9.136 9.142c3.779 3.936 10.4 2.299 11.92-2.945 0.7309-2.53 7.36e-4 -5.258-1.896-7.082l-21.26-21.27c-1.355-1.355-3.199-2.103-5.114-2.075" fill="currentColor" />
+            <path d="m31.89 6.67c-1.843 0.02688-3.603 0.7715-4.906 2.075l-21.26 21.27c-3.933 3.782-2.298 10.41 2.942 11.92 2.528 0.7312 5.254 7.39e-4 7.078-1.898l9.136-9.142v18.33c-0.05632 3.968 3.144 7.213 7.11 7.213 3.968 0 7.168-3.245 7.11-7.213v-18.33l9.136 9.142c3.779 3.936 10.4 2.299 11.92-2.945 0.7309-2.53 7.36e-4 -5.258-1.896-7.082l-21.26-21.27c-1.355-1.355-3.199-2.103-5.114-2.075" fill="currentColor" />
         </symbol>
         <symbol id="arrow-ne" viewBox="0 0 64 64">
-            <use transform="rotate(45 32 32)" href="#arrow-n" />
+            <use transform="rotate(45 36 36)" href="#arrow-n" />
         </symbol>
         <symbol id="arrow-e" viewBox="0 0 64 64">
             <use transform="rotate(90 32 32)" href="#arrow-n" />
         </symbol>
         <symbol id="arrow-se" viewBox="0 0 64 64">
-            <use transform="rotate(135 32 32)" href="#arrow-n" />
+            <use transform="rotate(90 32 32)" href="#arrow-ne" />
         </symbol>
         <symbol id="arrow-s" viewBox="0 0 64 64">
             <use transform="rotate(180 32 32)" href="#arrow-n" />
         </symbol>
         <symbol id="arrow-sw" viewBox="0 0 64 64">
-            <use transform="rotate(225 32 32)" href="#arrow-n" />
+            <use transform="rotate(180 32 32)" href="#arrow-ne" />
         </symbol>
         <symbol id="arrow-w" viewBox="0 0 64 64">
             <use transform="rotate(270 32 32)" href="#arrow-n" />
         </symbol>
         <symbol id="arrow-nw" viewBox="0 0 64 64">
-            <use transform="rotate(315 32 32)" href="#arrow-n" />
+            <use transform="rotate(270 32 32)" href="#arrow-ne" />
         </symbol>
         <symbol id="arrow-top" viewBox="0 0 64 64">
             <use transform="translate(0)" href="#arrow-n" />

@@ -1,7 +1,7 @@
 import Component from "../../Component.js";
 
 class Button extends Component {
-	static defaultUrl = "/icons.svg";
+	static defaultUrl = "/public/icons.svg";
 	constructor() {
 		super();
 		this.shadowRoot.appendChild(this.dom.main());

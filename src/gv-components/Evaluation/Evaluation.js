@@ -44,5 +44,8 @@ export default class Evaluation extends Criterion {
 		}
 		return next;
 	}
+	center() {
+		this._criteria[0].center();
+	}
 }
 Evaluation.register('gv-evaluation', { Dom });
