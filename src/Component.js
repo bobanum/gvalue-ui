@@ -1,11 +1,12 @@
 export default class Component extends HTMLElement {
 	static LONG_PRESS_DELAY = 500;
+	static shadowRootOptions = { mode: "open", delegatesFocus: false };
 	constructor() {
 		super();
 		this._ = {};
 		this.parts = {};
 		this.dom = this.adoptFunctions(new this.constructor.Dom());
-		this.attachShadow({ mode: "open" });
+		this.attachShadow(this.constructor.shadowRootOptions);
 	}
 	static register(tag, options = {}) {
 		tag = tag || this.toKebabCase(this.name);
@@ -127,4 +128,14 @@ export default class Component extends HTMLElement {
 			return result;
 		}
 	};
+	static addTextContentValue(element) {
+		Object.defineProperty(element, "value", {
+			get: function () {
+				return this.textContent;
+			},
+			set: function (val) {
+				this.textContent = val;
+			}
+		});
+	}
 }

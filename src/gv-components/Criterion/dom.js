@@ -5,7 +5,6 @@ export default class Dom extends Component.Dom {
 		const header = document.createElement("header");
 		header.appendChild(this.dom.label());
 
-
 		result.appendChild(header);
 		const description = document.createElement("div");
 		description.classList.add("description");
@@ -16,7 +15,7 @@ export default class Dom extends Component.Dom {
 	label() {
 		const result = document.createElement("label");
 		this.parts.label = result.appendChild(this.createSlot());
-		result.appendChild(this.dom.scoring());
+		this.parts.scoring = result.appendChild(this.dom.scoring());
 		return result;
 	}
 	criteria() {
@@ -30,37 +29,46 @@ export default class Dom extends Component.Dom {
 		return result;
 	}
 	scoring() {
-		const result = document.createElement("div");
-		result.classList.add("scoring");
-		const score = document.createElement("input");
-		score.inputMode = "none";
-		score.type = "number";
-		score.size = "1";
-		score.min = "0";
-		score.tabIndex = 0;
-		this.parts.score = result.appendChild(score);
-		const value = document.createElement("span");
-		value.classList.add("value");
-		this.parts.value = result.appendChild(value);
-		result.appendChild(value);
-		score.addEventListener("change", (e) => {
-			console.log(e);
-			
-			this.score = parseFloat(score.value);
-		});
+		const result = document.createElement("gv-scoring");
+		this.addEventListener("keydown", (e) => {
+			switch (e.key) {
+				case "Enter":
+				case "NumpadEnter":
+				case "Return":
+					let nextCriteria;
+					if (e.shiftKey) {
+						nextCriteria = this.navigate(-1);
+					} else if (this._criteria.length > 0) {
+						nextCriteria = this._criteria[0].navigate();
+					} else {
+						nextCriteria = this.navigate(1);
+					}
+					if (!nextCriteria) {
+						return;
+					}
+					nextCriteria.focus();
 
-		score.addEventListener("pointerdown", (e) => {
-			if (this.shadowRoot.activeElement === score && !score.readOnly) {
-				score.inputMode = "decimal";
+					e.preventDefault();
+					e.stopPropagation();
+					return;
+				case "ArrowLeft":
+					if (!e.ctrlKey) return;
+					e.preventDefault();
+					e.stopPropagation();
+					this.deactivate();
+					this.parentElement.focus();
+					return;
+				case "ArrowRight":
+					if (!e.ctrlKey || this._criteria.length === 0) return;
+					e.preventDefault();
+					e.stopPropagation();
+					this.deactivate();
+					this._criteria[0].focus();
+					return;
 			}
 		});
-		this.addEventListener("focusin", (e) => {
-			const currentCriterion = document.body.querySelector("gv-criterion.current");
-			if (currentCriterion && currentCriterion !== this) {
-				currentCriterion.deactivate();
-			}
-			this.activate();
-			e.stopPropagation();
+		result.addEventListener("change", (e) => {
+			this.score = result.value;
 		});
 		return result;
 	}
@@ -68,7 +76,7 @@ export default class Dom extends Component.Dom {
 		const scale = document.createElement("gv-scale");
 		scale.slot = "helpers";
 		scale.min = 0;
-		scale.max = this.value;
+		scale.max = this.max;
 		return scale;
 	}
 }

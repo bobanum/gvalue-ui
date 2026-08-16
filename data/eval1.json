@@ -13,13 +13,13 @@
                     "id": "k4ps8v",
                     "label": "Lisibilité et indentation du code",
                     "description": "Le code est-il bien indenté et facile à lire ?",
-                    "value": 10
+                    "max": 10
                 },
                 {
                     "id": "m5qt9w",
                     "label": "Nommage des variables et des fonctions",
                     "description": "Les noms de variables et de fonctions sont-ils descriptifs et cohérents ?",
-                    "value": 4
+                    "max": 4
                 },
                 {
                     "id": "n6ru0x",
@@ -31,13 +31,13 @@
                             "id": "o7sv1y",
                             "label": "Séparation des responsabilités (HTML/CSS/JS)",
                             "description": "Le code HTML, CSS et JavaScript est-il correctement séparé et organisé ?",
-                            "value": 1
+                            "max": 1
                         },
                         {
                             "id": "p8tw2z",
                             "label": "Réutilisabilité des composants",
                             "description": "Les composants sont-ils conçus pour être réutilisables et maintenables ?",
-                            "value": 6
+                            "max": 6
                         }
                     ]
                 }
@@ -45,7 +45,7 @@
         },
         {
             "id": "e8ux2b",
-            "value": 5,
+            "max": 5,
             "label": "Fonctionnalités et comportement",
             "description": "Évaluer si les fonctionnalités sont implémentées correctement et si le comportement de l'application est conforme aux attentes.",
             "criteria": [
@@ -53,19 +53,19 @@
                     "id": "q9ux3a",
                     "label": "Conformité aux exigences du mandat",
                     "description": "Le projet répond-il aux exigences spécifiées dans le mandat ?",
-                    "value": 5
+                    "max": 5
                 },
                 {
                     "id": "r0vy4b",
                     "label": "Gestion des cas limites et des erreurs",
                     "description": "Le projet gère-t-il correctement les cas limites et les erreurs ?",
-                    "value": 2
+                    "max": 2
                 },
                 {
                     "id": "s1wz5c",
                     "label": "Interactivité et expérience utilisateur",
                     "description": "L'application est-elle interactive et offre-t-elle une bonne expérience utilisateur ?",
-                    "value": 3
+                    "max": 3
                 }
             ]
         }

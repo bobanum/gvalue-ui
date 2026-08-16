@@ -11,6 +11,7 @@ export default class Evaluation extends Criterion {
 		criteria.forEach((c) => {
 			c.slot = "criteria";
 		});
+		
 		this.shadowRoot.querySelector("style").replaceWith(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.navigation());
 	}
@@ -18,9 +19,6 @@ export default class Evaluation extends Criterion {
 		super.connectedCallback();
 		const scale = document.createElement("gv-scale");
 		scale.slot = "helpers";
-	}
-	makeInputReadOnly(input, revert = false) {
-		return; // Do nothing, the evaluation input should never be editable
 	}
 	removeHelpers() {
 		this.parts.helpers.assignedElements().forEach((s) => s.remove());
@@ -38,6 +36,13 @@ export default class Evaluation extends Criterion {
 			.catch((error) => {
 				console.error("Error fetching evaluation data:", error);
 			});
+	}
+	navigate() {
+		const next = this._criteria[0].navigate();
+		if (!next) {
+			return;
+		}
+		return next;
 	}
 }
 Evaluation.register('gv-evaluation', { Dom });

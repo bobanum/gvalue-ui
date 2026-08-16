@@ -6,8 +6,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ICONS_PATH = path.resolve(__dirname, '../public/icons.svg');
-
+const ICONS_PATH = path.resolve(__dirname, '../public');
+const ICONS_FILES = ['icons.svg', 'icons2.svg'];
 const ICON_SIZE = 64;
 const COLUMNS = 10;
 const DISPLAY_GROUP_OPEN = '<g id="display">';
@@ -116,19 +116,22 @@ function replaceDisplayGroup(svg, gridContent) {
 }
 
 function main() {
-    let svg = fs.readFileSync(ICONS_PATH, 'utf8');
-    svg = removeXmlProlog(svg);
-    svg = stripLegacyXlink(svg);
-    const { fixedSvg, defsList } = fixDefs(svg);
-    const gridContent = buildGrid(defsList);
-    const result = replaceDisplayGroup(fixedSvg, gridContent);
-
-    fs.writeFileSync(ICONS_PATH, result, 'utf8');
-
-    const total = defsList.reduce((n, d) => n + d.ids.length, 0);
-    console.log(`Grille reconstruite : ${defsList.length} bloc(s), ${total} icône(s).`);
-    for (const { name, ids } of defsList) {
-        console.log(`  - ${name}: ${ids.length} icône(s)`);
+    for (const fileName of ICONS_FILES) {
+        const filePath = path.join(ICONS_PATH, fileName);
+        let svg = fs.readFileSync(filePath, 'utf8');
+        svg = removeXmlProlog(svg);
+        svg = stripLegacyXlink(svg);
+        const { fixedSvg, defsList } = fixDefs(svg);
+        const gridContent = buildGrid(defsList);
+        const result = replaceDisplayGroup(fixedSvg, gridContent);
+    
+        fs.writeFileSync(filePath, result, 'utf8');
+    
+        const total = defsList.reduce((n, d) => n + d.ids.length, 0);
+        console.log(`Grille reconstruite : ${defsList.length} bloc(s), ${total} icône(s).`);
+        for (const { name, ids } of defsList) {
+            console.log(`  - ${name}: ${ids.length} icône(s)`);
+        }
     }
 }
 

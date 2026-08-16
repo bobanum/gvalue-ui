@@ -3,34 +3,44 @@ import Dom from './dom.js';
 import css from "./style.css?inline";
 
 export default class Criterion extends Component {
+	static shadowRootOptions = { mode: "open", delegatesFocus: true };
 	constructor() {
 		super();
 		this._comments = [];
-		this._value;
+		this._max;
 		this._score;
 		this._criteria = [];
 		this.shadowRoot.appendChild(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.main());
 	}
 	connectedCallback() {
-		this.parts.value.textContent = this.value;
+		this.parts.scoring.max = this.max;
+		this.addEventListener("focusin", (e) => {
+			this.center();
+			const currentCriterion = document.body.querySelector("gv-criterion.current");
+			if (currentCriterion && currentCriterion !== this) {
+				currentCriterion.deactivate();
+			}
+			this.activate();
+			e.stopPropagation();
+		});
 	}
 	get label() {
 		return this.parts.label.textContent;
 	}
-	set label(value) {
-		this.parts.label.textContent = value;
+	set label(val) {
+		this.parts.label.textContent = val;
 	}
-	get value() {
+	get max() {
 		return this.total * (this.parentNode?.ratio || 1);
 	}
-	set value(val) {
-		this._value = val;
-		this.parts.score.max = val;
+	set max(val) {
+		this._max = val;
+		this.parts.scoring.max = val;
 	}
 	get score() {
 		if (this._score === undefined) {
-			this._score = this._criteria.reduce((total, criterion) => total + criterion.score, 0);
+			this._score = 1*this._criteria.reduce((total, criterion) => total + criterion.score, 0);
 		}
 		return this._score;
 	}
@@ -39,12 +49,11 @@ export default class Criterion extends Component {
 		if (val === null || val === undefined) {
 			this._score = undefined;
 		} else {
-			this._score = val;
+			this._score = parseFloat(val);
 		}
-		this.parts.score.value = this.score;
-		this.dispatchEvent(new CustomEvent("change", {
-			detail: { value: this.value }
-		}));
+
+		this.parts.scoring.value = this.score;
+		this.dispatchEvent(new CustomEvent("change"));
 	}
 	get totalRaw() {
 		if (this._totalRaw !== undefined) return this._totalRaw;
@@ -54,12 +63,12 @@ export default class Criterion extends Component {
 	}
 	get total() {
 		// if (this._total !== undefined) return this._total;
-		if (this._value !== undefined) {
-			return this._total = this._value;
+		if (this._max !== undefined) {
+			return this._total = this._max;
 		}
 		const totalRaw = this.totalRaw;
 		if (totalRaw === undefined) {
-			return this._total = this._value || 0;
+			return this._total = this._max || 0;
 		}
 		return this._total = totalRaw;
 	}
@@ -67,16 +76,16 @@ export default class Criterion extends Component {
 	get ratio() {
 		if (this._ratio !== undefined && !isNaN(this._ratio)) return this._ratio;
 		let ratio = this.parentNode?.ratio || 1;
-		if (this._value === undefined || this._criteria.length === 0) {
+		if (this._max === undefined || this._criteria.length === 0) {
 			return this._ratio = ratio;
 		}
-		return this._ratio = ratio * this._value / this.totalRaw;
+		return this._ratio = ratio * this._max / this.totalRaw;
 	}
 	get description() {
 		return this.shadowRoot.querySelector(".description").textContent;
 	}
-	set description(value) {
-		this.shadowRoot.querySelector(".description").textContent = value;
+	set description(val) {
+		this.shadowRoot.querySelector(".description").textContent = val;
 	}
 	get criteria() {
 		return this._criteria;
@@ -96,9 +105,9 @@ export default class Criterion extends Component {
 		}));
 		if (this._criteria.length > 0) {
 			this.classList.add("has-criteria");
-			this.makeInputReadOnly(this.parts.score, true);
+			this.parts.scoring.tabIndex = -1;
 		} else {
-			this.makeInputReadOnly(this.parts.score, false);
+			this.parts.scoring.tabIndex = 1;
 			this.classList.remove("has-criteria");
 		}
 	}
@@ -121,28 +130,8 @@ export default class Criterion extends Component {
 			c.comments = val;
 		});
 	}
-	makeInputReadOnly(input, revert = false) {
-		input.readOnly = true;
-		// input.style.pointerEvents = "none";
-		input.placeholder = "10";
-		input.tabIndex = -1;
-		const enableInput = () => {
-			input.readOnly = false;
-			input.value = input.placeholder;
-			input.focus();
-			input.select();
-			input.addEventListener("blur", () => {
-				input.readOnly = true;
-			}, { once: true });
-		};
-
-		let longPressTimer;
-		const LONG_PRESS_MS = 500;
-		let result = input.parentElement;
-		// this.addEventListener.call(result, "ctrl-click|longpress", (e) => {
-		this.addEventListener.call(result, "contextmenu", (e) => {
-			enableInput();
-		});
+	focus() {
+		this.parts.scoring.focus();
 	}
 	activate() {
 		this.classList.add("current");
@@ -151,6 +140,7 @@ export default class Criterion extends Component {
 		evaluation.fillComments(this._comments);
 		const scale = evaluation.appendChild(this.dom.scale());
 		this.parts.scale = scale;
+		// this.parts.scoring.focus();
 		scale.addEventListener("change", (e) => {
 			this.score = e.detail.value;
 		});
@@ -158,6 +148,44 @@ export default class Criterion extends Component {
 	deactivate() {
 		this.classList.remove("current");
 		this._comments.forEach((c) => c.remove());
+	}
+	center() {
+		this.parts.label.scrollIntoView({ behavior: "smooth", block: "center" });
+	}
+	navigate(direction = 0, last = false) {
+		if (direction === 0) {
+			if (this._criteria.length === 0) {
+				// this.focus();
+				return this;
+			}
+			if (last) {
+				return this._criteria[this._criteria.length - 1].navigate(direction, true);
+			}
+			return this._criteria[0].navigate();
+		}
+		if (direction < 0 && this.previousSibling && this.previousSibling.navigate) {
+			return this.previousSibling.navigate(0, true);
+		}
+		if (direction > 0 && this.nextSibling && this.nextSibling.navigate) {
+			return this.nextSibling.navigate();
+		}
+		return (this.parentNode.navigate) ? this.parentNode.navigate(direction) : null;
+	}
+	maximize() {
+		if (this._criteria.length > 0) {
+			[...this._criteria].forEach((c) => c.maximize());
+		} else {
+			this.score = this.max;
+		}
+		return this;
+	}
+	minimize() {
+		if (this._criteria.length > 0) {
+			[...this._criteria].forEach((c) => c.minimize());
+		} else {
+			this.score = this.min;
+		}
+		return this;
 	}
 }
 

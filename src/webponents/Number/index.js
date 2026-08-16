@@ -246,4 +246,4 @@ export default class GvNumberInput extends HTMLInputElement {
 	}
 }
 
-customElements.define('gv-number', GvNumberInput, { extends: 'input' });
+customElements.define('number-ponent', GvNumberInput, { extends: 'input' });
