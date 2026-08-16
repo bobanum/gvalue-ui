@@ -15,48 +15,37 @@ export default class Dom extends Component.Dom {
 		result.size = "1";
 		result.min = "0";
 		result.tabIndex = 1;
-		result.addEventListener("change", (e) => {
-			console.log("change", e, result.value, this._value);
+		result.addEventListener("input", (e) => {
 			this.value = result.valueAsNumber;
-			
-			// this.dispatchEvent(new CustomEvent("change", {
-			// 	detail: { value: result.value }
-			// }));
+
+			this.dispatchEvent(new CustomEvent("change", {
+				detail: { value: result.value }
+			}));
 		});
 
 		result.addEventListener("keydown", (e) => {
-			if (e.key === "Enter") {
-				this.dispatchEvent(new CustomEvent("enter", {
-					detail: { value: result.value }
-				}));
-				return;
-			}
-			
-			if (e.key === "ArrowUp") {
-				console.log(e, this.value);
-				if (!e.shiftKey && !e.ctrlKey && !e.metaKey) return;
-				let newValue = (this.value || 0);
-				if (e.shiftKey) {
-					newValue += 10 * this.step;
-				} else if (e.ctrlKey) {
-					newValue += 0.1 * this.step;
-				}
-				this.value = Math.min(this.max, newValue);
-				e.preventDefault();
-				return;
-			}
-			if (e.key === "ArrowDown") {
-				console.log(e, this.value);
-				if (!e.shiftKey && !e.ctrlKey && !e.metaKey) return;
-				let newValue = (this.value || 0);
-				if (e.shiftKey) {
-					newValue -= 10 * this.step;
-				} else if (e.ctrlKey) {
-					newValue -= 0.1 * this.step;
-				}
-				this.value = Math.max(0, newValue);
-				e.preventDefault();
-				return;
+
+			switch (e.key) {
+				case "ArrowUp":
+				case "ArrowDown":
+					let step = this.step * (e.key === "ArrowUp" ? 1 : -1);
+					if (e.shiftKey) {
+						step *= 10;
+					} else if (e.ctrlKey) {
+						step /= 10;
+					}
+					let value = (this.value || 0) + step;
+					this.value = Math.min(this.max, value);
+					e.preventDefault();
+					return;
+				case "Home":
+					this.value = this.min;
+					e.preventDefault();
+					return;
+				case "End":
+					this.value = this.max;
+					e.preventDefault();
+					return;
 			}
 		});
 		return result;

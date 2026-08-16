@@ -40,5 +40,13 @@ export default class Evaluation extends Criterion {
 				console.error("Error fetching evaluation data:", error);
 			});
 	}
+	navigate() {
+		const next = this._criteria[0].navigate();
+		if (!next) {
+			return;
+		}
+		next.scrollIntoView({ behavior: "smooth", block: "center" });
+		return next;
+	}
 }
 Evaluation.register('gv-evaluation', { Dom });

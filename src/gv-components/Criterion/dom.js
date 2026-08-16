@@ -30,6 +30,29 @@ export default class Dom extends Component.Dom {
 	}
 	scoring() {
 		const result = document.createElement("gv-scoring");
+		this.addEventListener("keydown", (e) => {
+			if (e.key === "Enter" || e.key === "NumpadEnter" || e.key === "Return" || e.key === "Tab") {
+				let nextCriteria;
+				if (e.shiftKey) {
+					nextCriteria = this.navigate(-1);
+				} else if (this._criteria.length > 0) {
+					nextCriteria = this._criteria[0].navigate();
+				} else {
+					nextCriteria = this.navigate(1);
+				}
+				if (!nextCriteria) {
+					return;
+				}
+				nextCriteria.scrollIntoView({ behavior: "smooth", block: "center" });
+				nextCriteria.focus();
+
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		});
+		result.addEventListener("change", (e) => {
+			this.score = result.value;
+		});
 		return result;
 	}
 	scale() {

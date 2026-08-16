@@ -4,7 +4,7 @@
 	--input-width: 5rem;
 	--smaller: .9;
 	--larger: calc(1 / var(--smaller));
-	font-size: calc(1em * var(--larger));
+	/* font-size: calc(1em * var(--larger)); */
 	display: grid;
 	grid-area: app;
 	max-height: 100vh;
@@ -117,6 +117,7 @@ slot.criteria {
 	padding: 0 0.5em;
 	padding-bottom: 1em;
 	overflow-y: auto;
+	scroll-behavior: smooth;
 }
 
 .navigation {

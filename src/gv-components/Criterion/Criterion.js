@@ -16,6 +16,7 @@ export default class Criterion extends Component {
 	connectedCallback() {
 		this.parts.scoring.max = this.max;
 		this.addEventListener("focusin", (e) => {
+			this.scrollIntoView({ behavior: "smooth", block: "center" });
 			const currentCriterion = document.body.querySelector("gv-criterion.current");
 			if (currentCriterion && currentCriterion !== this) {
 				currentCriterion.deactivate();
@@ -39,7 +40,7 @@ export default class Criterion extends Component {
 	}
 	get score() {
 		if (this._score === undefined) {
-			this._score = this._criteria.reduce((total, criterion) => total + criterion.score, 0);
+			this._score = 1*this._criteria.reduce((total, criterion) => total + criterion.score, 0);
 		}
 		return this._score;
 	}
@@ -48,12 +49,11 @@ export default class Criterion extends Component {
 		if (val === null || val === undefined) {
 			this._score = undefined;
 		} else {
-			this._score = val;
+			this._score = parseFloat(val);
 		}
+
 		this.parts.scoring.value = this.score;
-		this.dispatchEvent(new CustomEvent("change", {
-			detail: { value: this.max }
-		}));
+		this.dispatchEvent(new CustomEvent("change"));
 	}
 	get totalRaw() {
 		if (this._totalRaw !== undefined) return this._totalRaw;
@@ -145,6 +145,25 @@ export default class Criterion extends Component {
 	deactivate() {
 		this.classList.remove("current");
 		this._comments.forEach((c) => c.remove());
+	}
+	navigate(direction = 0, last = false) {
+		if (direction === 0) {
+			if (this._criteria.length === 0) {
+				// this.focus();
+				return this;
+			}
+			if (last) {
+				return this._criteria[this._criteria.length - 1].navigate(direction, true);
+			}
+			return this._criteria[0].navigate();
+		}
+		if (direction < 0 && this.previousSibling && this.previousSibling.navigate) {
+			return this.previousSibling.navigate(0, true);
+		}
+		if (direction > 0 && this.nextSibling && this.nextSibling.navigate) {
+			return this.nextSibling.navigate();
+		}
+		return (this.parentNode.navigate) ? this.parentNode.navigate(direction) : null;
 	}
 }
 
