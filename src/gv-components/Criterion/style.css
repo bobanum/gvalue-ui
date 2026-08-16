@@ -47,6 +47,7 @@ slot.criteria {
 	border-radius: 1em;
 	padding-block: .5rem .25rem;
 	position: relative;
+	font-size: var(--smaller);
 
 	&::before {
 		content: "⏵";
@@ -93,10 +94,6 @@ slot {
 	/* color: hsl(from currentColor h s l / 0.75); */
 	padding-block: .5em;
 	padding-inline: .5em;
-}
-
-::slotted(gv-criterion) {
-	font-size: calc(1em * var(--smaller));
 }
 
 slot.default {

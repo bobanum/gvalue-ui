@@ -38,12 +38,20 @@ export default class Dom extends Component.Dom {
 					this.value = Math.min(this.max, value);
 					e.preventDefault();
 					return;
-				case "Home":
-					this.value = this.min;
+				case "End":
+					if (e.ctrlKey) {
+						this.criterion.parentElement.minimize();
+					} else {
+						this.criterion.minimize();
+					}
 					e.preventDefault();
 					return;
-				case "End":
-					this.value = this.max;
+				case "Home":
+					if (e.ctrlKey) {
+						this.criterion.parentElement.maximize();
+					} else {
+						this.criterion.maximize();
+					}
 					e.preventDefault();
 					return;
 			}

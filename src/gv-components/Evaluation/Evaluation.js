@@ -20,9 +20,6 @@ export default class Evaluation extends Criterion {
 		const scale = document.createElement("gv-scale");
 		scale.slot = "helpers";
 	}
-	makeInputReadOnly(input, revert = false) {
-		return; // Do nothing, the evaluation input should never be editable
-	}
 	removeHelpers() {
 		this.parts.helpers.assignedElements().forEach((s) => s.remove());
 	}
@@ -45,7 +42,6 @@ export default class Evaluation extends Criterion {
 		if (!next) {
 			return;
 		}
-		next.scrollIntoView({ behavior: "smooth", block: "center" });
 		return next;
 	}
 }

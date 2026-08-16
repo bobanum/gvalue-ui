@@ -16,7 +16,7 @@ export default class Criterion extends Component {
 	connectedCallback() {
 		this.parts.scoring.max = this.max;
 		this.addEventListener("focusin", (e) => {
-			this.scrollIntoView({ behavior: "smooth", block: "center" });
+			this.center();
 			const currentCriterion = document.body.querySelector("gv-criterion.current");
 			if (currentCriterion && currentCriterion !== this) {
 				currentCriterion.deactivate();
@@ -106,9 +106,8 @@ export default class Criterion extends Component {
 		if (this._criteria.length > 0) {
 			this.classList.add("has-criteria");
 			this.parts.scoring.tabIndex = -1;
-			// this.makeInputReadOnly(this.parts.score, true);
 		} else {
-			// this.makeInputReadOnly(this.parts.score, false);
+			this.parts.scoring.tabIndex = 1;
 			this.classList.remove("has-criteria");
 		}
 	}
@@ -131,6 +130,9 @@ export default class Criterion extends Component {
 			c.comments = val;
 		});
 	}
+	focus() {
+		this.parts.scoring.focus();
+	}
 	activate() {
 		this.classList.add("current");
 		const evaluation = this.closest("gv-evaluation");
@@ -138,6 +140,7 @@ export default class Criterion extends Component {
 		evaluation.fillComments(this._comments);
 		const scale = evaluation.appendChild(this.dom.scale());
 		this.parts.scale = scale;
+		// this.parts.scoring.focus();
 		scale.addEventListener("change", (e) => {
 			this.score = e.detail.value;
 		});
@@ -145,6 +148,9 @@ export default class Criterion extends Component {
 	deactivate() {
 		this.classList.remove("current");
 		this._comments.forEach((c) => c.remove());
+	}
+	center() {
+		this.parts.label.scrollIntoView({ behavior: "smooth", block: "center" });
 	}
 	navigate(direction = 0, last = false) {
 		if (direction === 0) {
@@ -164,6 +170,22 @@ export default class Criterion extends Component {
 			return this.nextSibling.navigate();
 		}
 		return (this.parentNode.navigate) ? this.parentNode.navigate(direction) : null;
+	}
+	maximize() {
+		if (this._criteria.length > 0) {
+			[...this._criteria].forEach((c) => c.maximize());
+		} else {
+			this.score = this.max;
+		}
+		return this;
+	}
+	minimize() {
+		if (this._criteria.length > 0) {
+			[...this._criteria].forEach((c) => c.minimize());
+		} else {
+			this.score = this.min;
+		}
+		return this;
 	}
 }
 

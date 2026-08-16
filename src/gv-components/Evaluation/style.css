@@ -2,16 +2,16 @@
 
 :host {
 	--input-width: 5rem;
-	--smaller: .9;
-	--larger: calc(1 / var(--smaller));
-	/* font-size: calc(1em * var(--larger)); */
+	--smaller-ratio: .9;
+	--smaller: calc(1em * var(--smaller-ratio));
+	--larger: calc(1em / var(--smaller-ratio));
 	display: grid;
 	grid-area: app;
 	max-height: 100vh;
 	position: sticky;
 	top: 0;
 	height: 100%;
-	/* font-size: max(2vw, 1rem); */
+	font-size: var(--larger);
 
 	>header {
 		padding: 0.5em;
