@@ -1,7 +1,7 @@
 import Component from "../../Component.js";
 
 class Menu extends Component {
-	static defaultUrl = "/public/icons.svg#hamburger";
+	static defaultUrl = "icons.svg#hamburger";
 	constructor() {
 		super();
 		this.shadowRoot.appendChild(this.dom.main());
