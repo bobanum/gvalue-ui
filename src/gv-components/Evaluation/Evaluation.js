@@ -32,6 +32,7 @@ export default class Evaluation extends Criterion {
 			.then(([data, comments]) => {
 				this.fill(data);
 				this.comments = comments;
+				this.fillComments(this.comments);
 			})
 			.catch((error) => {
 				console.error("Error fetching evaluation data:", error);
