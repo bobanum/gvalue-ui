@@ -1,5 +1,11 @@
-:root.layout1 {
+:root[data-layout="compact"] {
 	body {
-		border: solid red;
+		>header {
+			padding: 0.125em 0.25em;
+		}
+
+		>nav.sec {
+			font-size: 0.9em;
+		}
 	}
 }
