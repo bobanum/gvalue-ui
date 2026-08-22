@@ -28,7 +28,10 @@ export default class Dom extends Component.Dom {
 	footer() {
 		const result = document.createElement("footer");
 		result.appendChild(this.createSlot("footer"));
-		const confirmButton = this.dom.button("Confirmer", "hsl(120, 50%, 30%)");
+		const confirmButton = this.dom.button("Confirmer", "hsl(120, 50%, 30%)", () => {
+			this.dispatchEvent(new CustomEvent("submit"));
+			this.remove();
+		});
 		result.appendChild(confirmButton);
 		const cancelButton = this.dom.button("Annuler", "hsl(0, 70%, 50%)", () => {
 			this.remove();

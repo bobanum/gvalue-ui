@@ -13,9 +13,16 @@
 <body>
     <header>
         <h1><img src="%BASE_URL%favicon.svg" alt="Logo"><span>GValue</span></h1>
-        <button type="button" class="fullscreen-toggle" aria-label="Basculer en plein écran"><svg width="16" height="16">
-                <use href="%BASE_URL%icons.svg#fullscreen-on" />
-            </svg></button>
+        <div class="header-actions">
+            <menu-ponent class="general-menu" label="Menu général">
+                <button type="button" data-action="import">Importer une évaluation</button>
+                <button type="button" data-action="export">Exporter l'évaluation</button>
+                <button type="button" data-action="preferences">Préférences…</button>
+            </menu-ponent>
+            <button type="button" class="fullscreen-toggle" aria-label="Basculer en plein écran"><svg width="16" height="16">
+                    <use href="%BASE_URL%icons.svg#fullscreen-on" />
+                </svg></button>
+        </div>
     </header>
     <nav class="sec">
         <a href="">

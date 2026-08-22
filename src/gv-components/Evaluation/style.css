@@ -23,6 +23,14 @@
 			display: block;
 		}
 	}
+
+	:host([data-layout="compact"]) {
+		--smaller-ratio: .85;
+
+		>header {
+			padding: 0.25em 0.5em;
+		}
+	}
 }
 
 .scoring {
@@ -123,6 +131,11 @@ slot.criteria {
 	scroll-behavior: smooth;
 }
 
+:host([data-layout="compact"]) slot.criteria {
+	padding-inline: 0.25em;
+	padding-bottom: 0.5em;
+}
+
 .navigation {
 	color: var(--base-color);
 	display: flex;
@@ -156,6 +169,10 @@ slot.criteria {
 		.scale {
 			flex-direction: column;
 			width: 2em;
+		}
+
+		:host([data-layout="compact"]) section.helpers {
+			max-width: 14em;
 		}
 	}
 
@@ -200,6 +217,10 @@ slot.criteria {
 		.scale {
 			li {
 				height: 2em;
+			}
+
+			:host([data-layout="compact"]) .helpers {
+				grid-template-rows: minmax(0, 1fr) auto;
 			}
 		}
 	}

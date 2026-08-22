@@ -19,7 +19,19 @@ class Comment extends Component {
 	}
 	connectedCallback() {
 		this.slot = "comments";
+		this.checked = this.checked;
 		// this.addEventListener("longpress", this.evt.open.bind(this));
+	}
+	get checked() {
+		return this.hasAttribute("checked");
+	}
+	set checked(value) {
+		const checked = Boolean(value);
+		this.toggleAttribute("checked", checked);
+		const input = this.shadowRoot.querySelector('input[type="checkbox"]');
+		if (input) {
+			input.checked = checked;
+		}
 	}
 	get value() {
 		return this._.value;
@@ -83,6 +95,15 @@ class Comment extends Component {
 			this.shadowRoot.appendChild(popup);
 		}
 	};
+	static get observedAttributes() {
+		return ["checked"];
+	}
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (name !== "checked" || oldValue === newValue) {
+			return;
+		}
+		this.checked = newValue !== null;
+	}
 }
 
 Comment.register('gv-comment', { Dom });
