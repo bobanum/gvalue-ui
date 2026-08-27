@@ -50,30 +50,25 @@ slot.criteria {
 	font-size: var(--smaller);
 
 	&::before {
-		content: "⏵";
+		content: "▸";
 		position: absolute;
 		border-radius: 1em;
 		color: var(--background-color);
-		/* border: 1px solid var(--border-color); */
 		background-color: var(--border-color);
-		/* color: var(--border-color);
-		border: 1px solid var(--border-color);
-		background-color: var(--background-color); */
 		line-height: 0;
-		font-size: .8rem;
-		width: 1.2em;
-		height: 1.2em;
+		font-size: 1.2rem;
+		width: 0.8em;
+		height: 0.8em;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: -.25em;
-		left: 0em;
+		top: -.15em;
+		left: 0.1em;
 		box-sizing: border-box;
-		/* padding-left: 1px; */
-		/* padding-bottom: 2px; */
-		rotate: 0deg;
+		rotate: 90deg;
 		transition: rotate 200ms ease-out;
 		box-sizing: border-box;
+		letter-spacing: -0.1em;
 	}
 }
 
@@ -91,7 +86,6 @@ slot {
 	font-family: var(--font-cursive);
 	grid-column: 1 / -1;
 	line-height: 1;
-	/* color: hsl(from currentColor h s l / 0.75); */
 	padding-block: .5em;
 	padding-inline: .5em;
 }
@@ -110,7 +104,7 @@ slot.default {
 		margin-top: -2px;
 
 		&::before {
-			rotate: 90deg;
+			rotate: 0deg;
 		}
 	}
 

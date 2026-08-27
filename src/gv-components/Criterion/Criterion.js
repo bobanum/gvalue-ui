@@ -22,6 +22,7 @@ export default class Criterion extends Component {
 				currentCriterion.deactivate();
 			}
 			this.activate();
+			e.preventDefault();
 			e.stopPropagation();
 		});
 	}
@@ -146,6 +147,8 @@ export default class Criterion extends Component {
 		});
 	}
 	deactivate() {
+		console.log(123);
+		
 		this.classList.remove("current");
 		this._comments.forEach((c) => c.remove());
 	}

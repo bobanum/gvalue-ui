@@ -16,9 +16,15 @@ export default class Evaluation extends Criterion {
 		this.shadowRoot.appendChild(this.dom.navigation());
 	}
 	connectedCallback() {
-		super.connectedCallback();
+		// super.connectedCallback();
 		const scale = document.createElement("gv-scale");
 		scale.slot = "helpers";
+	}
+	get title() {
+		return this.parts.title.textContent;
+	}
+	set title(value) {
+		this.parts.title.textContent = value;
 	}
 	removeHelpers() {
 		this.parts.helpers.assignedElements().forEach((s) => s.remove());

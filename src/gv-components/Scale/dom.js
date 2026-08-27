@@ -13,10 +13,13 @@ export default class Dom extends Component.Dom {
 		result.tabIndex = 1;
 		result.innerHTML = this.formatFrac(val);
 		result.dataset.value = val;
-		result.addEventListener("click", () => {
+		result.addEventListener("click", (e) => {
+			console.log(321);
+			
 			this.dispatchEvent(new CustomEvent("change", {
 				detail: { value: val }
 			}));
+			e.stopPropagation();
 		});
 		return result;
 	}

@@ -13,7 +13,9 @@ export default class Dom extends Criterion.Dom {
 	}
 	header() {
 		const result = document.createElement("header");
-		result.appendChild(this.createSlot("title", "Évaluation"));
+		this.parts.title = result.appendChild(document.createElement("h1"));
+		this.parts.title.textContent = "Évaluation";
+		// result.appendChild(this.createSlot("title", "Évaluation"));
 		result.appendChild(this.dom.student());
 		this.parts.scoring = result.appendChild(this.dom.scoring());
 		return result;

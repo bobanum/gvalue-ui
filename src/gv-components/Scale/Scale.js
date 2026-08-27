@@ -12,8 +12,6 @@ class Scale extends Component {
 		this.shadowRoot.appendChild(this.dom.style(css));
 		this.shadowRoot.appendChild(this.dom.main());
 	}
-	connectedCallback() {
-	}
 	get min() {
 		return this._.min;
 	}

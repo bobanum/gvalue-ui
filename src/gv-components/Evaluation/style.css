@@ -7,7 +7,7 @@
 	--larger: calc(1em / var(--smaller-ratio));
 	display: grid;
 	grid-area: app;
-	max-height: 100vh;
+	max-height: 100dvh;
 	position: sticky;
 	top: 0;
 	height: 100%;
@@ -19,8 +19,9 @@
 		font-weight: 900;
 		font-family: var(--font-title);
 
-		slot {
-			display: block;
+		h1 {
+			margin: 0;
+			font-size: 1.25em;
 		}
 	}
 }
@@ -30,7 +31,9 @@
 	align-items: center;
 	gap: 0 1ch;
 }
-
+gv-scoring {
+	background-color: transparent;
+}
 .student {
 	display: flex;
 	align-items: center;
@@ -135,10 +138,14 @@ slot.criteria {
 
 		>header {
 			display: grid;
-			grid-template-columns: auto auto auto;
+			grid-template-columns: auto 5rem;
 			justify-content: space-between;
 			grid-row: 1;
 			grid-column: 1;
+			h1 {
+				grid-column: 1 / -1;
+				line-height: 1;
+			}
 		}
 	}
 
@@ -150,8 +157,7 @@ slot.criteria {
 		grid-row: span 2;
 		grid-column: 2;
 		place-content: stretch end;
-		width: 80vh;
-		max-width: 17em;
+		width: clamp(14em, 80dvh, 17em);
 
 		.scale {
 			flex-direction: column;
@@ -187,7 +193,7 @@ slot.criteria {
 			display: grid;
 			grid-template-columns: 1fr auto;
 
-			slot {
+			h1 {
 				grid-column: 1 / -1;
 			}
 		}
